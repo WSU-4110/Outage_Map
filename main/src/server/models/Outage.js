@@ -51,10 +51,9 @@ class Outage {
                 '${this.outage_status}',
                 '${dateCreated}'
             )
-        ;`;
+          ;`;
 
-    const [newOutage, _] = db.execute(sql);
-    return newOutage;
+    return db.execute(sql);
   }
 
   static findAll() {

@@ -1,9 +1,14 @@
 const express = require("express");
 const app = express();
-const outageRouter = require("./routes/routes");
+let outageRouter = (userRouter = require("./routes/routes"));
 
 app.use(express.json());
+app.use("/", outageRouter);
 app.use("/outages", outageRouter);
+app.use("/outage-new", outageRouter);
+app.use("/login", userRouter);
+app.use("/signup", userRouter);
+
 const PORT = process.env.PORT || "3000";
 
 //Error Handling
