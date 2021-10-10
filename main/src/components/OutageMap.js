@@ -1,8 +1,28 @@
 import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
+import React, { useState, useEffect } from 'react';
 import mockData from './testData/MOCK_DATA.json'
+import axios from 'axios';
+import outageData from './testData/outageData.json'
 
-const fillBlueOptions = { fillColor: 'blue' };
 
+function OutageIndicator ({ outage }) { //this component renders the markers with corresponding lat and long values calculated by the geocodify api.
+    const [coords, setCoords] = useState();
+
+    useEffect(() => {
+        async function resolveLocation() {
+          const resp = await axios.get('https://api.geocodify.com/v2/geocode/json?api_key=1e79b746ca6813d40e4e997e4a4e263f1307e5eb&q=' + outage.outage_street+ ', ' + outage.outage_city+ ', Michigan, USA');
+          const [lng, lat] = resp.data.response.bbox;
+          setCoords({ lng, lat })
+        }
+        resolveLocation();
+    }, [outage]);
+
+    return !coords ? "Loading" : (
+        <Marker position={[coords.lat, coords.lng]}>
+            <Popup>{outage.service_type} {outage.service_name}</Popup>
+        </Marker>
+    )
+}
 
 function OutageMap() { //This is where the map page will be rendered.
     return (
@@ -12,11 +32,8 @@ function OutageMap() { //This is where the map page will be rendered.
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
 
-            {mockData.map(mock => (
-                <Circle center={[mock.Latitude, mock.Longitude]} pathOptions={fillBlueOptions} radius={200}>
-                    <Popup>{mock.id}</Popup>
-                </Circle>
-
+            {outageData.outages.map(mock => (
+                <OutageIndicator outage={mock} />
             ))}
         </MapContainer>
     );
