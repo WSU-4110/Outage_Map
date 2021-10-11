@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from './css/logo.svg';
+import './css/App.css';
+import OutageMap from './components/OutageMap';
+import NavBar from "./components/NavBar"
+import HomeContent from "./components/HomeContent"
 
-function App() {
+function App() { //primary page of the site
   return (
     <div className="App">
+      <NavBar />
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>
+          page is alive.
+        </h1>
       </header>
+      <OutageMap />
     </div>
+    
   );
 }
 
