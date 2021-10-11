@@ -1,0 +1,114 @@
+{
+    "outages": [
+        {
+            "user_id": 1,
+            "service_type": "Streaming",
+            "service_name": "Netflix",
+            "outage_street": "Dodge Park",
+            "outage_city": "Sterling Heights",
+            "outage_state": "Michigan",
+            "outage_description": "Down for three hours",
+            "outage_status": "Open",
+            "date_created": "2021-10-07T04:00:00.000Z"
+        },
+        {
+            "user_id": 1,
+            "service_type": "Internet",
+            "service_name": "ATT",
+            "outage_street": "Cass",
+            "outage_city": "Detroit",
+            "outage_state": "Michigan",
+            "outage_description": "undefined",
+            "outage_status": "Open",
+            "date_created": "2021-10-07T04:00:00.000Z"
+        },
+        {
+            "user_id": 1,
+            "service_type": "Internet",
+            "service_name": "ATT",
+            "outage_street": "Mound",
+            "outage_city": "Sterling Heights",
+            "outage_state": "Michigan",
+            "outage_description": "undefined",
+            "outage_status": "Open",
+            "date_created": "2021-10-07T04:00:00.000Z"
+        },
+        {
+            "user_id": 1,
+            "service_type": "Internet",
+            "service_name": "Postman",
+            "outage_street": "Dequindre",
+            "outage_city": "Detroit",
+            "outage_state": "Michigan",
+            "outage_description": "Down all day",
+            "outage_status": "Open",
+            "date_created": "2021-10-07T04:00:00.000Z"
+        },
+        {
+            "user_id": 1,
+            "service_type": "Internet",
+            "service_name": "ATT",
+            "outage_street": "Dodge Park",
+            "outage_city": "Sterling Heights",
+            "outage_state": "Michigan",
+            "outage_description": "Down for three hours",
+            "outage_status": "Open",
+            "date_created": "2021-10-08T04:00:00.000Z"
+        },
+        {
+            "user_id": 1,
+            "service_type": "Power",
+            "service_name": "DTE Energy",
+            "outage_street": "Dodge Park",
+            "outage_city": "Sterling Heights",
+            "outage_state": "Michigan",
+            "outage_description": "Down for three hours",
+            "outage_status": "Open",
+            "date_created": "2021-10-08T04:00:00.000Z"
+        },
+        {
+            "user_id": 1,
+            "service_type": "Internet",
+            "service_name": "Xfinity",
+            "outage_street": "Mound Road",
+            "outage_city": "Warren",
+            "outage_state": "Michigan",
+            "outage_description": "Down for three hours",
+            "outage_status": "Open",
+            "date_created": "2021-10-08T04:00:00.000Z"
+        },
+        {
+            "user_id": 1,
+            "service_type": "Internet",
+            "service_name": "Netflix",
+            "outage_street": "Ryan",
+            "outage_city": "Warren",
+            "outage_state": "Michigan",
+            "outage_description": "Down for three hours",
+            "outage_status": "Open",
+            "date_created": "2021-10-08T04:00:00.000Z"
+        },
+        {
+            "user_id": 1,
+            "service_type": "Power",
+            "service_name": "DTE Energy",
+            "outage_street": "Woodward",
+            "outage_city": "Detroit",
+            "outage_state": "Michigan",
+            "outage_description": "Down for three hours",
+            "outage_status": "Open",
+            "date_created": "2021-10-08T04:00:00.000Z"
+        },
+        {
+            "user_id": 1,
+            "service_type": "Power",
+            "service_name": "DTE Energy",
+            "outage_street": "Dequindre",
+            "outage_city": "Warren",
+            "outage_state": "Michigan",
+            "outage_description": "Down for three hours",
+            "outage_status": "Open",
+            "date_created": "2021-10-08T04:00:00.000Z"
+        }
+    ]
+}
