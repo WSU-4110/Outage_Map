@@ -9,7 +9,7 @@ app.use("/outage-new", outageRouter);
 app.use("/login", userRouter);
 app.use("/signup", userRouter);
 
-const PORT = process.env.PORT || "3000";
+const PORT = process.env.PORT || "5000";
 
 //Error Handling
 app.use((error, req, res, next) => {
