@@ -12,6 +12,8 @@ function App() { //primary page of the site
         <h1>
           page is alive.
         </h1>
+        <SignupForm />   
+      </main>
       </header>
       <OutageMap />
     </div>
