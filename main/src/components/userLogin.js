@@ -1,11 +1,43 @@
 // login page for users
 // author: IW
-import React, {usestate} from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import "./login-page.css";
+//second draft of react form
+import React from 'react';
+import {ReactComponent as Logo} from './css/logo.svg';
 
-export default function Login() {
+class Login extends React.Component{
+    state={
+        email:'',
+        pwd:''
+    }
+    handleChange = (e) =>{
+        const{name, value}=e.target
+        this.setState({[name]:value})
+    }
+    
+    handleSubmits = (e) =>{
+        e.preventDefault()
+    }
+
+    return(){
+        return(
+            <div>
+                <div>
+                    <Logo/>
+                </div>
+                <div>
+                    <form>
+                        <input type='email' name='email' placeholder='email...' onChange={this.handleChange}/>
+                        <input type='password' name='pwd' placeholder='password...' onChange={this.handleChange}/>
+                        <button onSubmit={this.handleSubmits}>Login</button>
+                    </form>
+                </div>
+            </div>
+        );
+    }
+}
+export default Login;
+//first draft of react form
+/*export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
 
@@ -16,7 +48,7 @@ export default function Login() {
     function handleSubmits(event) {
         event.preventDefault();
     }
-
+    
     return (
         <div className="Login">
             <Form onSubmit={handleSubmits}>
@@ -43,5 +75,5 @@ export default function Login() {
             </Form>
         </div>
     );
-}
+}*/
 
