@@ -58,7 +58,21 @@ class Outage {
 
   static findAll() {
     let sql = "SELECT * FROM outages;";
-    return db.execute(sql);
+    // let results =  db.execute(sql);
+    // if (!results.length) {
+    //   console.log("no outages");
+    // }
+    // return results;
+    try {
+     let results =  db.execute(sql, (err) => {
+        if (!results.length) {
+          return [''];
+       }
+       return results;
+    }) }
+    catch(err) {
+      return [''];
+    }
   }
 }
 module.exports = Outage;
