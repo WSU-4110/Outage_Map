@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from "react-router-dom";
 import '../css/NavBar.css'
 
 class Navbar extends React.Component {
@@ -12,10 +13,11 @@ class Navbar extends React.Component {
     render(){
         return(
             <nav className="NavbarItems">
-                <h1 className="navbartitle">
-                    Outage Map 
-                    {/* <i className="fab fa-react"></i> */}
-                </h1>
+                <Link className="navbartitle" to="/">
+                    <h1>
+                        Outage Map 
+                    </h1>
+                </Link>
 
                 {/* function that will recognize user click and change menu img from 3 layer icon to 'x'. Also the naming has to 'fas fa-' according to fontawesome */}
                 <div className="menuicon" onClick={this.handleClick}>
@@ -25,16 +27,16 @@ class Navbar extends React.Component {
                 {/* className changes based on user-click on menu icon, this is for mobile view css */}
                 <ul className={this.state.clicked ? 'navmenu active' : 'navmenu'}>
                     <li>
-                        <a className="navlinks" href='#'>Home</a>
+                        <Link className="navlinks" to="/">Home</Link>
                     </li>
                     <li>
-                        <a className="navlinks" href='#'>View Outages</a>
+                        <Link className="navlinks" to='/outages'>View Outages</Link>
                     </li>
                     <li>
                         <a className="navlinks" href='#'>Report Outage</a>
                     </li>
                     <li>
-                        <a className="navlinks" href='#'>Sign Up</a>
+                        <Link className="navlinks" to='/signup'>Sign Up</Link>
                     </li>
                 </ul>
 
