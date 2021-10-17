@@ -1,5 +1,9 @@
 const db = require("../db/sql");
 
+/*
+ * Outage Class for Outage table in databse
+ * This class will contain all SQL statements related to Outage Table
+ */
 class Outage {
   constructor(
     user_id,
@@ -21,6 +25,7 @@ class Outage {
     this.outage_status = outage_status;
   }
 
+  //Function to save the newly reported outage to the database
   save() {
     let outageDate = new Date();
     let year = outageDate.getFullYear();
@@ -56,8 +61,10 @@ class Outage {
     return db.execute(sql);
   }
 
+  //SQL query function to get outages from database for
+  //outage map page
   static findAll() {
-    let sql = "SELECT * FROM outages where user_id = 3;";
+    let sql = "SELECT * FROM outages";
     return db.execute(sql);
   }
 }
