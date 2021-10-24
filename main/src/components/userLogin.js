@@ -21,6 +21,8 @@ class userLogin extends React.Component{
     return(){
         return(
             <div>
+                <h1>Login Page</h1>
+                    <userLogin/>
                 <div>
                     <Logo/>
                 </div>
