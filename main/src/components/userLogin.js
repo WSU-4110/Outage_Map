@@ -4,7 +4,7 @@
 import React from 'react';
 import {ReactComponent as Logo} from './css/logo.svg';
 
-class Login extends React.Component{
+class userLogin extends React.Component{
     state={
         email:'',
         pwd:''
@@ -35,7 +35,7 @@ class Login extends React.Component{
         );
     }
 }
-export default Login;
+export default userLogin;
 //first draft of react form
 /*export default function Login() {
     const [email, setEmail] = useState("");
