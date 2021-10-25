@@ -2,42 +2,55 @@
 // author: IW
 //second draft of react form
 import React from 'react';
-import {ReactComponent as Logo} from './css/logo.svg';
+import "../css/login.css";
+//import axios from "axios";
 
-class userLogin extends React.Component{
-    state={
-        email:'',
-        pwd:''
+class UserLogin extends React.Component{
+    constructor(){
+        super();
+
+        this.state={
+            email:'', //object entry from user
+            pwd:'' //object entry from user
+        };
+        this.handleChange=this.handleChange.bind(this);
+        this.handleSubmits=this.handleSubmits.bind(this);
+
     }
+    
     handleChange = (e) =>{
         const{name, value}=e.target
         this.setState({[name]:value})
     }
     
-    handleSubmits = (e) =>{
-        e.preventDefault()
+    handleSubmits = (e) =>{        
+        e.preventDefault();
+        console.log("Form submitted with the following data");
+        console.log(this.state);
     }
 
-    return(){
+    render(){
         return(
             <div>
-                <h1>Login Page</h1>
-                    <userLogin/>
-                <div>
-                    <Logo/>
-                </div>
-                <div>
-                    <form>
-                        <input type='email' name='email' placeholder='email...' onChange={this.handleChange}/>
-                        <input type='password' name='pwd' placeholder='password...' onChange={this.handleChange}/>
-                        <button onSubmit={this.handleSubmits}>Login</button>
+                <div id="main-holder">
+                    <form className="login-form" onSubmit={this.handleSubmits}>
+                        <h1 id="login-header">Login</h1>
+                        <div>
+                            <form id ="login-form">
+                                <input type='email' name='email' id="username-field" class="login-form-field" placeholder='email...' onChange={this.handleChange}/>
+                                <input type='password' name='pwd' id="password-field" class="login-form-field" placeholder='password...' onChange={this.handleChange}/>
+                                <div className="login-form-submit">
+                                    <button onSubmit={this.handleSubmits}>Login</button>
+                                </div>
+                            </form>
+                        </div>
                     </form>
                 </div>
             </div>
         );
     }
 }
-export default userLogin;
+export default UserLogin;
 //first draft of react form
 /*export default function Login() {
     const [email, setEmail] = useState("");
@@ -78,4 +91,3 @@ export default userLogin;
         </div>
     );
 }*/
-
