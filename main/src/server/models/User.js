@@ -20,7 +20,7 @@ class User {
         let sql = `
         INSERT INTO users (user_email, user_password)
          VALUES ('${this.user_email}', '${hash}');`;
-        console.log(hash);
+        //console.log(hash);
         return db.execute(sql);
       }
     });
