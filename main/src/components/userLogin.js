@@ -43,7 +43,7 @@ class UserLogin extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id ="login-page">
         <div id="main-holder">
           <form className="login-form" onSubmit={this.handleSubmits}>
             <h1 id="login-header">Login</h1>
