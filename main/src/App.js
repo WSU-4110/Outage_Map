@@ -11,6 +11,7 @@ import OutageMap from './components/OutageMap';
 import SignupForm from './components/SignupForm';
 import NavBar from "./components/NavBar"
 import HomeContent from "./components/HomeContent"
+import UserLogin from "./components/userLogin";
 //import { Router } from 'express';
 
 function App() { //primary page of the site
@@ -27,6 +28,9 @@ function App() { //primary page of the site
           </Route>
           <Route path="/signup">
             <SignupForm />
+          </Route>
+          <Route path="/login">
+            <UserLogin />
           </Route>
         </Switch>
       </Router>
