@@ -30,8 +30,10 @@ class User {
   //Compare the password the user entered to the hashed
   //password in the database. Return true if passwords match.
   async validateUser() {
+    console.log(this.user_email);
     let sql = `SELECT * FROM users WHERE user_email = '${this.user_email}';`;
     const [result] = await db.execute(sql);
+    //console.log(result);
     const isValid = await bcrypt.compare(
       this.user_password,
       result[0].user_password
