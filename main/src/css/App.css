@@ -2,6 +2,11 @@
     font-family: 'Sen', sans-serif;
 }
 
+body {
+    background: url("outages-map-background.png") no-repeat center center fixed;
+    background-size: cover;
+}
+
 .leaflet-container{
     width: 50%;
     height: 75vh;

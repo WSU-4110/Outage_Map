@@ -16,11 +16,6 @@ h2 {
   color: orange;
 }
 
-body {
-  background-image: url("outages-map-background.png");
-  background-size: 1080px;
-}
-
 .text {
   color: #fff;
   font-size: 25px;

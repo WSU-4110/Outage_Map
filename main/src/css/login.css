@@ -10,10 +10,6 @@ html {
   justify-items: center;
   align-items: center;
   /*background-color: #505050;*/
-  background-image: url("outages-map-background.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
 }
 
 #main-holder {
