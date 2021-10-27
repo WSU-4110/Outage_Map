@@ -103,7 +103,8 @@ class SignupForm extends React.Component {
   render() {
     return (
       <div>
-        <h1>Registration form</h1>
+        <div id="main-holder">
+        <h1>Create an Account</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label htmlFor="email">Email Address:</label>
@@ -154,6 +155,7 @@ class SignupForm extends React.Component {
 
           <input type="submit" value="Submit" className="btn btn-success" />
         </form>
+      </div>
       </div>
     );
   }
