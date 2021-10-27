@@ -10,7 +10,7 @@
 img {
   /* margin-left: -400px; */
   left: 5%;
-  top: 2%;
+  top: .9rem;
   position: absolute;
 }
 
@@ -66,7 +66,7 @@ img {
   img {
     /* margin-left: -400px; */
     left: 5%;
-    top: 5%;
+    margin-top: -10px;
     position: absolute;
   }
 

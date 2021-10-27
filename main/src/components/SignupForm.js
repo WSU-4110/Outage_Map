@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import "../css/SignupForm.css";
 
 class SignupForm extends React.Component {
   constructor() {
@@ -102,59 +103,61 @@ class SignupForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <div id="main-holder">
-        <h1>Create an Account</h1>
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="email">Email Address:</label>
-            <input
-              type="text"
-              name="email"
-              value={this.state.input.email}
-              onChange={this.handleChange}
-              className="form-control"
-              placeholder="Enter email"
-              id="email"
-            />
+      <div id="signup-page">
+        <div id="signup-holder">
+          <h1 id="h1">Create an Account</h1>
+          <div id="signup-form">
+            <form onSubmit={this.handleSubmit}>
+              <div className="form-group">
+                {/* <label htmlFor="email">Email Address:</label> */}
+                <input
+                  type="text"
+                  name="email"
+                  value={this.state.input.email}
+                  onChange={this.handleChange}
+                  className="form-control"
+                  placeholder="Enter email"
+                  id="email"
+                />
 
-            <div className="text-danger">{this.state.errors.email}</div>
+                <div className="text-danger">{this.state.errors.email}</div>
+              </div>
+
+              <div className="form-group">
+                {/* <label htmlFor="password">Password:</label> */}
+                <input
+                  type="password"
+                  name="password"
+                  value={this.state.input.password}
+                  onChange={this.handleChange}
+                  className="form-control"
+                  placeholder="Enter password"
+                  id="password"
+                />
+
+                <div className="text-danger">{this.state.errors.password}</div>
+              </div>
+
+              <div className="form-group">
+                {/* <label htmlFor="password">Confirm Password:</label> */}
+                <input
+                  type="password"
+                  name="confirm_password"
+                  value={this.state.input.confirm_password}
+                  onChange={this.handleChange}
+                  className="form-control"
+                  placeholder="Confirm password"
+                  id="confirm_password"
+                />
+
+                <div className="text-danger">
+                  {this.state.errors.confirm_password}
+                </div>
+              </div>
+
+              <input type="submit" value="Submit" id="signup-submit" />
+            </form>
           </div>
-
-          <div className="form-group">
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              name="password"
-              value={this.state.input.password}
-              onChange={this.handleChange}
-              className="form-control"
-              placeholder="Enter password"
-              id="password"
-            />
-
-            <div className="text-danger">{this.state.errors.password}</div>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="password">Confirm Password:</label>
-            <input
-              type="password"
-              name="confirm_password"
-              value={this.state.input.confirm_password}
-              onChange={this.handleChange}
-              className="form-control"
-              placeholder="Enter confirm password"
-              id="confirm_password"
-            />
-
-            <div className="text-danger">
-              {this.state.errors.confirm_password}
-            </div>
-          </div>
-
-          <input type="submit" value="Submit" className="btn btn-success" />
-        </form>
       </div>
       </div>
     );

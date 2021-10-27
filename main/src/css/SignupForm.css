@@ -1,37 +1,138 @@
-html {
-  height: 100%;
-}
-
-body {
-  height: 100%;
-  margin: 0;
-  font-family: Helvetica, Helvetica, sans-serif;
+#signup-page {
   display: grid;
   justify-items: center;
   align-items: center;
-  background-image: url('outages-map-background.png');
-  background-size: cover;
-} 
-
-.form-group {
-  padding: 0em 4em 3em;
-  max-width: 400px;
 }
 
-#main-holder {
-  width: 30%;
-  height: 40%;
-  margin-top: 50%;
+.form-group {
+  margin-left: 20%;
+  margin-right: 20%;
+  padding: 5% 5% 5% 5%;
+}
+
+.form-control{
+  width: 200%;
+}
+
+#signup-holder{
+  width: 350px;
+  height: 280px;
+  padding-top: 1%;
+  margin-top: 40%;
   display: center;
   justify-items: center;
   align-items: center; 
-  background-color: #ffffffb6;
+  background-color: gray;
   border-radius: 7px;
   box-shadow: 0px 0px 5px 2px black;
+  position: absolute;
 }
 
-h1 {
-  padding-top: 10px;
+#signup-form{
+  padding-top: 5%;
+  margin-right: 20%;
+  align-self: flex-start;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+#signup-submit{
+  width: 50%;
+  margin-top: 10%;
+  margin-left: 50%;
+  /* margin-right: 25%; */
+  padding: 7px;
+  align-self: center;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  background-color: #1f1c1c;
+  cursor: pointer;
+  outline: none;
+}
+
+#h1 {
+  margin-bottom: 0;
+  padding-top: 5%;
   font-size: 32px;
   text-align:center;
+}
+
+@media screen and (max-width: 960px){ */
+  #signup-holder{
+    margin-top: 50%;
+    position: absolute;
+  }
+
+  #signup-form{
+    margin-left: 10%;
+  }
+
+  .form-control{
+    margin-left: -10%;
+  }
+
+  #signup-submit{
+    margin-left: 35%;
+  }
+}
+
+@media screen and (max-width: 670px){
+  #signup-holder{
+    width: 350px;
+    height: 280px;
+    margin-top: 100%;
+    position: absolute;
+  }
+
+  .form-group {
+    margin-left: 10%;
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 480px){
+  #signup-holder{
+    width: 350px;
+    height: 280px;
+    margin-top: 100%;
+    padding-bottom: 2%;
+    position: absolute;
+  }
+
+  .form-control{
+    padding-left: ;
+  }
+
+  .form-group {
+    width: 50%;
+  }
+
+  #signup-submit{
+    width: 50%;
+    margin-top: 2%;
+    margin-left: 40%;
+  }
+}
+
+@media screen and (max-width: 314px){
+  #signup-holder{
+    width: 350px;
+    height: 250px;
+    margin-top: 150%;
+    padding-bottom: 8%;
+    position: absolute;
+  }
+
+  .form-group {
+    margin-left: 10%;
+  }
+
+  #signup-submit{
+    width: 50%;
+    margin-top: 2%;
+    margin-left: 40%;
+  }
 }
