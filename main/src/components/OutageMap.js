@@ -28,7 +28,7 @@ function OutageIndicator({ outage }) {
   ) : (
     <Marker position={[coords.lat, coords.lng]}>
       <Popup>
-        {outage.service_type} {outage.service_name}
+        {outage.service_type}: {outage.service_name}
       </Popup>
     </Marker>
   );
@@ -46,7 +46,7 @@ function OutageMap() {
   }, []);
   console.log(allOutages);
   return (
-    <MapContainer center={[38.89, -77.059]} zoom={13} scrollWheelZoom={true}>
+    <MapContainer center={[44, -85]} zoom={7} scrollWheelZoom={true}>
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
