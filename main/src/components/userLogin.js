@@ -48,7 +48,7 @@ class UserLogin extends React.Component {
       <div id ="login-page">
         <div id="main-holder">
           <form className="login-form" onSubmit={this.handleSubmits}>
-            <h1 id="login-header">Login</h1>
+            <h1 id="login-header">Log in</h1>
             <div>
               <div id="login-form">
                 <input
@@ -68,7 +68,7 @@ class UserLogin extends React.Component {
                   onChange={this.handleChange}
                 />
                 <div className="login-form-submit">
-                  <button onSubmit={this.handleSubmits}>Log in</button>
+                  <input type="submit" value="Log in" id="login-submit" onSubmit={this.handleSubmits}/>
                 </div>
               </div>
             </div>
