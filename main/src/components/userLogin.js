@@ -2,6 +2,7 @@
 // author: IW
 //second draft of react form
 import React, { useEffect } from "react";
+import { useHistory, withRouter } from "react-router-dom";
 import "../css/login.css";
 import axios from "axios";
 
@@ -39,6 +40,7 @@ class UserLogin extends React.Component {
       user_password: `${this.state.pwd}`,
     });
     console.log(res);
+    this.props.history.push("/outages")
   }
 
   render() {
@@ -76,7 +78,8 @@ class UserLogin extends React.Component {
     );
   }
 }
-export default UserLogin;
+export default withRouter(UserLogin);
+
 //first draft of react form
 /*export default function Login() {
     const [email, setEmail] = useState("");
