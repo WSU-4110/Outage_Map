@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { useHistory, withRouter } from "react-router-dom";
 import "../css/SignupForm.css";
 
 class SignupForm extends React.Component {
@@ -26,6 +27,7 @@ class SignupForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
 
+
     if (this.validate()) {
       console.log(this.state);
 
@@ -45,7 +47,7 @@ class SignupForm extends React.Component {
         })
         .then(
           (response) => {
-            console.log(response);
+            this.props.history.push("/login")
           },
           (error) => {
             console.log(error);
@@ -164,4 +166,4 @@ class SignupForm extends React.Component {
   }
 }
 
-export default SignupForm;
+export default withRouter(SignupForm);
