@@ -3,6 +3,7 @@
 //second draft of react form
 import React, { useEffect } from "react";
 import { useHistory, withRouter } from "react-router-dom";
+import Modal from 'react-modal';
 import "../css/login.css";
 import axios from "axios";
 
