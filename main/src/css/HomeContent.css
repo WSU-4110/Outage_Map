@@ -1,8 +1,6 @@
 .content {
-  display: inline-block;
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-top: 20px;
+  /* display: inline-block; this was not allowing the content to be centered correctly */
+  margin: auto;
 }
 
 h2 {
