@@ -7,6 +7,7 @@ import outageData from "./testData/outageData.json";
 function OutageIndicator({ outage }) {
   //this component renders the markers with corresponding lat and long values calculated by the geocodify api.
   const [coords, setCoords] = useState();
+  //console.log(JSON.parse(localStorage.getItem('user')))
 
   useEffect(() => {
     async function resolveLocation() {
@@ -45,6 +46,7 @@ function OutageMap() {
     fetchOutages();
   }, []);
   console.log(allOutages);
+  
   return (
     <MapContainer center={[44, -85]} zoom={7} scrollWheelZoom={true}>
       <TileLayer
