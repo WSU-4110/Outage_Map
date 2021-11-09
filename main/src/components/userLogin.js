@@ -13,6 +13,7 @@ class UserLogin extends React.Component {
     this.state = {
       email: "", //object entry from user
       pwd: "", //object entry from user
+      loggedIn: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmits = this.handleSubmits.bind(this);
@@ -24,22 +25,13 @@ class UserLogin extends React.Component {
   };
 
   async handleSubmits(e) {
-    console.log("Form submitted with the following data");
-    console.log(this.state.pwd);
     e.preventDefault();
-
-    // const res = await axios.get("/login", {
-    //   params: {
-    //     user_email: `${this.state.email}`,
-    //     user_password: `${this.state.pwd}`,
-    //   },
-    // });
-
     const res = await axios.post("/login", {
       user_email: `${this.state.email}`,
       user_password: `${this.state.pwd}`,
     });
-    console.log(res);
+    this.state.loggedIn = true;
+    localStorage.setItem('user', JSON.stringify(res.data))
     this.props.history.push("/outages")
   }
 
