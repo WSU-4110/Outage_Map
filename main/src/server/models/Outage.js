@@ -53,7 +53,7 @@ class Outage {
                 '${this.outage_city}',
                 '${this.outage_state}',
                 '${this.outage_description}',
-                '${this.outage_status}',
+                'Open',
                 '${dateCreated}'
             )
           ;`;
@@ -65,6 +65,20 @@ class Outage {
   //outage map page
   static findAll() {
     let sql = "SELECT * FROM outages";
+    return db.execute(sql);
+  }
+
+  close() {
+    let sql =
+      `UPDATE OUTAGES
+       SET outage_status = 'Closed'
+       WHERE user_id = '${this.user_id}'
+       and service_type = '${this.service_type}'
+       and service_name = '${this.service_name}'
+       and outage_street = '${this.outage_street}'
+       and outage_city = '${this.outage_city}'
+       and outage_state = '${this.outage_state}';
+      `;
     return db.execute(sql);
   }
 }
