@@ -40,6 +40,21 @@ function OutageMap() {
   //This is where the map page will be rendered.
   const [allOutages, setAllOutages] = useState([]);
   const [reportIsOpen, setReportIsOpen] = useState(false);
+
+  navigator.geolocation.getCurrentPosition(function(position) {
+    console.log("Latitude is :", position.coords.latitude);
+    console.log("Longitude is :", position.coords.longitude);
+
+    var realLat = position.coords.latitude;
+    var realLong = position.coords.longitude;
+    
+    realLat = Math.abs(realLat);
+    console.log(realLat - Math.floor(realLat)); //this will output the decimal values
+
+    realLong = Math.abs(realLong);
+    console.log(realLong - Math.floor(realLong));
+  }); //This function requests the browser user to allow location information to be used. Used to get user Lat Long Coords
+
   const setReportIsOpenTrue = () =>{
     setReportIsOpen(true);
   }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from 'react-router-dom'
 import axios from "axios";
 
 function ReportOutage(){
@@ -20,6 +21,8 @@ function ReportOutage(){
         setFormData((data) => ({...data, [event.target.name]: event.target.value,}));
     };
 
+    const history = useHistory();
+
     const handleSubmitReport = async (event) =>{
         event.preventDefault();
         console.log(formData.serviceName); // This is return undefined when I am expecting the service name entered by the user.
@@ -32,6 +35,8 @@ function ReportOutage(){
             outage_state: `${formData.serviceState}`,
             outage_description: `${formData.serviceDescription}`,
         })
+
+        history.push('/outages');
     };
 
     return (
