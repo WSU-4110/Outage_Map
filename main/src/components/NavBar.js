@@ -23,12 +23,17 @@ class Navbar extends React.Component {
             className={this.state.clicked ? "fas fa-times" : "fas fa-bars"}
           ></i>
         </div>
-
+              
         {/* className changes based on user-click on menu icon, this is for mobile view css */}
         <ul className={this.state.clicked ? "navmenu active" : "navmenu"}>
           <li>
             <Link className="navlinks" to="/login">
               Log In
+            </Link>
+          </li>
+          <li>
+            <Link className="navlinks" to="/profile">
+              Profile
             </Link>
           </li>
           <li>

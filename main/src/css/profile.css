@@ -1,0 +1,32 @@
+.main-content.completelistview { padding: 0; }
+.completelistview .noteview { margin: 10px; }
+
+.profile-tabbed-view,
+.profile-tabbed-view .ptab-row {
+    height: 100%;
+}
+
+.profile-tabbed-view .ptab-grid {
+    height: 100%;
+}
+
+.profile-tabbed-view .pv-col-border {
+    overflow: auto;
+    height: 100%;
+    min-height: 800px;
+    border-left: 1px solid #ccc;
+}
+
+.profile-tabbed-view .ptab-ms-c {
+    border-top: 0;
+}
+
+.profileview-tab,
+.profileview-item {
+    display: none;
+}
+
+.profileview-tab-sel,
+.profileview-item-sel {
+    display: block;
+}

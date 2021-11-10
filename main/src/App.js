@@ -12,6 +12,7 @@ import SignupForm from './components/SignupForm';
 import NavBar from "./components/NavBar"
 import HomeContent from "./components/HomeContent"
 import UserLogin from "./components/userLogin";
+import Profile from "./components/ProfilePage";
 //import { Router } from 'express';
 
 function App() { //primary page of the site
@@ -31,6 +32,9 @@ function App() { //primary page of the site
           </Route>
           <Route path="/login">
             <UserLogin />
+          </Route>
+          <Route path="/profile">
+            <Profile />
           </Route>
         </Switch>
       </Router>
