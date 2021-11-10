@@ -53,7 +53,7 @@ class Outage {
                 '${this.outage_city}',
                 '${this.outage_state}',
                 '${this.outage_description}',
-                '${this.outage_status}',
+                'Open',
                 '${dateCreated}'
             )
           ;`;
