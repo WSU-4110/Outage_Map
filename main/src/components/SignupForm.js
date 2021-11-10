@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { useHistory, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import "../css/SignupForm.css";
 
 class SignupForm extends React.Component {

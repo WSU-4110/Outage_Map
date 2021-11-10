@@ -42,11 +42,6 @@ class Navbar extends React.Component {
             </Link>
           </li>
           <li>
-            <a className="navlinks" href="#">
-              Report Outage
-            </a>
-          </li>
-          <li>
             <Link className="navlinks" to="/signup">
               Sign Up
             </Link>
