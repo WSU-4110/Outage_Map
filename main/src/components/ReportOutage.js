@@ -1,58 +1,73 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-async function handleSubmitReport(data){
-    console.log(data.serviceType);
-    const res = await axios.post("/outage-new", {
-        user_id: `${data.userReport}`,
-        service_type: `${data.serviceType}`,
-        service_name: `${data.serviceName}`,
-        outage_street: `${data.serviceStreet}`,
-        outage_city: `${data.serviceCity}`,
-        outage_state: `${data.serviceState}`,
-        outage_description: `${data.serviceDescription}`,
-      });
-}
-
 function ReportOutage(){
+    //Use state hook to track what values are being inputed into the form as well as
+    //setting the default values
     const [formData, setFormData] = useState({
-        userReport: "",
+        userReport: '6',
         serviceType: "",
         serviceName: "",
         serviceStreet: "",
         serviceCity: "",
         serviceState: "",
         serviceDescription: ""
-    }) //Use state hook to track what values are being inputed into the form as well as
-        //setting the default values
+    }) 
+
+    const handleChange = (event) => {
+        event.preventDefault();
+        const { name, value } = event.target;
+        setFormData((data) => ({...data, [event.target.name]: event.target.value,}));
+    };
+
+    const handleSubmitReport = async (event) =>{
+        event.preventDefault();
+        console.log(formData.serviceName); // This is return undefined when I am expecting the service name entered by the user.
+        const res = await axios.post("/outage-new", {
+            user_id: `${formData.userReport}`,
+            service_type: `${formData.serviceType}`,
+            service_name: `${formData.serviceName}`,
+            outage_street: `${formData.serviceStreet}`,
+            outage_city: `${formData.serviceCity}`,
+            outage_state: `${formData.serviceState}`,
+            outage_description: `${formData.serviceDescription}`,
+        })
+    };
 
     return (
         <>
             <h1 id="Report-Title" class>Test Dialog box</h1>
-            <form onSubmit={handleSubmitReport(formData)}>
+            <form onSubmit={handleSubmitReport}>
                 <input type="text" placeholder="Service Type" 
-                onChange={(event) => setFormData({...formData, serviceType: event.target.value})} //inline function to set formData for the form
-                value={formData.serviceType}/*this is where data in the form is read*//>
+                onChange={handleChange} //inline function to set formData for the form
+                value={formData.serviceType}/*this is where data in the form is read*/
+                name="serviceType"/>
+
 
                 <input type="text" placeholder="Service Name"
-                onChange={(event) => setFormData({...formData, serviceName: event.target.value})} 
-                value={formData.serviceName}/>
+                onChange={handleChange} 
+                value={formData.serviceName}
+                name="serviceName"/>
 
                 <input type="text" placeholder="Street"
-                onChange={(event) => setFormData({...formData, serviceStreet: event.target.value})} 
-                value={formData.serviceStreet}/>
+                onChange={handleChange} 
+                value={formData.serviceStreet}
+                name="serviceStreet"/>
 
                 <input type="text" placeholder="City"
-                onChange={(event) => setFormData({...formData, serviceCity: event.target.value})} 
-                value={formData.serviceCity}/>
+                onChange={handleChange} 
+                value={formData.serviceCity}
+                name="serviceCity"/>
 
                 <input type="text" placeholder="State"
-                onChange={(event) => setFormData({...formData, serviceState: event.target.value})} 
-                value={formData.serviceState}/>
+                onChange={handleChange} 
+                value={formData.serviceState}
+                name="serviceState"/>
 
                 <input type="text" placeholder="Description"
-                onChange={(event) => setFormData({...formData, serviceDescription: event.target.value})} 
-                value={formData.serviceDescription}/>
+                onChange={handleChange} 
+                value={formData.serviceDescription}
+                name="serviceDescription"/>
 
                 <button type="submit">Report Outage</button>
             </form>

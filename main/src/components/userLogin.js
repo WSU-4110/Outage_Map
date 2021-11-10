@@ -31,9 +31,13 @@ class UserLogin extends React.Component {
       user_email: `${this.state.email}`,
       user_password: `${this.state.pwd}`,
     });
-    this.state.loggedIn = true;
-    localStorage.setItem('user', JSON.stringify(res.data))
-    this.props.history.push("/outages")
+
+    if(res.status === 200)
+    {
+      this.state.loggedIn = true;
+      localStorage.setItem('user', JSON.stringify(this.state.email));
+      this.props.history.push("/outages");
+    }
   }
 
   render() {

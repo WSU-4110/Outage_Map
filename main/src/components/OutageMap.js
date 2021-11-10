@@ -7,7 +7,8 @@ import ReportOutage from "./ReportOutage"
 function OutageIndicator({ outage }) {
   //this component renders the markers with corresponding lat and long values calculated by the geocodify api.
   const [coords, setCoords] = useState();
-  //console.log(JSON.parse(localStorage.getItem('user')))
+  //localStorage.clear();
+  console.log(JSON.parse(localStorage.getItem('user')));
 
   useEffect(() => {
     async function resolveLocation() {
