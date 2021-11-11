@@ -13,11 +13,9 @@ class User {
 
   //Signup functionality. Inserts a new user into the User table.
   register() {
-    console.log(this.user_password);
     let sql = `
         INSERT INTO users (user_email, user_password)
          VALUES ('${this.user_email}', '${this.user_password}');`;
-    //console.log(hash);
     return db.execute(sql);
   }
 
@@ -28,7 +26,7 @@ class User {
     let isValid = false;
     let sql = `SELECT * FROM users WHERE user_email = '${this.user_email}';`;
     const [result] = await db.execute(sql);
-    if (result[0].user_email != null) {
+    if (result[0] != null) {
       isValid = true;
     }
     return isValid;

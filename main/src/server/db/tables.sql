@@ -39,7 +39,8 @@ INSERT INTO service_types values ('Gaming Platform');
 INSERT INTO service_types values ('Website');
 
 
-
+insert into outages (user_email, service_type, service_name, latitude,
+longitude, outage_description, date_created) values ("test")
 
 select * from service_types;
 select * from outages;

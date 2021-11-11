@@ -17,7 +17,7 @@ exports.login = async (req, res, next) => {
     let { user_email, user_password } = req.body;
     const user = new User(user_email, user_password);
     const validUser = await user.validateUser();
-    console.log(validUser);
+    console.log(`Valid User: ${validUser}`);
     if (validUser) res.status(200).json({ user });
     else res.status(401).json({ message: "Wrong email/password" });
   } catch (error) {
