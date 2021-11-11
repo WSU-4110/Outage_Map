@@ -12,4 +12,12 @@ body {
     height: 80vh;
     margin: auto;
     margin-top: 2%;
+    z-index: 0;
+}
+
+.modal-container{
+    position: fixed;
+    z-index: 1;
+    width: 50%;
+    height: 50vh;
 }

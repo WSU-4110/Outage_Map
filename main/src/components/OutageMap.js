@@ -1,13 +1,14 @@
 import { MapContainer, TileLayer, Marker, Popup, Circle } from "react-leaflet";
 import React, { useState, useEffect } from "react";
-import mockData from "./testData/MOCK_DATA.json";
+import Modal from "react-modal";
 import axios from "axios";
-import outageData from "./testData/outageData.json";
+import ReportOutage from "./ReportOutage";
 
 function OutageIndicator({ outage }) {
   //this component renders the markers with corresponding lat and long values calculated by the geocodify api.
   const [coords, setCoords] = useState();
-  //console.log(JSON.parse(localStorage.getItem('user')))
+  //localStorage.clear();
+  console.log(JSON.parse(localStorage.getItem("user")));
 
   useEffect(() => {
     async function resolveLocation() {
@@ -38,6 +39,29 @@ function OutageIndicator({ outage }) {
 function OutageMap() {
   //This is where the map page will be rendered.
   const [allOutages, setAllOutages] = useState([]);
+  const [reportIsOpen, setReportIsOpen] = useState(false);
+
+  navigator.geolocation.getCurrentPosition(function (position) {
+    console.log("Latitude is :", position.coords.latitude);
+    console.log("Longitude is :", position.coords.longitude);
+
+    var realLat = position.coords.latitude;
+    var realLong = position.coords.longitude;
+
+    realLat = Math.abs(realLat);
+    console.log(realLat - Math.floor(realLat)); //this will output the decimal values
+
+    realLong = Math.abs(realLong);
+    console.log(realLong - Math.floor(realLong));
+  }); //This function requests the browser user to allow location information to be used. Used to get user Lat Long Coords
+
+  const setReportIsOpenTrue = () => {
+    setReportIsOpen(true);
+  };
+  const setReportIsOpenFalse = () => {
+    setReportIsOpen(false);
+  };
+
   useEffect(() => {
     async function fetchOutages() {
       const resp = await axios.get("/outages");
@@ -46,18 +70,25 @@ function OutageMap() {
     fetchOutages();
   }, []);
   console.log(allOutages);
-  
-  return (
-    <MapContainer center={[44, -85]} zoom={7} scrollWheelZoom={true}>
-      <TileLayer
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
 
-      {allOutages.map((mock) => (
-        <OutageIndicator outage={mock} />
-      ))}
-    </MapContainer>
+  return (
+    <>
+      <button onClick={setReportIsOpenTrue}>Report Outage</button>
+      <MapContainer center={[44, -85]} zoom={7} scrollWheelZoom={true}>
+        <TileLayer
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+
+        {allOutages.map((mock) => (
+          <OutageIndicator outage={mock} />
+        ))}
+      </MapContainer>
+      <Modal id="modal-container" isOpen={reportIsOpen}>
+        <button onClick={setReportIsOpenFalse}>X</button>
+        <ReportOutage />
+      </Modal>
+    </>
   );
 }
 

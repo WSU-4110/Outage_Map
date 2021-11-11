@@ -12,10 +12,12 @@
     "leaflet": "^1.7.1",
     "mysql2": "^2.3.0",
     "nodemon": "^2.0.12",
+    "object-hash": "^2.2.0",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.0-rc.1",
     "react-dom": "^17.0.2",
     "react-leaflet": "^3.2.1",
+    "react-modal": "^3.14.3",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2"
@@ -27,7 +29,7 @@
     "eject": "react-scripts eject",
     "dev": "npx nodemon src/server/server.js"
   },
-  "proxy": "http://localhost:5000",
+  "proxy": "http://localhost:8000",
   "eslintConfig": {
     "extends": [
       "react-app",
