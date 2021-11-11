@@ -40,3 +40,34 @@ exports.createNewOutage = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.closeOutage = async (req, res, next) => {
+  try {
+    let {
+      user_id,
+      service_type,
+      service_name,
+      outage_street,
+      outage_city,
+      outage_state,
+      outage_description,
+      outage_status,
+    } = req.body;
+    let outage = new Outage(
+      user_id,
+      service_type,
+      service_name,
+      outage_street,
+      outage_city,
+      outage_state,
+      outage_description,
+      outage_status
+    );
+
+    outage = await outage.close();
+    res.status(200).json({ message: "Outage Closed" });
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
