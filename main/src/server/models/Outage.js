@@ -29,27 +29,7 @@ class Outage {
     let day = outageDate.getDate();
     let dateCreated = `${year}-${month}-${day}`;
 
-    let sql = `
-            INSERT INTO outages (
-               user_email,
-               service_type,
-               service_name,
-               latitude,
-               longitude,
-               outage_description,
-               date_created,
-            )
-            VALUES (
-                '${this.user_email}',
-                '${this.service_type}',
-                '${this.service_name}',
-                '${this.latitude}',
-                '${this.longitude}',
-                '${this.outage_description}',
-                '${dateCreated}'
-            )
-          ;`;
-
+    let sql = `INSERT INTO outages (user_email, service_type, service_name, latitude, longitude, outage_description, date_created) VALUES ('${this.user_email}', '${this.service_type}', '${this.service_name}', '${this.latitude}', '${this.longitude}', '${this.outage_description}', '${dateCreated}');`;
     return db.execute(sql);
   }
 
