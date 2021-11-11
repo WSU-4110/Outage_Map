@@ -41,7 +41,7 @@ exports.createNewOutage = async (req, res, next) => {
   }
 };
 
-exports.profilepage = async (req, res, next) => {
+exports.profilePage = async (req, res, next) => {
   try {
     let { user_email } = req.body;
     const [profile, _] = await Outage.userProfile(user_email);
