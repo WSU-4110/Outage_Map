@@ -6,11 +6,8 @@ import { useHistory, withRouter } from "react-router-dom";
 import Modal from "react-modal";
 import "../css/login.css";
 import axios from "axios";
-<<<<<<< HEAD
 import { Container, Form, Row, Col, Button, ToggleButtonGroup} from 'react-bootstrap'
-=======
 import hash from "object-hash";
->>>>>>> 2b7720a3adf22f0aa45dc40baf34024c213d67c0
 
 class UserLogin extends React.Component {
   constructor() {
@@ -91,7 +88,7 @@ class UserLogin extends React.Component {
             </Col>
           </Form>
         </Container>
-        
+
         <div id="main-holder">
           <form className="login-form" onSubmit={this.handleSubmits}>
             <h1 id="login-header">Log in</h1>
