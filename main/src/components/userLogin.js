@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import { useHistory, withRouter } from "react-router-dom";
 import "../css/login.css";
 import axios from "axios";
+import { Container, Form, Row, Col, Button, ToggleButtonGroup} from 'react-bootstrap'
 
 class UserLogin extends React.Component {
   constructor() {
@@ -38,6 +39,50 @@ class UserLogin extends React.Component {
   render() {
     return (
       <div id ="login-page">
+        <Container className="loginContainer w-50 mw-75" >
+          <Form>
+            <Row className = "mx-auto">
+              <Col /*lg={4} md={6} sm={12}*/>
+                <Form.Group controlId="formEmail">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control type="email" placeholder="Email"/>
+                  <ToggleButtonGroup
+                  type="email"
+                  name="email"
+                  id="username-field"
+                  className="login-form-field"
+                  placeholder="Email"
+                  onChange={this.handleChange}
+                  ></ToggleButtonGroup>
+                </Form.Group>
+                </Col>
+            </Row>
+ 
+            <Row className = "mx-auto">
+              <Col /*lg={4} md={6} sm={12}*/>
+                <Form.Group controlId="formPassword">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control type="password" placeholder="Password"/>
+                  <ToggleButtonGroup
+                  type="password"
+                  name="pwd"
+                  id="password-field"
+                  className="login-form-field"
+                  placeholder="Password"
+                  onChange={this.handleChange}
+                  ></ToggleButtonGroup>
+                </Form.Group>
+              </Col>
+            </Row>
+
+            <Col>
+              <Row className = "mx-auto">
+                <Button variant="primary btn-block" type="submit" >Login</Button>
+              </Row>
+            </Col>
+          </Form>
+        </Container>
+
         <div id="main-holder">
           <form className="login-form" onSubmit={this.handleSubmits}>
             <h1 id="login-header">Log in</h1>

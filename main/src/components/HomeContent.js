@@ -1,5 +1,6 @@
 import React from "react";
 import "../css/HomeContent.css";
+import { Button, Card} from 'react-bootstrap'
 
 const HomeContent = () => {
   return (
@@ -15,6 +16,9 @@ const HomeContent = () => {
           Outage Map provides all users with the ability to see an outage map
           for a variety of services that are provided.
         </p>
+
+        {/* <Button>Test</Button> */}
+
       </div>
     </body>
   );

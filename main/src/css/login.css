@@ -1,13 +1,20 @@
-#login-page {
+.loginContainer{
+  margin-top: 10%;
+  padding: 30px;
+  background-color: #565757;
+  border-radius: 7px;
+}
+
+/* #login-page {
   display: grid;
   justify-items: center;
   align-items: center;
-}
+} */
 
+/*
 #main-holder {
   width: 600px;
   height: 410px;
-  /* padding-bottom: 3%; */
   padding-top: 1%;
   margin-top: 40%;
   display: grid;
@@ -27,7 +34,6 @@
 
 #login-submit{
   margin-top: 10%;
-  /* margin-right: 25%; */
   padding: 7px;
   align-self: center;
   text-align: center;
@@ -121,3 +127,4 @@ h1{
   }
 
 }
+*/
