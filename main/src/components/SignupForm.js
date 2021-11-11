@@ -31,7 +31,7 @@ class SignupForm extends React.Component {
     console.log(hashedPassword);
 
     if (this.validate()) {
-      console.log(this.state);
+      //console.log(this.state);
 
       let input = {};
       input["name"] = "";

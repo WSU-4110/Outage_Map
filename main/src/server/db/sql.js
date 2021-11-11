@@ -4,7 +4,7 @@ const connection = mysql.createPool({
   connectionLimit: 10,
   password: "password",
   user: "root",
-  database: "outageMapDB",
+  database: "outageMapV2",
   host: "localhost",
   port: "3306",
 });
