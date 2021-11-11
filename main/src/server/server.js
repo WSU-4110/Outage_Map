@@ -8,6 +8,7 @@ app.use("/outages", outageRouter);
 app.use("/outage-new", outageRouter);
 app.use("/login", userRouter);
 app.use("/signup", userRouter);
+app.use("/profile", outageRouter);
 
 const PORT = process.env.PORT || "5000";
 
