@@ -47,9 +47,6 @@ function OutageMap() {
 
     var realLat = position.coords.latitude;
     var realLong = position.coords.longitude;
-
-    localStorage.setItem('userLat', position.coords.latitude);
-    localStorage.setItem('userLong', position.coords.longitude);
     
     realLat = Math.abs(realLat);
     console.log("Decimal");
