@@ -13,33 +13,24 @@ class User {
 
   //Signup functionality. Inserts a new user into the User table.
   register() {
-    //Encrypt User Password
-    bcrypt.hash(this.user_password, 10, (err, hash) => {
-      if (err) throw err;
-      else {
-        let sql = `
+    console.log(this.user_password);
+    let sql = `
         INSERT INTO users (user_email, user_password)
-         VALUES ('${this.user_email}', '${hash}');`;
-        //console.log(hash);
-        return db.execute(sql);
-      }
-    });
+         VALUES ('${this.user_email}', '${this.user_password}');`;
+    //console.log(hash);
+    return db.execute(sql);
   }
 
   //Validation upon User login
   //Compare the password the user entered to the hashed
   //password in the database. Return true if passwords match.
   async validateUser() {
-    //console.log(this.user_email);
+    let isValid = false;
     let sql = `SELECT * FROM users WHERE user_email = '${this.user_email}';`;
     const [result] = await db.execute(sql);
-    //console.log(result);
-    const isValid = await bcrypt.compare(
-      this.user_password,
-      result[0].user_password
-    );
-    console.log(this.user_password);
-    console.log(result[0].user_password);
+    if (result[0].user_email != null) {
+      isValid = true;
+    }
     return isValid;
   }
 }

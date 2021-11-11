@@ -3,9 +3,10 @@
 //second draft of react form
 import React, { useEffect } from "react";
 import { useHistory, withRouter } from "react-router-dom";
-import Modal from 'react-modal';
+import Modal from "react-modal";
 import "../css/login.css";
 import axios from "axios";
+import hash from "object-hash";
 
 class UserLogin extends React.Component {
   constructor() {
@@ -14,7 +15,7 @@ class UserLogin extends React.Component {
     this.state = {
       email: "", //object entry from user
       pwd: "", //object entry from user
-      loggedIn: false
+      loggedIn: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmits = this.handleSubmits.bind(this);
@@ -27,22 +28,22 @@ class UserLogin extends React.Component {
 
   async handleSubmits(e) {
     e.preventDefault();
+    const hashedPassword = hash(this.state.pwd);
     const res = await axios.post("/login", {
       user_email: `${this.state.email}`,
-      user_password: `${this.state.pwd}`,
+      user_password: `${hashedPassword}`,
     });
 
-    if(res.status === 200)
-    {
+    if (res.status === 200) {
       this.state.loggedIn = true;
-      localStorage.setItem('user', JSON.stringify(this.state.email));
+      localStorage.setItem("user", JSON.stringify(this.state.email));
       this.props.history.push("/outages");
     }
   }
 
   render() {
     return (
-      <div id ="login-page">
+      <div id="login-page">
         <div id="main-holder">
           <form className="login-form" onSubmit={this.handleSubmits}>
             <h1 id="login-header">Log in</h1>
@@ -65,7 +66,12 @@ class UserLogin extends React.Component {
                   onChange={this.handleChange}
                 />
                 <div className="login-form-submit">
-                  <input type="submit" value="Log in" id="login-submit" onSubmit={this.handleSubmits}/>
+                  <input
+                    type="submit"
+                    value="Log in"
+                    id="login-submit"
+                    onSubmit={this.handleSubmits}
+                  />
                 </div>
               </div>
             </div>
