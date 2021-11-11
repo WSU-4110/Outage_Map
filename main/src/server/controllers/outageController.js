@@ -6,6 +6,7 @@ exports.getAllOutages = async (req, res, next) => {
     res.status(200).json({ outages });
   } catch (error) {
     console.log(error);
+    res.status(500)
     next(error);
   }
 };
@@ -13,30 +14,39 @@ exports.getAllOutages = async (req, res, next) => {
 exports.createNewOutage = async (req, res, next) => {
   try {
     let {
-      user_id,
+      user_email,
       service_type,
       service_name,
-      outage_street,
-      outage_city,
-      outage_state,
-      outage_description,
-      outage_status,
+      latitude,
+      longitude,
+      outage_description
     } = req.body;
     let outage = new Outage(
-      user_id,
+      user_email,
       service_type,
       service_name,
-      outage_street,
-      outage_city,
-      outage_state,
-      outage_description,
-      outage_status
+      latitude,
+      longitude,
+      outage_description
     );
 
     outage = await outage.save();
     res.status(201).json({ message: "Outage Created" });
   } catch (error) {
     console.log(error);
+    res.status(500)
+    next(error);
+  }
+};
+
+exports.profilePage = async (req, res, next) => {
+  try {
+    let { user_email } = req.body;
+    const [profile, _] = await Outage.userProfile(user_email);
+    res.status(200).json({ profile });
+  } catch (error) {
+    console.log(error);
+    res.status(404);
     next(error);
   }
 };
