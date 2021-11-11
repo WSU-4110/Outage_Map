@@ -68,14 +68,12 @@ class Outage {
     return db.execute(sql);
   }
 
-<<<<<<< HEAD
   static userProfile(email) {
     let sql = `SELECT * FROM outages where user_email = '${this.user_email}'`;
     return db.query(sql);
-=======
+  }
   close() {
-    let sql =
-      `UPDATE OUTAGES
+    let sql = `UPDATE OUTAGES
        SET outage_status = 'Closed'
        WHERE user_id = '${this.user_id}'
        and service_type = '${this.service_type}'
@@ -85,7 +83,6 @@ class Outage {
        and outage_state = '${this.outage_state}';
       `;
     return db.execute(sql);
->>>>>>> 0e554bea421c8c15481688ef022f5e0b289c9177
   }
 }
 module.exports = Outage;
