@@ -47,12 +47,31 @@ function OutageMap() {
 
     var realLat = position.coords.latitude;
     var realLong = position.coords.longitude;
+
+    localStorage.setItem('userLat', position.coords.latitude);
+    localStorage.setItem('userLong', position.coords.longitude);
     
     realLat = Math.abs(realLat);
-    console.log(realLat - Math.floor(realLat)); //this will output the decimal values
+    console.log("Decimal");
+    console.log(realLat - Math.floor(realLat)); //this will output the decimal values of realLat
 
-    realLong = Math.abs(realLong);
-    console.log(realLong - Math.floor(realLong));
+    console.log("latDegree");
+    var latDegree = (Math.floor(realLat));
+    console.log(latDegree);
+
+    console.log("latMinute");
+    var latMinute = (realLat - Math.floor(realLat)) * 60;
+    console.log(latMinute);
+
+    console.log("latSecond");
+    var latSecond = (latMinute - Math.floor(latMinute)) * 60;
+    console.log(latSecond);
+
+    var latDD = latDegree + (latMinute/60) + (latSecond/3600);
+    console.log(latDD);
+
+    // realLong = Math.abs(realLong);
+    // console.log(realLong - Math.floor(realLong));
   }); //This function requests the browser user to allow location information to be used. Used to get user Lat Long Coords
 
   const setReportIsOpenTrue = () =>{
