@@ -47,7 +47,6 @@ class UserLogin extends React.Component {
 
   render() {
     return (
-<<<<<<< HEAD
       <div id ="login-page">
         <Container className="loginContainer w-50 mw-75" >
           <Form>
@@ -92,10 +91,7 @@ class UserLogin extends React.Component {
             </Col>
           </Form>
         </Container>
-
-=======
-      <div id="login-page">
->>>>>>> 2b7720a3adf22f0aa45dc40baf34024c213d67c0
+        
         <div id="main-holder">
           <form className="login-form" onSubmit={this.handleSubmits}>
             <h1 id="login-header">Log in</h1>
