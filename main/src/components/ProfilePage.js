@@ -17,7 +17,7 @@ class Profile extends React.Component {
         super(props);
         this.state = {
             person: [
-                { id: 0, name: 'User Name', selected: true },
+                { id: 0, name: 'User Name', selected: true },//pulls username as email
             ],
             selectedUser: null,
             selectedTab: 'profile',
@@ -41,10 +41,7 @@ class Profile extends React.Component {
                                     <div className="ptab-col-md-6 ptab-col-12">
                                         <Input value={selectedUser.email} onChange={this.changeEmail} inputStyle="box" labelStyle="floating">Email</Input>
                                     </div>
-                                </div>
-                                
-                               
-                                
+                                </div>                               
                                 <div className="ptab-row ptab-justify-content-end">
                                     <div className="ptab-col-md-6 ptab-col-12">
                                         <div className="ptab-pull-right ptab-btn-group">
@@ -93,7 +90,7 @@ class Profile extends React.Component {
                 }
                 break;
             default:
-                return 'null';
+                return 0;
         }
         return (
             <Form className="profile-tabbed-view">
@@ -122,9 +119,9 @@ class Profile extends React.Component {
         this.setState({ selectedTab: newTab });
     }
     
-    changeUser = (event, inst) => {
+    /*changeUser = (event, inst) => {
         this.setState({ selectedUser: this.state.data[event.index]});
-    }
+    }*/
     
     changeFirstName = (event) => {
         const updatedUser = this.state.selectedUser;
