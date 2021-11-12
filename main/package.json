@@ -11,6 +11,9 @@
     "leaflet": "^1.7.1",
     "mysql2": "^2.3.2",
     "nodemon": "^2.0.15",
+    "mysql2": "^2.3.0",
+    "nodemon": "^2.0.12",
+    "object-hash": "^2.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-leaflet": "^3.2.2",
@@ -26,7 +29,7 @@
     "eject": "react-scripts eject",
     "dev": "npx nodemon src/server/server.js"
   },
-  "proxy": "http://localhost:5000",
+  "proxy": "http://localhost:8000",
   "eslintConfig": {
     "extends": [
       "react-app",

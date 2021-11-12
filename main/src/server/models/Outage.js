@@ -6,23 +6,19 @@ const db = require("../db/sql");
  */
 class Outage {
   constructor(
-    user_id,
+    user_email,
     service_type,
     service_name,
-    outage_street,
-    outage_city,
-    outage_state,
-    outage_description,
-    outage_status
+    latitude,
+    longitude,
+    outage_description
   ) {
-    this.user_id = user_id;
+    this.user_email = user_email;
     this.service_type = service_type;
     this.service_name = service_name;
-    this.outage_street = outage_street;
-    this.outage_city = outage_city;
-    this.outage_state = outage_state;
+    this.latitude = latitude ;
+    this.longitude = longitude;
     this.outage_description = outage_description;
-    this.outage_status = outage_status;
   }
 
   //Function to save the newly reported outage to the database
@@ -33,31 +29,7 @@ class Outage {
     let day = outageDate.getDate();
     let dateCreated = `${year}-${month}-${day}`;
 
-    let sql = `
-            INSERT INTO outages (
-                user_id,
-                service_type,
-                service_name,
-                outage_street,
-                outage_city,
-                outage_state,
-                outage_description,
-                outage_status,
-                date_created  
-            )
-            VALUES (
-                '${this.user_id}',
-                '${this.service_type}',
-                '${this.service_name}',
-                '${this.outage_street}',
-                '${this.outage_city}',
-                '${this.outage_state}',
-                '${this.outage_description}',
-                'Open',
-                '${dateCreated}'
-            )
-          ;`;
-
+    let sql = `INSERT INTO outages (user_email, service_type, service_name, latitude, longitude, outage_description, date_created) VALUES ('${this.user_email}', '${this.service_type}', '${this.service_name}', '${this.latitude}', '${this.longitude}', '${this.outage_description}', '${dateCreated}');`;
     return db.execute(sql);
   }
 
@@ -69,18 +41,23 @@ class Outage {
   }
 
   static userProfile(email) {
+<<<<<<< HEAD
     let sql = `SELECT * FROM outages where user_email = '${this.user_email}'`;
     return db.query(sql);}
+=======
+    let sql = `SELECT * FROM outages where user_email = '${email}'`;
+    return db.execute(sql);
+  }
+
+>>>>>>> b1d619a8eb736eb1a8724fbb2e3b109665f4d403
   close() {
-    let sql =
-      `UPDATE OUTAGES
+    let sql = `UPDATE OUTAGES
        SET outage_status = 'Closed'
-       WHERE user_id = '${this.user_id}'
+       WHERE user_email = '${this.user_email}'
        and service_type = '${this.service_type}'
        and service_name = '${this.service_name}'
-       and outage_street = '${this.outage_street}'
-       and outage_city = '${this.outage_city}'
-       and outage_state = '${this.outage_state}';
+       and latitude = '${this.latitude}'
+       and longitude = '${this.longitude}'
       `;
     return db.execute(sql);
   }

@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
+import hash from "object-hash";
 import "../css/SignupForm.css";
 
 class SignupForm extends React.Component {
@@ -24,12 +25,13 @@ class SignupForm extends React.Component {
     });
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
-
+    const hashedPassword = hash(this.state.input.password);
+    console.log(hashedPassword);
 
     if (this.validate()) {
-      console.log(this.state);
+      //console.log(this.state);
 
       let input = {};
       input["name"] = "";
@@ -40,19 +42,14 @@ class SignupForm extends React.Component {
 
       // alert("You have successfully registered");
 
-      axios
-        .post("/signup", {
-          user_email: `${this.state.input.email}`,
-          user_password: `${this.state.input.password}`,
-        })
-        .then(
-          (response) => {
-            this.props.history.push("/login")
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+      const res = await axios.post("/signup", {
+        user_email: `${this.state.input.email}`,
+        user_password: `${hashedPassword}`,
+      });
+
+      if (res.status === 201) {
+        this.props.history.push("/login");
+      }
     }
   }
 
@@ -160,7 +157,7 @@ class SignupForm extends React.Component {
               <input type="submit" value="Register" id="signup-submit" />
             </form>
           </div>
-      </div>
+        </div>
       </div>
     );
   }
