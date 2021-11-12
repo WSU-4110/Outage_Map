@@ -6,12 +6,8 @@ function ReportOutage(){
     //Use state hook to track what values are being inputed into the form as well as
     //setting the default values
     const [formData, setFormData] = useState({
-        userReport: '6',
         serviceType: "",
         serviceName: "",
-        serviceStreet: "",
-        serviceCity: "",
-        serviceState: "",
         serviceDescription: ""
     }) 
 
@@ -25,14 +21,13 @@ function ReportOutage(){
 
     const handleSubmitReport = async (event) =>{
         event.preventDefault();
-        console.log(formData.serviceName); // This is return undefined when I am expecting the service name entered by the user.
+        console.log(localStorage.getItem("longitude"));
         const res = await axios.post("/outage-new", {
-            user_id: `${formData.userReport}`,
+            user_email: `${JSON.parse(localStorage.getItem("user"))}`,
             service_type: `${formData.serviceType}`,
             service_name: `${formData.serviceName}`,
-            outage_street: `${formData.serviceStreet}`,
-            outage_city: `${formData.serviceCity}`,
-            outage_state: `${formData.serviceState}`,
+            latitude: localStorage.getItem("latitude"),
+            longitude: localStorage.getItem("longitude"),
             outage_description: `${formData.serviceDescription}`,
         })
 
@@ -43,36 +38,24 @@ function ReportOutage(){
         <>
             <h1 id="Report-Title" class>Test Dialog box</h1>
             <form onSubmit={handleSubmitReport}>
-                <input type="text" placeholder="Service Type" 
-                onChange={handleChange} //inline function to set formData for the form
-                value={formData.serviceType}/*this is where data in the form is read*/
-                name="serviceType"/>
 
+                <select selected="Streaming" id="serviceType" name="serviceType" onChange={handleChange} required>
+                    <option value="Streaming">Streaming</option>
+                    <option value="Internet">Internet</option>
+                    <option value="Power">Power</option>
+                    <option value="Cable">Cable</option>
+                    <option value="Gaming Platform">Gaming Platform</option>
+                </select>
 
                 <input type="text" placeholder="Service Name"
                 onChange={handleChange} 
                 value={formData.serviceName}
-                name="serviceName"/>
-
-                <input type="text" placeholder="Street"
-                onChange={handleChange} 
-                value={formData.serviceStreet}
-                name="serviceStreet"/>
-
-                <input type="text" placeholder="City"
-                onChange={handleChange} 
-                value={formData.serviceCity}
-                name="serviceCity"/>
-
-                <input type="text" placeholder="State"
-                onChange={handleChange} 
-                value={formData.serviceState}
-                name="serviceState"/>
+                name="serviceName" required/>
 
                 <input type="text" placeholder="Description"
                 onChange={handleChange} 
                 value={formData.serviceDescription}
-                name="serviceDescription"/>
+                name="serviceDescription" required/>
 
                 <button type="submit">Report Outage</button>
             </form>
