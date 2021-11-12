@@ -71,3 +71,12 @@ exports.closeOutage = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.profilepage = async (req, res, next) => {
+  try {
+    let { user_email } = req.body;
+    const [profile,_ ] = await Outage.userProfile(user_email);
+    res.status(200).json({ profile });
+  } catch (error) {
+    console.log(error);
+    next(error);}}

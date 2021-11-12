@@ -1,12 +1,19 @@
 //profile page, with user reported outages and closed outages
 import React from "react";
-import {Button, Input, Card, CardHeader, CardContent, Form, Listview, TabNav, NavItem} from "react";
 import { useHistory, withRouter } from "react-router-dom";
-//import moment from "moment"; //for date formatting
 import { useState, useEffect } from "react";
 import "../css/profile.css";
 
-class ListItem extends React.Component {
+const Profile = (props) => {
+    return (
+        <div style= {{className :'ptab-form-grid'}}>        
+            <h2>Profile for: </h2>
+            <p style= {{color :'orange'}}> test@test.com</p>
+        </div>
+    )
+}
+
+/*class ListItem extends React.Component {
     render() {
          return <li data-selected={this.props.item.selected}>{this.props.item.name}</li>;
     }
@@ -91,67 +98,67 @@ class Profile extends React.Component {
                 break;
             default:
                 return 0;
-        }
-        return (
-            <Form className="profile-tabbed-view">
-                <div className="ptab-grid ptab-no-padding">
-                    <div className="ptab-row">
-                        <div className="ptab-col-12 ptab-col-md-2 ptab-col-sm-3">
-                            <Listview select="single" itemType={ListItem} data={this.state.person} onItemTap={this.changeUser} />
-                        </div>
-                        <div className="ptab-col-12 ptab-col-md-10 ptab-col-sm-9 pv-col-border">
-                            <TabNav display="inline">
-                                <NavItem selected={this.state.selectedTab === 'profile'} onClick={this.selectTab.bind(null, 'profile')}>Profile</NavItem>
-                                <NavItem selected={this.state.selectedTab === 'repOutage'} onClick={this.selectTab.bind(null, 'repOutage')}>Reported Outage</NavItem>
-                                <NavItem selected={this.state.selectedTab === 'closOutage'} onClick={this.selectTab.bind(null, 'closOutage')}>Closed Outage</NavItem>
-                            </TabNav>
-                            {content}
-                        </div>
-                    </div>
-                </div>
-            </Form>
-        );
-    }
+        }*/
+//         return (
+//             <Form className="profile-tabbed-view">
+//                 <div className="ptab-grid ptab-no-padding">
+//                     <div className="ptab-row">
+//                         <div className="ptab-col-12 ptab-col-md-2 ptab-col-sm-3">
+//                             <Listview select="single" itemType={ListItem} data={this.state.person} onItemTap={this.changeUser} />
+//                         </div>
+//                         <div className="ptab-col-12 ptab-col-md-10 ptab-col-sm-9 pv-col-border">
+//                             <TabNav display="inline">
+//                                 <NavItem selected={this.state.selectedTab === 'profile'} onClick={this.selectTab.bind(null, 'profile')}>Profile</NavItem>
+//                                 <NavItem selected={this.state.selectedTab === 'repOutage'} onClick={this.selectTab.bind(null, 'repOutage')}>Reported Outage</NavItem>
+//                                 <NavItem selected={this.state.selectedTab === 'closOutage'} onClick={this.selectTab.bind(null, 'closOutage')}>Closed Outage</NavItem>
+//                             </TabNav>
+//                             {/* /{content} */}
+//                         </div>
+//                     </div>
+//                 </div>
+//             </Form>
+//         );
+//     }
     
      
     
-    selectTab = (newTab) => {
-        this.setState({ selectedTab: newTab });
-    }
+//     selectTab = (newTab) => {
+//         this.setState({ selectedTab: newTab });
+//     }
     
-    /*changeUser = (event, inst) => {
-        this.setState({ selectedUser: this.state.data[event.index]});
-    }*/
+//     /*changeUser = (event, inst) => {
+//         this.setState({ selectedUser: this.state.data[event.index]});
+//     }*/
     
-    changeFirstName = (event) => {
-        const updatedUser = this.state.selectedUser;
-        updatedUser.first = event.target.value;
+//     changeFirstName = (event) => {
+//         const updatedUser = this.state.selectedUser;
+//         updatedUser.first = event.target.value;
 
-        this.setState({ selectedUser: updatedUser });
-    }
+//         this.setState({ selectedUser: updatedUser });
+//     }
     
     
-    changeEmail = (event) => {
-        const updatedUser = this.state.selectedUser;
-        updatedUser.email = event.target.value;
+//     changeEmail = (event) => {
+//         const updatedUser = this.state.selectedUser;
+//         updatedUser.email = event.target.value;
 
-        this.setState({ selectedUser: updatedUser });
-    }
+//         this.setState({ selectedUser: updatedUser });
+//     }
     
     
     
-    //shows the report date
-    /*formatDate(date:any) {
-        return(
-            util.datetime.formatDate('D, d h:ii A', new Date(date))
-        ); 
-    }*/
-    //pulls closed outages for the user
-    /*closOutages = (index) => {
-        const updatedUser = this.state.selectedUser;
-        updatedUser.tasks[index] = event.target.checked;
+//     //shows the report date
+//     /*formatDate(date:any) {
+//         return(
+//             util.datetime.formatDate('D, d h:ii A', new Date(date))
+//         ); 
+//     }*/
+//     //pulls closed outages for the user
+//     /*closOutages = (index) => {
+//         const updatedUser = this.state.selectedUser;
+//         updatedUser.tasks[index] = event.target.checked;
         
-        this.setState({ selectedUser: updatedUser });
-    }*/
-}
+//         this.setState({ selectedUser: updatedUser });
+//     }*/
+// }
 export default withRouter(Profile);
