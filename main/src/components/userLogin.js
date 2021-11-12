@@ -45,45 +45,68 @@ class UserLogin extends React.Component {
   render() {
     return (
       <div id ="login-page">
-        <Container className="loginContainer w-50 mw-75" >
+        <Container className="loginContainer w-50 mw-25" >
           <Form>
-            <Row className = "mx-auto">
+            <h1 id="title">Login</h1>
+
+            <Row className = "m-3 mx-auto w-50">
               <Col /*lg={4} md={6} sm={12}*/>
                 <Form.Group controlId="formEmail">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control type="email" placeholder="Email"/>
-                  <ToggleButtonGroup
+                  {/* <Form.Label className="formLabel">Email</Form.Label> */}
+                  {/* <Form.Control 
                   type="email"
                   name="email"
                   id="username-field"
                   className="login-form-field"
                   placeholder="Email"
-                  onChange={this.handleChange}
-                  ></ToggleButtonGroup>
+                  onChange={this.handleChange}/>
+                  </Form.Group> */}
+                  <Form.Control input
+                    type="email"
+                    name="email"
+                    id="username-field"
+                    className="login-form-field"
+                    placeholder="Email"
+                    onChange={this.handleChange}
+                  />
                 </Form.Group>
-                </Col>
+              </Col>
             </Row>
  
-            <Row className = "mx-auto">
+            <Row className = "m-3 mx-auto w-50">
               <Col /*lg={4} md={6} sm={12}*/>
                 <Form.Group controlId="formPassword">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control type="password" placeholder="Password"/>
-                  <ToggleButtonGroup
+                  {/* <Form.Label className="formLabel">Password</Form.Label> */}
+                  {/* <Form.Control 
+                  type="password"
+                  name="pwd"
+                  id="password-field"
+                  className="login-form-field"
+                  placeholder="Password"
+                  onChange={this.handleChange}/> */}
+                  <Form.Control input
                   type="password"
                   name="pwd"
                   id="password-field"
                   className="login-form-field"
                   placeholder="Password"
                   onChange={this.handleChange}
-                  ></ToggleButtonGroup>
+                />
                 </Form.Group>
               </Col>
             </Row>
-
-            <Col>
-              <Row className = "mx-auto">
-                <Button variant="primary btn-block" type="submit" >Login</Button>
+            
+            <Col className = "mx-auto w-25">
+              <Row>
+                <Button 
+                  className="customBtn" 
+                  variant="primary btn-block" 
+                  type="submit" 
+                  size="md"  
+                  style={{background: "orange", border: "none"}}
+                  >
+                    Login
+                </Button>
               </Row>
             </Col>
           </Form>
