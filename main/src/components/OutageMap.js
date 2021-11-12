@@ -8,18 +8,12 @@ function OutageIndicator({ outage }) {
   //this component renders the markers with corresponding lat and long values calculated by the geocodify api.
   const [coords, setCoords] = useState();
   //localStorage.clear();
-  console.log(JSON.parse(localStorage.getItem("user")));
+  //console.log(JSON.parse(localStorage.getItem("user")));
 
   useEffect(() => {
-    async function resolveLocation() {
-      const resp = await axios.get(
-        "https://api.geocodify.com/v2/geocode/json?api_key=1e79b746ca6813d40e4e997e4a4e263f1307e5eb&q=" +
-          outage.outage_street +
-          ", " +
-          outage.outage_city +
-          ", Michigan, USA"
-      );
-      const [lng, lat] = resp.data.response.bbox;
+    function resolveLocation() {
+      let lng = Number(outage.longitude);
+      let lat = Number(outage.latitude);
       setCoords({ lng, lat });
     }
     resolveLocation();
@@ -29,7 +23,7 @@ function OutageIndicator({ outage }) {
     "Loading"
   ) : (
     <Marker position={[coords.lat, coords.lng]}>
-      <Popup>
+      <Popup className={outage.service_type}>
         {outage.service_type}: {outage.service_name}
       </Popup>
     </Marker>
@@ -42,17 +36,17 @@ function OutageMap() {
   const [reportIsOpen, setReportIsOpen] = useState(false);
 
   navigator.geolocation.getCurrentPosition(function (position) {
-    console.log("Latitude is :", position.coords.latitude);
-    console.log("Longitude is :", position.coords.longitude);
+    //console.log("Latitude is :", position.coords.latitude);
+    //console.log("Longitude is :", position.coords.longitude);
 
     var realLat = position.coords.latitude;
     var realLong = position.coords.longitude;
 
-    realLat = Math.abs(realLat);
-    console.log(realLat - Math.floor(realLat)); //this will output the decimal values
+    var offsetLat = realLat.toString().match(/^-?\d+(?:\.\d{0,3})?/)[0]; //offset coords by truncating to 3 decimals without rounding
+    var offsetLong = realLong.toString().match(/^-?\d+(?:\.\d{0,3})?/)[0];
 
-    realLong = Math.abs(realLong);
-    console.log(realLong - Math.floor(realLong));
+    localStorage.setItem("latitude", offsetLat);
+    localStorage.setItem("longitude", offsetLong);
   }); //This function requests the browser user to allow location information to be used. Used to get user Lat Long Coords
 
   const setReportIsOpenTrue = () => {
