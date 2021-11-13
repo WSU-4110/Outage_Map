@@ -11,8 +11,9 @@ const Profile = (props) => {
             <p style= {{color :'orange'}}> test@test.com</p>
         </div>
     )
+    
 }
-
+export default withRouter(Profile);
 /*class ListItem extends React.Component {
     render() {
          return <li data-selected={this.props.item.selected}>{this.props.item.name}</li>;
@@ -161,4 +162,4 @@ class Profile extends React.Component {
 //         this.setState({ selectedUser: updatedUser });
 //     }*/
 // }
-export default withRouter(Profile);
+

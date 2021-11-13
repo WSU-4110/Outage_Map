@@ -9,8 +9,6 @@
     "axios": "^0.22.0",
     "bcrypt": "^5.0.1",
     "leaflet": "^1.7.1",
-    "mysql2": "^2.3.2",
-    "nodemon": "^2.0.15",
     "mysql2": "^2.3.0",
     "nodemon": "^2.0.12",
     "object-hash": "^2.2.0",
