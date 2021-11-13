@@ -9,6 +9,18 @@ function OutageIndicator({ outage }) {
   const [coords, setCoords] = useState();
   //localStorage.clear();
   //console.log(JSON.parse(localStorage.getItem("user")));
+  
+  /*const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const setIsLoggedInTrue = () => {
+    setIsLoggedIn(true);
+  };
+  const setIsLoggedInFalse = () => {
+    setIsLoggedIn(false);
+  };*/
+  
+ console.log(JSON.parse(localStorage.getItem("user")));
+
+  //outage.user_email = localStorage.getItem("email"); 
 
   useEffect(() => {
     function resolveLocation() {
@@ -19,12 +31,22 @@ function OutageIndicator({ outage }) {
     resolveLocation();
   }, [outage]);
 
+
+
   return !coords ? (
     "Loading"
   ) : (
     <Marker position={[coords.lat, coords.lng]}>
       <Popup className={outage.service_type}>
         {outage.service_type}: {outage.service_name}
+        
+        <button onClick={outage.onClick}>  {/* onClick event handlers for closing and extending reports*/}
+          Close Report
+          </button>
+        <button onClick={outage.onClick}>
+          Extend Report
+          </button> 
+        {}
       </Popup>
     </Marker>
   );
