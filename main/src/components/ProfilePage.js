@@ -11,9 +11,19 @@ const Profile = (props) => {
             <p style= {{color :'orange'}}> test@test.com</p>
         </div>
     )
-    
 }
-export default withRouter(Profile);
+const Tab = (props) => {
+    return (
+        <div className="ptab-ms-c">
+            <ul className="pnav">
+                <li>Reported Outages</li>
+                <li>Closed Outages</li>
+            </ul>
+        </div>
+    )
+}    
+
+export default withRouter(Profile, Tab);
 /*class ListItem extends React.Component {
     render() {
          return <li data-selected={this.props.item.selected}>{this.props.item.name}</li>;
