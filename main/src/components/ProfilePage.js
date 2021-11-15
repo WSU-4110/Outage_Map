@@ -4,26 +4,91 @@ import { useHistory, withRouter } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "../css/profile.css";
 
-const Profile = (props) => {
-    return (
-        <div style= {{className :'ptab-form-grid'}}>        
-            <h2>Profile for: </h2>
-            <p style= {{color :'orange'}}> test@test.com</p>
-        </div>
-    )
-}
-const Tab = (props) => {
-    return (
-        <div className="ptab-ms-c">
-            <ul className="pnav">
-                <li>Reported Outages</li>
-                <li>Closed Outages</li>
-            </ul>
-        </div>
-    )
-}    
+function Profile() {
+    
+    function Tab({ children, active = 0 }) {
+        const [activeTab, setActiveTab] = useState(active); //state active tab
+        const [tabsData, setTabsData] = useState([]); //data held in tab
 
-export default withRouter(Profile, Tab);
+        useEffect(() => {
+            let data = [];
+
+            React.Children.forEach(children, element => {
+                if (!React.isValidElement(element))
+                    return;
+
+                const { props: { tab, children } } = element;
+                data.push({ tab, children });
+            });
+            setTabsData(data);
+        }, [children]); //dependancy of useEffect
+        const tabContent = [
+            {
+                title: "Reported Outages",
+                content: `Reported outages coming from user content`,
+            },
+            {
+                title: "Closed Outages",
+                content: `Closed outages from user content`,
+            },
+        ];
+
+        return (
+            <div className="tab-content">
+                <ul className="nav nav-tabs">
+                    {tabsData.map(({ tab }, idx) => (
+                        <li className="nav-item">
+                            <a
+                                className={`nav-link ${idx === activeTab ? "active" : ""}`}
+                                href="#" onClick={() => setActiveTab(idx)}
+                            >
+                                {tab}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+                <div className="tab-content">
+                    {tabsData[activeTab] && tabsData[activeTab].children}
+                </div>
+            </div>
+        );
+    }
+    function TabPane({ children }) {
+        return { children };
+
+    }
+
+    Tab.TabPane = TabPane; //static component for how many tabs for render
+
+    function TabView (tabContent) {
+        return (
+            <div className="row">
+                <div className="col text-center">
+                    <h2>User Outages</h2>
+                    <div className="row text-left">
+                        <Tab active={1}>
+                            {tabContent.map((tab, idx) => (
+                                <Tab.TabPane key={`Tab-${idx}`} tab={tab.title}>
+                                    {tab.content}
+                                </Tab.TabPane>
+                            ))}
+                        </Tab>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+    
+    return (
+        <div className="profileview-tab">
+            <h2 className="ptab-row">Profile for:</h2>
+            <p className="profileview-tab" style={{ color: 'orange' }}>test@test.com</p>
+        </div>
+    );
+}
+
+
+export default withRouter(Profile);
 /*class ListItem extends React.Component {
     render() {
          return <li data-selected={this.props.item.selected}>{this.props.item.name}</li>;

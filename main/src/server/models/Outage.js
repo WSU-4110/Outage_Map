@@ -40,16 +40,11 @@ class Outage {
     return db.execute(sql);
   }
 
-  static userProfile(email) {
-<<<<<<< HEAD
-    let sql = `SELECT * FROM outages where user_email = '${this.user_email}'`;
-    return db.query(sql);}
-=======
+  static userProfile(email) {   
     let sql = `SELECT * FROM outages where user_email = '${email}'`;
     return db.execute(sql);
   }
 
->>>>>>> b1d619a8eb736eb1a8724fbb2e3b109665f4d403
   close() {
     let sql = `UPDATE OUTAGES
        SET outage_status = 'Closed'

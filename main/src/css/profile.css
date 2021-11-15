@@ -1,13 +1,42 @@
-.main-content.completelistview { padding: 0; }
-.completelistview .noteview { margin: 10px; }
+.tab-content{
+  margin:0 auto;
+  width:70%;
+  text-align:center;
+  margin-top:15vh;
+}
+#content {
+  width: calc(100% - 250px);
+  padding: 40px;
+  min-height: 100vh;
+  transition: all 0.3s;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 
-.profile-tabbed-view,
-.profile-tabbed-view .ptab-row {
-    height: 100%;
+#content.active {
+  width: 100%;
+}
+.profile-tabbed-view{
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  font-size: 1.1rem;
+  padding-top: 1em;
+  }
+.ptab-row {
+    height: auto;
+    width: auto;
+    font-size:1.5rem; 
+    background-color:transparent;
+    border-bottom: 1px solid white;  
 }
 
 .profile-tabbed-view .ptab-grid {
     height: 100%;
+    text-align: center;
 }
 
 .profile-tabbed-view .pv-col-border {
@@ -21,7 +50,7 @@
     width: 80%;
     height: auto;
     min-height: 400px;
-    background: #053742;
+    background: #176f6f;
     margin: 3.5rem auto 1.5rem;
     padding: 2rem 1rem;
     color: #E8F0F2;
@@ -46,18 +75,26 @@ ul.pnav li {
     border-top-right-radius: 2rem;
   }
   ul.pnav li:hover {
-    background: rgba(50, 224, 196, 0.15);
+    background: rgba(134, 136, 136, 0.15);
   }
   ul.pnav li.active {
-    background: #39A2DB;
+    background: orange
   }
 
-.profileview-tab,
-.profileview-item {
-    display: none;
+.profileview-tab{
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  font-size: 1.1rem;
+  padding-top: 1em;
+  display: block;
 }
-
-.profileview-tab-sel,
-.profileview-item-sel {
-    display: block;
+p{
+  width: auto;
+  height: auto;
+  text-align: left;  
+  font-size: 1.2rem; 
+  padding-left: .5em;
 }
