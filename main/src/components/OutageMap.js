@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import axios from "axios";
 import ReportOutage from "./ReportOutage";
+import { Button, Container, Row, Col } from 'react-bootstrap';
 
 function OutageIndicator({ outage }) {
   //this component renders the markers with corresponding lat and long values calculated by the geocodify api.
@@ -66,8 +67,19 @@ function OutageMap() {
   console.log(allOutages);
 
   return (
-    <>
-      <button onClick={setReportIsOpenTrue}>Report Outage</button>
+    <Container>
+      <Col className = "m-3 mx-auto w-25">
+        <Row>
+        <Button onClick={setReportIsOpenTrue}
+          variant="primary btn-block"
+          size="md"  
+          style={{background: "orange", border: "none"}}
+          >
+            Report Outage
+          </Button>
+        </Row>
+      </Col>
+      {/* <button onClick={setReportIsOpenTrue}>Report Outage</button> */}
       <MapContainer center={[44, -85]} zoom={7} scrollWheelZoom={true}>
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -82,7 +94,7 @@ function OutageMap() {
         <button onClick={setReportIsOpenFalse}>X</button>
         <ReportOutage />
       </Modal>
-    </>
+    </Container>
   );
 }
 

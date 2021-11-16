@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from 'react-router-dom'
 import axios from "axios";
+import { Button, Container, Row, Col, Form } from 'react-bootstrap';
 
 function ReportOutage(){
     //Use state hook to track what values are being inputed into the form as well as
@@ -35,31 +36,67 @@ function ReportOutage(){
     };
 
     return (
-        <>
-            <h1 id="Report-Title" class>Test Dialog box</h1>
-            <form onSubmit={handleSubmitReport}>
+        <Container className="w-25">
+            <Form>
+                <h1 id="Report-Title" class>Report Outage</h1>
 
-                <select selected="Streaming" id="serviceType" name="serviceType" onChange={handleChange} required>
-                    <option value="Streaming">Streaming</option>
-                    <option value="Internet">Internet</option>
-                    <option value="Power">Power</option>
-                    <option value="Cable">Cable</option>
-                    <option value="Gaming Platform">Gaming Platform</option>
-                </select>
+                    <Row className = "m-3 mx-auto">
+                        <Col>
+                            <select selected="Streaming" id="serviceType" name="serviceType" onChange={handleChange} required>
+                                <option value="Streaming">Streaming</option>
+                                <option value="Internet">Internet</option>
+                                <option value="Power">Power</option>
+                                <option value="Cable">Cable</option>
+                                <option value="Gaming Platform">Gaming Platform</option>
+                            </select>
+                        </Col>
+                    </Row>
 
-                <input type="text" placeholder="Service Name"
-                onChange={handleChange} 
-                value={formData.serviceName}
-                name="serviceName" required/>
+                    <Row className = "m-3 mx-auto">
+                        <Col>
+                            <input type="text" placeholder="Service Name"
+                            onChange={handleChange} 
+                            value={formData.serviceName}
+                            name="serviceName" required/>
+                        </Col>
+                    </Row>
 
-                <input type="text" placeholder="Description"
-                onChange={handleChange} 
-                value={formData.serviceDescription}
-                name="serviceDescription" required/>
+                    <Row className = "m-3 mx-auto">
+                        <Col>
+                            <input type="text" placeholder="Description"
+                            onChange={handleChange} 
+                            value={formData.serviceDescription}
+                            name="serviceDescription" required/>
+                        </Col>
+                    </Row>
 
-                <button type="submit">Report Outage</button>
-            </form>
-        </>
+                    <Button type="submit">Report Outage</Button>
+            </Form>
+        </Container>
+
+        // <h1 id="Report-Title" class>Test Dialog box</h1>
+        // <form onSubmit={handleSubmitReport}>
+
+        //     <select selected="Streaming" id="serviceType" name="serviceType" onChange={handleChange} required>
+        //         <option value="Streaming">Streaming</option>
+        //         <option value="Internet">Internet</option>
+        //         <option value="Power">Power</option>
+        //         <option value="Cable">Cable</option>
+        //         <option value="Gaming Platform">Gaming Platform</option>
+        //     </select>
+
+        //     <input type="text" placeholder="Service Name"
+        //     onChange={handleChange} 
+        //     value={formData.serviceName}
+        //     name="serviceName" required/>
+
+        //     <input type="text" placeholder="Description"
+        //     onChange={handleChange} 
+        //     value={formData.serviceDescription}
+        //     name="serviceDescription" required/>
+
+        //     <Button type="submit">Report Outage</Button>
+        // </form>
     );
 }
 
