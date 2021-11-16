@@ -45,8 +45,8 @@ class Outage {
     return db.execute(sql);
   }
 
-  close() {
-    let sql = `UPDATE OUTAGES SET outage_status = 'Closed' WHERE user_email = '${this.user_email}' and service_type = '${this.service_type}' and service_name = '${this.service_name}' and latitude = '${this.latitude}'and longitude = '${this.longitude}' and outage_description = '${this.outage_description}';`;
+  static close(id) {
+    let sql = `UPDATE OUTAGES SET outage_status = 'Closed' WHERE outage_id = ${id};`;
     return db.execute(sql);
   }
 }
