@@ -6,6 +6,7 @@ app.use(express.json());
 app.use("/", outageRouter);
 app.use("/outages", outageRouter);
 app.use("/outage-new", outageRouter);
+app.use("/outage-close", outageRouter);
 app.use("/login", userRouter);
 app.use("/signup", userRouter);
 app.use("/profile", outageRouter);
