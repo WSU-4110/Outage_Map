@@ -12,10 +12,9 @@ function OutageIndicator({ outage }) {
   const localUser = localStorage.getItem("user");
   const userEmail = '"' + outage.user_email + '"';
   // localUser user has "" around it so "" is added around outage.user_email so that it would satisfy the condition on line 40-66
-  if(localUser === userEmail) { 
+  if (localUser === userEmail) {
     console.log("user exist");
-  }
-  else {
+  } else {
     console.log("User does not exist");
   }
 
@@ -30,11 +29,12 @@ function OutageIndicator({ outage }) {
       latitude: `${outage.latitude}`,
       longitude: `${outage.longitude}`,
       outage_description: `${outage.serviceDescription}`,
-  })
+    });
     console.log("Closing Report");
-  }
+    console.log(res.status);
+  };
 
-  function extendReport(){
+  function extendReport() {
     console.log("Extending Report");
   }
 
@@ -47,34 +47,33 @@ function OutageIndicator({ outage }) {
     resolveLocation();
   }, [outage]);
 
-  if (!coords){
-    return "Loading"
-  }
-  else if(isLoggedIn){ 
+  if (!coords) {
+    return "Loading";
+  } else if (isLoggedIn) {
     return (
-        <Marker position={[coords.lat, coords.lng]}>
-          <Popup className={outage.service_type}>
-            {outage.service_type}: {outage.service_name}
-            <button onClick={closeReport}>  {/* onClick event handlers for closing and extending reports*/}
-              Close Report
-              </button>
-            <button onClick={extendReport}>
-              Extend Report
-              </button> 
-            {}
-          </Popup>
-        </Marker>)
-  }
-  else{
+      <Marker position={[coords.lat, coords.lng]}>
+        <Popup className={outage.service_type}>
+          {outage.service_type}: {outage.service_name}
+          <button onClick={closeReport}>
+            {" "}
+            {/* onClick event handlers for closing and extending reports*/}
+            Close Report
+          </button>
+          <button onClick={extendReport}>Extend Report</button>
+          {}
+        </Popup>
+      </Marker>
+    );
+  } else {
     return (
-    <Marker position={[coords.lat, coords.lng]}>
-      <Popup className={outage.service_type}>
-        {outage.service_type}: {outage.service_name}
-      </Popup>
-    </Marker>)
-      }
+      <Marker position={[coords.lat, coords.lng]}>
+        <Popup className={outage.service_type}>
+          {outage.service_type}: {outage.service_name}
+        </Popup>
+      </Marker>
+    );
   }
-
+}
 
 function OutageMap() {
   //This is where the map page will be rendered.
@@ -94,7 +93,7 @@ function OutageMap() {
 
     localStorage.setItem("latitude", offsetLat);
     localStorage.setItem("longitude", offsetLong);
-  }); 
+  });
   //This function requests the browser user to allow location information to be used. Used to get user Lat Long Coords
 
   const setReportIsOpenTrue = () => {
@@ -135,4 +134,3 @@ function OutageMap() {
 }
 
 export default OutageMap;
-
