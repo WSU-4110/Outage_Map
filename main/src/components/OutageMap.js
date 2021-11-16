@@ -20,7 +20,17 @@ function OutageIndicator({ outage }) {
   }
 
   const [isLoggedIn, setIsLoggedIn] = useState(localUser === userEmail); //localStorage.getItem("user") === outage.user_email
-  function closeReport() { 
+
+  const closeReport = async (event) => {
+    event.preventDefault();
+    const res = await axios.post("/outage-close", {
+      user_email: `${outage.user_email}`,
+      service_type: `${outage.serviceType}`,
+      service_name: `${outage.serviceName}`,
+      latitude: `${outage.latitude}`,
+      longitude: `${outage.longitude}`,
+      outage_description: `${outage.serviceDescription}`,
+  })
     console.log("Closing Report");
   }
 

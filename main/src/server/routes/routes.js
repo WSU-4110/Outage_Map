@@ -7,6 +7,7 @@ const userController = require("../controllers/userController");
 router.route("/").get(outageController.getAllOutages);
 router.route("/outages").get(outageController.getAllOutages);
 router.route("/outage-new").post(outageController.createNewOutage);
+router.route("/outage-close").put(outageController.closeOutage);
 router.route("/profile").post(outageController.profilePage);
 
 //Routes for login and signup
