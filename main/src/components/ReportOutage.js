@@ -21,7 +21,6 @@ function ReportOutage(){
 
     const handleSubmitReport = async (event) =>{
         event.preventDefault();
-        console.log(localStorage.getItem("longitude"));
         const res = await axios.post("/outage-new", {
             user_email: `${JSON.parse(localStorage.getItem("user"))}`,
             service_type: `${formData.serviceType}`,
@@ -30,13 +29,16 @@ function ReportOutage(){
             longitude: localStorage.getItem("longitude"),
             outage_description: `${formData.serviceDescription}`,
         })
-
+        window.location.reload();
         history.push('/outages');
     };
 
     return (
         <>
             <h1 id="Report-Title" class>Test Dialog box</h1>
+            {/* {JSON.parse(localStorage.getItem("user")) == null
+            ? <h1>please log in</h1>
+            : */}
             <form onSubmit={handleSubmitReport}>
 
                 <select selected="Streaming" id="serviceType" name="serviceType" onChange={handleChange} required>
@@ -59,6 +61,7 @@ function ReportOutage(){
 
                 <button type="submit">Report Outage</button>
             </form>
+            {/* } */}
         </>
     );
 }

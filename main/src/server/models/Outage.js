@@ -16,7 +16,7 @@ class Outage {
     this.user_email = user_email;
     this.service_type = service_type;
     this.service_name = service_name;
-    this.latitude = latitude ;
+    this.latitude = latitude;
     this.longitude = longitude;
     this.outage_description = outage_description;
   }
@@ -45,15 +45,8 @@ class Outage {
     return db.execute(sql);
   }
 
-  close() {
-    let sql = `UPDATE OUTAGES
-       SET outage_status = 'Closed'
-       WHERE user_email = '${this.user_email}'
-       and service_type = '${this.service_type}'
-       and service_name = '${this.service_name}'
-       and latitude = '${this.latitude}'
-       and longitude = '${this.longitude}'
-      `;
+  static close(id) {
+    let sql = `UPDATE OUTAGES SET outage_status = 'Closed' WHERE outage_id = ${id};`;
     return db.execute(sql);
   }
 }

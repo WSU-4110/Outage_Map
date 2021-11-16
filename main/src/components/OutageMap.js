@@ -17,6 +17,29 @@ function OutageIndicator({ outage }) {
   const [coords, setCoords] = useState();
   //localStorage.clear();
   //console.log(JSON.parse(localStorage.getItem("user")));
+  const localUser = localStorage.getItem("user");
+  const userEmail = '"' + outage.user_email + '"';
+  console.log(localUser);
+  // localUser user has "" around it so "" is added around outage.user_email so that it would satisfy the condition on line 40-66
+  // if (localUser === userEmail) {
+  //   console.log("user exist");
+  // } else {
+  //   console.log("User does not exist");
+  // }
+
+  const [isLoggedIn, setIsLoggedIn] = useState(localUser === userEmail); //localStorage.getItem("user") === outage.user_email
+
+  const closeReport = async (event) => {
+    event.preventDefault();
+    const res = await axios.post("/outage-close", {
+      outage_id: `${outage.outage_id}`
+    });
+    console.log(res.status);
+  };
+
+  function extendReport() {
+    console.log("Extending Report");
+  }
 
   const LeafIcon = L.Icon.extend({
     options: {
@@ -79,26 +102,43 @@ function OutageIndicator({ outage }) {
     resolveLocation();
   }, [outage]);
 
-  return !coords ? (
-    "Loading"
-  ) : (
-    <Marker position={[coords.lat, coords.lng]} icon={icon}>
-      <Popup className={outage.service_type}>
-        {outage.service_type}: {outage.service_name}
-      </Popup>
-    </Marker>
-  );
+
+  if (!coords) {
+    return "Loading";
+  } else if (isLoggedIn) {
+    return (
+      <Marker position={[coords.lat, coords.lng]} icon={icon}>
+        <Popup className={outage.service_type}>
+          {outage.service_type}: {outage.service_name}
+          <button onClick={closeReport}>
+            {" "}
+            {/* onClick event handlers for closing and extending reports*/}
+            Close Report
+          </button>
+          <button onClick={extendReport}>Extend Report</button>
+          {}
+        </Popup>
+      </Marker>
+    );
+  } else {
+    return (
+      <Marker position={[coords.lat, coords.lng]}>
+        <Popup className={outage.service_type}>
+          {outage.service_type}: {outage.service_name}
+        </Popup>
+      </Marker>
+    );
+  }
+
 }
 
 function OutageMap() {
   //This is where the map page will be rendered.
   const [allOutages, setAllOutages] = useState([]);
+  console.log(allOutages);
   const [reportIsOpen, setReportIsOpen] = useState(false);
 
   navigator.geolocation.getCurrentPosition(function (position) {
-    //console.log("Latitude is :", position.coords.latitude);
-    //console.log("Longitude is :", position.coords.longitude);
-
     var realLat = position.coords.latitude;
     var realLong = position.coords.longitude;
 
@@ -107,8 +147,8 @@ function OutageMap() {
 
     localStorage.setItem("latitude", offsetLat);
     localStorage.setItem("longitude", offsetLong);
-  }); //This function requests the browser user to allow location information to be used. Used to get user Lat Long Coords
-
+  });
+  //This function requests the browser user to allow location information to be used. Used to get user Lat Long Coords
   const setReportIsOpenTrue = () => {
     setReportIsOpen(true);
   };
@@ -123,7 +163,6 @@ function OutageMap() {
     }
     fetchOutages();
   }, []);
-  console.log(allOutages);
 
   return (
     <>
