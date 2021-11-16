@@ -89,13 +89,7 @@ function Profile() {
 
 
 export default withRouter(Profile);
-/*class ListItem extends React.Component {
-    render() {
-         return <li data-selected={this.props.item.selected}>{this.props.item.name}</li>;
-    }
-}
-
-class Profile extends React.Component {
+/*class Profile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -195,46 +189,3 @@ class Profile extends React.Component {
 //             </Form>
 //         );
 //     }
-    
-     
-    
-//     selectTab = (newTab) => {
-//         this.setState({ selectedTab: newTab });
-//     }
-    
-//     /*changeUser = (event, inst) => {
-//         this.setState({ selectedUser: this.state.data[event.index]});
-//     }*/
-    
-//     changeFirstName = (event) => {
-//         const updatedUser = this.state.selectedUser;
-//         updatedUser.first = event.target.value;
-
-//         this.setState({ selectedUser: updatedUser });
-//     }
-    
-    
-//     changeEmail = (event) => {
-//         const updatedUser = this.state.selectedUser;
-//         updatedUser.email = event.target.value;
-
-//         this.setState({ selectedUser: updatedUser });
-//     }
-    
-    
-    
-//     //shows the report date
-//     /*formatDate(date:any) {
-//         return(
-//             util.datetime.formatDate('D, d h:ii A', new Date(date))
-//         ); 
-//     }*/
-//     //pulls closed outages for the user
-//     /*closOutages = (index) => {
-//         const updatedUser = this.state.selectedUser;
-//         updatedUser.tasks[index] = event.target.checked;
-        
-//         this.setState({ selectedUser: updatedUser });
-//     }*/
-// }
-
