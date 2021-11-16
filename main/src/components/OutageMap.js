@@ -11,26 +11,21 @@ function OutageIndicator({ outage }) {
   //console.log(JSON.parse(localStorage.getItem("user")));
   const localUser = localStorage.getItem("user");
   const userEmail = '"' + outage.user_email + '"';
+  console.log(localUser);
   // localUser user has "" around it so "" is added around outage.user_email so that it would satisfy the condition on line 40-66
-  if (localUser === userEmail) {
-    console.log("user exist");
-  } else {
-    console.log("User does not exist");
-  }
+  // if (localUser === userEmail) {
+  //   console.log("user exist");
+  // } else {
+  //   console.log("User does not exist");
+  // }
 
   const [isLoggedIn, setIsLoggedIn] = useState(localUser === userEmail); //localStorage.getItem("user") === outage.user_email
 
   const closeReport = async (event) => {
     event.preventDefault();
     const res = await axios.post("/outage-close", {
-      user_email: `${outage.user_email}`,
-      service_type: `${outage.serviceType}`,
-      service_name: `${outage.serviceName}`,
-      latitude: `${outage.latitude}`,
-      longitude: `${outage.longitude}`,
-      outage_description: `${outage.serviceDescription}`,
+      outage_id: `${outage.outage_id}`
     });
-    console.log("Closing Report");
     console.log(res.status);
   };
 
@@ -82,9 +77,6 @@ function OutageMap() {
   const [reportIsOpen, setReportIsOpen] = useState(false);
 
   navigator.geolocation.getCurrentPosition(function (position) {
-    //console.log("Latitude is :", position.coords.latitude);
-    //console.log("Longitude is :", position.coords.longitude);
-
     var realLat = position.coords.latitude;
     var realLong = position.coords.longitude;
 
@@ -95,7 +87,6 @@ function OutageMap() {
     localStorage.setItem("longitude", offsetLong);
   });
   //This function requests the browser user to allow location information to be used. Used to get user Lat Long Coords
-
   const setReportIsOpenTrue = () => {
     setReportIsOpen(true);
   };
@@ -110,7 +101,6 @@ function OutageMap() {
     }
     fetchOutages();
   }, []);
-  console.log(allOutages);
 
   return (
     <>
