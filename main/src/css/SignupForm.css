@@ -1,3 +1,9 @@
+#signuptitle{
+  margin-bottom: 25px;
+  text-align: center;
+  color: white;
+}
+
 .signupContainer{
   margin-top: 10%;
   padding: 30px;
@@ -5,8 +11,6 @@
   border-radius: 7px;
   box-shadow: 0px 0px 5px 2px black;
 }
-
-
 
 #signup-page {
   display: grid;

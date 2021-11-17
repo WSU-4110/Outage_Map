@@ -104,6 +104,10 @@ function OutageMap() {
     setReportIsOpen(false);
   };
 
+  const[show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handelShow = () => setShow(true);
+
   useEffect(() => {
     async function fetchOutages() {
       const resp = await axios.get("/outages");
@@ -138,7 +142,12 @@ function OutageMap() {
         ))}
       </MapContainer>
       <Modal id="modal-container" isOpen={reportIsOpen}>
-        <button onClick={setReportIsOpenFalse}>X</button>
+        <Button 
+        onClick={setReportIsOpenFalse}
+        style={{background: "black", border: "none"}}>
+          X
+        </Button>
+
         <ReportOutage />
       </Modal>
     </Container>

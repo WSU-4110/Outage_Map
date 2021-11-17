@@ -45,23 +45,14 @@ class UserLogin extends React.Component {
   render() {
     return (
       <div id ="login-page">
-        <Container className="loginContainer w-50 mw-25" >
-          <Form>
+        <Container className="loginContainer w-25 mw-25" >
+          <Form onSubmit={this.handleSubmits}>
             <h1 id="title">Login</h1>
 
-            <Row className = "m-3 mx-auto w-50">
+            <Row className = "m-3 mx-auto w-75">
               <Col /*lg={4} md={6} sm={12}*/>
                 <Form.Group controlId="formEmail">
-                  {/* <Form.Label className="formLabel">Email</Form.Label> */}
-                  {/* <Form.Control 
-                  type="email"
-                  name="email"
-                  id="username-field"
-                  className="login-form-field"
-                  placeholder="Email"
-                  onChange={this.handleChange}/>
-                  </Form.Group> */}
-                  <Form.Control input
+                  <input
                     type="email"
                     name="email"
                     id="username-field"
@@ -73,18 +64,10 @@ class UserLogin extends React.Component {
               </Col>
             </Row>
  
-            <Row className = "m-3 mx-auto w-50">
+            <Row className = "m-3 mx-auto w-75">
               <Col /*lg={4} md={6} sm={12}*/>
                 <Form.Group controlId="formPassword">
-                  {/* <Form.Label className="formLabel">Password</Form.Label> */}
-                  {/* <Form.Control 
-                  type="password"
-                  name="pwd"
-                  id="password-field"
-                  className="login-form-field"
-                  placeholder="Password"
-                  onChange={this.handleChange}/> */}
-                  <Form.Control input
+                  <input
                   type="password"
                   name="pwd"
                   id="password-field"
@@ -104,6 +87,7 @@ class UserLogin extends React.Component {
                   type="submit" 
                   size="md"  
                   style={{background: "orange", border: "none"}}
+                  onSubmit={this.handleSubmits}
                   >
                     Login
                 </Button>
@@ -112,7 +96,7 @@ class UserLogin extends React.Component {
           </Form>
         </Container>
 
-        <div id="main-holder">
+        {/* <div id="main-holder">
           <form className="login-form" onSubmit={this.handleSubmits}>
             <h1 id="login-header">Log in</h1>
             <div>
@@ -144,50 +128,9 @@ class UserLogin extends React.Component {
               </div>
             </div>
           </form>
-        </div>
+        </div> */}
       </div>
     );
   }
 }
 export default withRouter(UserLogin);
-
-//first draft of react form
-/*export default function Login() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("")
-
-    function validateForm(){
-        return email.length > 0 && password.length > 0;
-    }
-
-    function handleSubmits(event) {
-        event.preventDefault();
-    }
-    
-    return (
-        <div className="Login">
-            <Form onSubmit={handleSubmits}>
-                <Form.Group size="lg" controlID="email">
-                    <Form.Label>User Email</Form.Label>
-                    <Form.Control
-                    autoFocus //focus on the field
-                    type="email"
-                    value={email}
-                    onChange={(e) => setPassword (e.target.value)}
-                    />
-                </Form.Group>
-                <Form.Group size="lg" controlID="password">
-                    <Form.Label>User Password</Form.Label>
-                    <Form.Control
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                </Form.Group>
-                <Button block size="lg" type="submit" disabled={!validateForm()}>
-                  Login  
-                </Button>
-            </Form>
-        </div>
-    );
-}*/

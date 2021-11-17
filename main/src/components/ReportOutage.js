@@ -36,13 +36,14 @@ function ReportOutage(){
     };
 
     return (
-        <Container className="w-25">
+        <Container id="report-container" className="w-75">
             <Form>
-                <h1 id="Report-Title" class>Report Outage</h1>
+                <h1 id="report-title" class>Report Outage</h1>
 
-                    <Row className = "m-3 mx-auto">
-                        <Col>
-                            <select selected="Streaming" id="serviceType" name="serviceType" onChange={handleChange} required>
+                    <Row >
+                        <Col className = "m-3 mx-auto">
+                            <select className="form-control" placeholder="Select Service Type" selected="Streaming" id="serviceType" name="serviceType" onChange={handleChange} required>
+                                <option selected>Select Service Type</option>
                                 <option value="Streaming">Streaming</option>
                                 <option value="Internet">Internet</option>
                                 <option value="Power">Power</option>
@@ -52,25 +53,32 @@ function ReportOutage(){
                         </Col>
                     </Row>
 
-                    <Row className = "m-3 mx-auto">
-                        <Col>
-                            <input type="text" placeholder="Service Name"
+                    <Row >
+                        <Col className = "m-3 mx-auto w-50">
+                            <Form.Control type="text" placeholder="Service Name"
                             onChange={handleChange} 
                             value={formData.serviceName}
                             name="serviceName" required/>
                         </Col>
                     </Row>
 
-                    <Row className = "m-3 mx-auto">
-                        <Col>
-                            <input type="text" placeholder="Description"
+                    <Row >
+                        <Col className = "m-3 mx-auto">
+                            <Form.Control type="text" placeholder="Description"
                             onChange={handleChange} 
                             value={formData.serviceDescription}
                             name="serviceDescription" required/>
                         </Col>
                     </Row>
 
-                    <Button type="submit">Report Outage</Button>
+                    <Row className="w-50 mx-auto">
+                        <Button 
+                        className = "m-4 mx-auto" 
+                        type="submit"
+                        style={{background: "black", border: "none"}}>
+                            Report Outage
+                        </Button>
+                    </Row>
             </Form>
         </Container>
 

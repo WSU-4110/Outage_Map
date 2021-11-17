@@ -104,23 +104,13 @@ class SignupForm extends React.Component {
   render() {
     return (
       <div id="signup-page">
-
-        <Container className="signupContainer w-50 mw-25">
-          <h1 id="title">Create an Account</h1>
-
+        <Container className="signupContainer w-25">
           <Form onSubmit={this.handleSubmit}>
-            <Row className = "m-3 mx-auto w-50">
+            <h1 id="signuptitle">Create an Account</h1>
+
+            <Row className = "m-3 mx-auto w-75">
               <Col>
                 <Form.Group controlId="formEmail">
-                  {/* <Form.Control 
-                    type="text"
-                    name="email"
-                    value={this.state.input.email}
-                    onChange={this.handleChange}
-                    className="form-control"
-                    placeholder="Email"
-                    id="email"
-                  /> */}
                   <input
                   type="text"
                   name="email"
@@ -136,18 +126,9 @@ class SignupForm extends React.Component {
               </Col>
             </Row>
 
-            <Row className = "m-3 mx-auto w-50">
+            <Row className = "m-3 mx-auto w-75">
               <Col>
                 <Form.Group>
-                  {/* <Form.Control 
-                    type="password"
-                    name="password"
-                    value={this.state.input.password}
-                    onChange={this.handleChange}
-                    className="form-control"
-                    placeholder="Password"
-                    id="password"
-                  /> */}
                   <input
                   type="password"
                   name="password"
@@ -163,18 +144,9 @@ class SignupForm extends React.Component {
               </Col>
             </Row>
 
-            <Row className = "m-3 mx-auto w-50">
+            <Row className = "m-3 mx-auto w-75">
               <Col>
                 <Form.Group>
-                  {/* <Form.Control 
-                    type="password"
-                    name="confirm_password"
-                    value={this.state.input.confirm_password}
-                    onChange={this.handleChange}
-                    className="form-control"
-                    placeholder="Confirm Password"
-                    id="confirm_password"
-                  /> */}
                   <input
                   type="password"
                   name="confirm_password"
@@ -207,63 +179,6 @@ class SignupForm extends React.Component {
 
           </Form>
         </Container>
-
-        {/* Old Signup code */}
-        
-        {/*
-        <div id="signup-holder">
-          <h1 id="h1">Create an Account</h1>
-          <div id="signup-form">
-            <form onSubmit={this.handleSubmit}>
-              <div className="form-group">
-                <input
-                  type="text"
-                  name="email"
-                  value={this.state.input.email}
-                  onChange={this.handleChange}
-                  className="form-control"
-                  placeholder="Email"
-                  id="email"
-                />
-
-                <div className="text-danger">{this.state.errors.email}</div>
-              </div>
-
-              <div className="form-group">
-                <input
-                  type="password"
-                  name="password"
-                  value={this.state.input.password}
-                  onChange={this.handleChange}
-                  className="form-control"
-                  placeholder="Password"
-                  id="password"
-                />
-
-                <div className="text-danger">{this.state.errors.password}</div>
-              </div>
-
-              <div className="form-group">
-                <input
-                  type="password"
-                  name="confirm_password"
-                  value={this.state.input.confirm_password}
-                  onChange={this.handleChange}
-                  className="form-control"
-                  placeholder="Confirm Password"
-                  id="confirm_password"
-                />
-
-                <div className="text-danger">
-                  {this.state.errors.confirm_password}
-                </div>
-              </div>
-
-              <input type="submit" value="Register" id="signup-submit" />
-            </form>
-          </div>
-        </div>
-        */}
       </div>
     );
   }
