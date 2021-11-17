@@ -59,6 +59,7 @@ class UserLogin extends React.Component {
                     className="form-control"
                     placeholder="Email"
                     onChange={this.handleChange}
+                    required
                   />
                 </Form.Group>
               </Col>
@@ -74,6 +75,7 @@ class UserLogin extends React.Component {
                   className="form-control"
                   placeholder="Password"
                   onChange={this.handleChange}
+                  required
                 />
                 </Form.Group>
               </Col>

@@ -84,7 +84,7 @@ function OutageIndicator({ outage }) {
         case "Internet":
           setIcon(internetIcon)
           break;
-        case "Gaming":
+        case "Gaming Platform":
           setIcon(gamingIcon)
           break;
         case "Cable":
@@ -155,10 +155,6 @@ function OutageMap() {
     setReportIsOpen(false);
   };
 
-  const[show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handelShow = () => setShow(true);
-
   useEffect(() => {
     async function fetchOutages() {
       const resp = await axios.get("/outages");
@@ -182,7 +178,7 @@ function OutageMap() {
       </Col>
       {/* <button onClick={setReportIsOpenTrue}>Report Outage</button> */}
       <MapContainer center={JSON.parse(localStorage.getItem("user")) == null ? [44, -85]:[localStorage.getItem("latitude"), localStorage.getItem("longitude")]} 
-      zoom={JSON.parse(localStorage.getItem("user")) == null ? 7 : 10} 
+      zoom={JSON.parse(localStorage.getItem("user")) == null ? 7 : 12} 
       scrollWheelZoom={true}>
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
