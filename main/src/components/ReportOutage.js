@@ -22,7 +22,6 @@ function ReportOutage(){
 
     const handleSubmitReport = async (event) =>{
         event.preventDefault();
-        console.log(localStorage.getItem("longitude"));
         const res = await axios.post("/outage-new", {
             user_email: `${JSON.parse(localStorage.getItem("user"))}`,
             service_type: `${formData.serviceType}`,
@@ -31,15 +30,17 @@ function ReportOutage(){
             longitude: localStorage.getItem("longitude"),
             outage_description: `${formData.serviceDescription}`,
         })
-
+        window.location.reload();
         history.push('/outages');
     };
 
     return (
         <Container id="report-container" className="w-75">
-            <Form>
+            <Form onSubmit={handleSubmitReport}>
                 <h1 id="report-title" class>Report Outage</h1>
-
+                {/* {JSON.parse(localStorage.getItem("user")) == null
+                ? <h1>please log in</h1>
+                : */}
                     <Row >
                         <Col className = "m-3 mx-auto">
                             <select className="form-control" placeholder="Select Service Type" selected="Streaming" id="serviceType" name="serviceType" onChange={handleChange} required>

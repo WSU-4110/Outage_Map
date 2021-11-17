@@ -1,9 +1,17 @@
 import { MapContainer, TileLayer, Marker, Popup, Circle } from "react-leaflet";
 import React, { useState, useEffect } from "react";
+import L from "leaflet";
 import Modal from "react-modal";
 import axios from "axios";
 import ReportOutage from "./ReportOutage";
 import { Button, Container, Row, Col } from 'react-bootstrap';
+import gaming from "./icons/gamepad-solid.svg"
+import streaming from "./icons/video-slash-solid.svg"
+import power from "./icons/plug-solid.svg"
+import internet from "./icons/wifi-solid.svg"
+import cable from "./icons/ethernet-solid.svg"
+import website from "./icons/laptop-code-solid.svg"
+import exclamation from "./icons/exclamation-solid.svg"
 
 function OutageIndicator({ outage }) {
   //this component renders the markers with corresponding lat and long values calculated by the geocodify api.
@@ -12,26 +20,21 @@ function OutageIndicator({ outage }) {
   //console.log(JSON.parse(localStorage.getItem("user")));
   const localUser = localStorage.getItem("user");
   const userEmail = '"' + outage.user_email + '"';
+  console.log(localUser);
   // localUser user has "" around it so "" is added around outage.user_email so that it would satisfy the condition on line 40-66
-  if (localUser === userEmail) {
-    console.log("user exist");
-  } else {
-    console.log("User does not exist");
-  }
+  // if (localUser === userEmail) {
+  //   console.log("user exist");
+  // } else {
+  //   console.log("User does not exist");
+  // }
 
   const [isLoggedIn, setIsLoggedIn] = useState(localUser === userEmail); //localStorage.getItem("user") === outage.user_email
 
   const closeReport = async (event) => {
     event.preventDefault();
     const res = await axios.post("/outage-close", {
-      user_email: `${outage.user_email}`,
-      service_type: `${outage.serviceType}`,
-      service_name: `${outage.serviceName}`,
-      latitude: `${outage.latitude}`,
-      longitude: `${outage.longitude}`,
-      outage_description: `${outage.serviceDescription}`,
+      outage_id: `${outage.outage_id}`
     });
-    console.log("Closing Report");
     console.log(res.status);
   };
 
@@ -39,20 +42,73 @@ function OutageIndicator({ outage }) {
     console.log("Extending Report");
   }
 
+  const LeafIcon = L.Icon.extend({
+    options: {
+        iconSize:     [38, 35],
+    }
+  });
+
+  const streamingIcon = new LeafIcon({
+    iconUrl: streaming
+  });
+  const powerIcon = new LeafIcon({
+    iconUrl: power
+  });
+  const internetIcon = new LeafIcon({
+    iconUrl: internet
+  });
+  const gamingIcon = new LeafIcon({
+    iconUrl: gaming
+  });
+  const exclamationIcon = new LeafIcon({
+    iconUrl: exclamation
+  });
+  const cableIcon = new LeafIcon({
+    iconUrl: cable
+  });
+  const websiteIcon = new LeafIcon({
+    iconUrl: website
+  });
+
+  const [icon, setIcon] = useState(powerIcon);
+
   useEffect(() => {
     function resolveLocation() {
       let lng = Number(outage.longitude);
       let lat = Number(outage.latitude);
+      switch(outage.service_type) {
+        case "Streaming":
+          setIcon(streamingIcon)
+          break;
+        case "Power":
+          setIcon(powerIcon)
+          break;
+        case "Internet":
+          setIcon(internetIcon)
+          break;
+        case "Gaming":
+          setIcon(gamingIcon)
+          break;
+        case "Cable":
+          setIcon(cableIcon)
+          break;
+        case "Website":
+          setIcon(websiteIcon)
+          break;
+        default:
+          setIcon(exclamationIcon)
+      }
       setCoords({ lng, lat });
     }
     resolveLocation();
   }, [outage]);
 
+
   if (!coords) {
     return "Loading";
   } else if (isLoggedIn) {
     return (
-      <Marker position={[coords.lat, coords.lng]}>
+      <Marker position={[coords.lat, coords.lng]} icon={icon}>
         <Popup className={outage.service_type}>
           {outage.service_type}: {outage.service_name}
           <button onClick={closeReport}>
@@ -74,6 +130,7 @@ function OutageIndicator({ outage }) {
       </Marker>
     );
   }
+
 }
 
 function OutageMap() {
@@ -83,9 +140,6 @@ function OutageMap() {
   const [reportIsOpen, setReportIsOpen] = useState(false);
 
   navigator.geolocation.getCurrentPosition(function (position) {
-    //console.log("Latitude is :", position.coords.latitude);
-    //console.log("Longitude is :", position.coords.longitude);
-
     var realLat = position.coords.latitude;
     var realLong = position.coords.longitude;
 
@@ -96,7 +150,6 @@ function OutageMap() {
     localStorage.setItem("longitude", offsetLong);
   });
   //This function requests the browser user to allow location information to be used. Used to get user Lat Long Coords
-
   const setReportIsOpenTrue = () => {
     setReportIsOpen(true);
   };
@@ -115,7 +168,6 @@ function OutageMap() {
     }
     fetchOutages();
   }, []);
-  console.log(allOutages);
 
   return (
     <Container>
