@@ -1,3 +1,17 @@
+#signuptitle{
+  margin-bottom: 25px;
+  text-align: center;
+  color: white;
+}
+
+.signupContainer{
+  margin-top: 10%;
+  padding: 30px;
+  background-color: #565757;
+  border-radius: 7px;
+  box-shadow: 0px 0px 5px 2px black;
+}
+
 #signup-page {
   display: grid;
   justify-items: center;
@@ -64,7 +78,7 @@
   color: white;
 }
 
-@media screen and (max-width: 960px){
+/* @media screen and (max-width: 960px){
   #signup-holder{
     margin-top: 50%;
     position: absolute;
@@ -74,16 +88,12 @@
     margin-left: 10%;
   }
 
-  .form-control{
-    margin-left: -10%;
-  }
-
   #signup-submit{
     margin-left: 35%;
   }
-}
+} */
 
-@media screen and (max-width: 670px){
+/* @media screen and (max-width: 670px){
   #signup-holder{
     width: 350px;
     height: 280px;
@@ -139,4 +149,4 @@
     margin-top: 2%;
     margin-left: 40%;
   }
-}
+} */

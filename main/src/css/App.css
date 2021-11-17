@@ -15,9 +15,16 @@ body {
     z-index: 0;
 }
 
-.modal-container{
-    position: fixed;
-    z-index: 1;
-    width: 50%;
-    height: 50vh;
+#modal-container{
+    position: absolute;
+    transform: translate(25vw, 0%) !important;
+    width: 600px;
+    max-width: 100%;
+    height: 450px;
+}
+
+#report-title{
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
 }

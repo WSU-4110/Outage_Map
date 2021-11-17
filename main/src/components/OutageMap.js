@@ -4,6 +4,7 @@ import L from "leaflet";
 import Modal from "react-modal";
 import axios from "axios";
 import ReportOutage from "./ReportOutage";
+import { Button, Container, Row, Col } from 'react-bootstrap';
 import gaming from "./icons/gamepad-solid.svg"
 import streaming from "./icons/video-slash-solid.svg"
 import power from "./icons/plug-solid.svg"
@@ -156,6 +157,10 @@ function OutageMap() {
     setReportIsOpen(false);
   };
 
+  const[show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handelShow = () => setShow(true);
+
   useEffect(() => {
     async function fetchOutages() {
       const resp = await axios.get("/outages");
@@ -165,8 +170,19 @@ function OutageMap() {
   }, []);
 
   return (
-    <>
-      <button onClick={setReportIsOpenTrue}>Report Outage</button>
+    <Container>
+      <Col className = "m-3 mx-auto w-25">
+        <Row>
+        <Button onClick={setReportIsOpenTrue}
+          variant="primary btn-block"
+          size="md"  
+          style={{background: "orange", border: "none"}}
+          >
+            Report Outage
+          </Button>
+        </Row>
+      </Col>
+      {/* <button onClick={setReportIsOpenTrue}>Report Outage</button> */}
       <MapContainer center={[44, -85]} zoom={7} scrollWheelZoom={true}>
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -178,10 +194,15 @@ function OutageMap() {
         ))}
       </MapContainer>
       <Modal id="modal-container" isOpen={reportIsOpen}>
-        <button onClick={setReportIsOpenFalse}>X</button>
+        <Button 
+        onClick={setReportIsOpenFalse}
+        style={{background: "black", border: "none"}}>
+          X
+        </Button>
+
         <ReportOutage />
       </Modal>
-    </>
+    </Container>
   );
 }
 
