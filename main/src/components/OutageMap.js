@@ -17,10 +17,8 @@ function OutageIndicator({ outage }) {
   //this component renders the markers with corresponding lat and long values calculated by the geocodify api.
   const [coords, setCoords] = useState();
   //localStorage.clear();
-  //console.log(JSON.parse(localStorage.getItem("user")));
   const localUser = localStorage.getItem("user");
   const userEmail = '"' + outage.user_email + '"';
-  console.log(localUser);
   // localUser user has "" around it so "" is added around outage.user_email so that it would satisfy the condition on line 40-66
   // if (localUser === userEmail) {
   //   console.log("user exist");
@@ -123,7 +121,7 @@ function OutageIndicator({ outage }) {
     );
   } else {
     return (
-      <Marker position={[coords.lat, coords.lng]}>
+      <Marker position={[coords.lat, coords.lng]} icon={icon}>
         <Popup className={outage.service_type}>
           {outage.service_type}: {outage.service_name}
         </Popup>
@@ -168,9 +166,9 @@ function OutageMap() {
     }
     fetchOutages();
   }, []);
-
+  console.log(JSON.parse(localStorage.getItem("user")));
   return (
-    <Container>
+    <>
       <Col className = "m-3 mx-auto w-25">
         <Row>
         <Button onClick={setReportIsOpenTrue}
@@ -183,7 +181,9 @@ function OutageMap() {
         </Row>
       </Col>
       {/* <button onClick={setReportIsOpenTrue}>Report Outage</button> */}
-      <MapContainer center={[44, -85]} zoom={7} scrollWheelZoom={true}>
+      <MapContainer center={JSON.parse(localStorage.getItem("user")) == null ? [44, -85]:[localStorage.getItem("latitude"), localStorage.getItem("longitude")]} 
+      zoom={JSON.parse(localStorage.getItem("user")) == null ? 7 : 10} 
+      scrollWheelZoom={true}>
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -202,7 +202,7 @@ function OutageMap() {
 
         <ReportOutage />
       </Modal>
-    </Container>
+    </>
   );
 }
 

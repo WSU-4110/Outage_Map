@@ -56,7 +56,7 @@ class UserLogin extends React.Component {
                     type="email"
                     name="email"
                     id="username-field"
-                    className="login-form-field"
+                    className="form-control"
                     placeholder="Email"
                     onChange={this.handleChange}
                   />
@@ -71,7 +71,7 @@ class UserLogin extends React.Component {
                   type="password"
                   name="pwd"
                   id="password-field"
-                  className="login-form-field"
+                  className="form-control"
                   placeholder="Password"
                   onChange={this.handleChange}
                 />
