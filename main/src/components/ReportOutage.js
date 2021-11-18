@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from 'react-router-dom'
 import axios from "axios";
+import { Button, Container, Row, Col, Form } from 'react-bootstrap';
 
 function ReportOutage(){
     //Use state hook to track what values are being inputed into the form as well as
@@ -21,7 +22,6 @@ function ReportOutage(){
 
     const handleSubmitReport = async (event) =>{
         event.preventDefault();
-        console.log(localStorage.getItem("longitude"));
         const res = await axios.post("/outage-new", {
             user_email: `${JSON.parse(localStorage.getItem("user"))}`,
             service_type: `${formData.serviceType}`,
@@ -30,36 +30,82 @@ function ReportOutage(){
             longitude: localStorage.getItem("longitude"),
             outage_description: `${formData.serviceDescription}`,
         })
-
+        window.location.reload();
         history.push('/outages');
     };
 
     return (
-        <>
-            <h1 id="Report-Title" class>Test Dialog box</h1>
-            <form onSubmit={handleSubmitReport}>
+        <Container id="report-container" className="w-75">
+            <Form onSubmit={handleSubmitReport}>
+                <h1 id="report-title" class>Report Outage</h1>
+                {/* {JSON.parse(localStorage.getItem("user")) == null
+                ? <h1>please log in</h1>
+                : */}
+                    <Row >
+                        <Col className = "m-3 mx-auto">
+                            <select className="form-control" placeholder="Select Service Type" selected="Streaming" id="serviceType" name="serviceType" onChange={handleChange} required>
+                                <option selected>Select Service Type</option>
+                                <option value="Streaming">Streaming</option>
+                                <option value="Internet">Internet</option>
+                                <option value="Power">Power</option>
+                                <option value="Cable">Cable</option>
+                                <option value="Gaming Platform">Gaming Platform</option>
+                            </select>
+                        </Col>
+                    </Row>
 
-                <select selected="Streaming" id="serviceType" name="serviceType" onChange={handleChange} required>
-                    <option value="Streaming">Streaming</option>
-                    <option value="Internet">Internet</option>
-                    <option value="Power">Power</option>
-                    <option value="Cable">Cable</option>
-                    <option value="Gaming Platform">Gaming Platform</option>
-                </select>
+                    <Row >
+                        <Col className = "m-3 mx-auto w-50">
+                            <Form.Control type="text" placeholder="Service Name"
+                            onChange={handleChange} 
+                            value={formData.serviceName}
+                            name="serviceName" required/>
+                        </Col>
+                    </Row>
 
-                <input type="text" placeholder="Service Name"
-                onChange={handleChange} 
-                value={formData.serviceName}
-                name="serviceName" required/>
+                    <Row >
+                        <Col className = "m-3 mx-auto">
+                            <Form.Control type="text" placeholder="Description"
+                            onChange={handleChange} 
+                            value={formData.serviceDescription}
+                            name="serviceDescription" required/>
+                        </Col>
+                    </Row>
 
-                <input type="text" placeholder="Description"
-                onChange={handleChange} 
-                value={formData.serviceDescription}
-                name="serviceDescription" required/>
+                    <Row className="w-50 mx-auto">
+                        <Button 
+                        className = "m-4 mx-auto" 
+                        type="submit"
+                        style={{background: "black", border: "none"}}>
+                            Report Outage
+                        </Button>
+                    </Row>
+            </Form>
+        </Container>
 
-                <button type="submit">Report Outage</button>
-            </form>
-        </>
+        // <h1 id="Report-Title" class>Test Dialog box</h1>
+        // <form onSubmit={handleSubmitReport}>
+
+        //     <select selected="Streaming" id="serviceType" name="serviceType" onChange={handleChange} required>
+        //         <option value="Streaming">Streaming</option>
+        //         <option value="Internet">Internet</option>
+        //         <option value="Power">Power</option>
+        //         <option value="Cable">Cable</option>
+        //         <option value="Gaming Platform">Gaming Platform</option>
+        //     </select>
+
+        //     <input type="text" placeholder="Service Name"
+        //     onChange={handleChange} 
+        //     value={formData.serviceName}
+        //     name="serviceName" required/>
+
+        //     <input type="text" placeholder="Description"
+        //     onChange={handleChange} 
+        //     value={formData.serviceDescription}
+        //     name="serviceDescription" required/>
+
+        //     <Button type="submit">Report Outage</Button>
+        // </form>
     );
 }
 

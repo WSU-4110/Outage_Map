@@ -14,6 +14,7 @@ import HomeContent from "./components/HomeContent"
 import UserLogin from "./components/userLogin";
 import Profile from "./components/ProfilePage";
 import ListItem from "./components/ProfilePage";
+import 'bootstrap/dist/css/bootstrap.min.css'; //bootstrap css
 //import { Router } from 'express';
 
 function App() { //primary page of the site

@@ -3,6 +3,7 @@ import axios from "axios";
 import { withRouter } from "react-router-dom";
 import hash from "object-hash";
 import "../css/SignupForm.css";
+import { Container, Form, Row, Col, Button } from "react-bootstrap";
 
 class SignupForm extends React.Component {
   constructor() {
@@ -103,13 +104,14 @@ class SignupForm extends React.Component {
   render() {
     return (
       <div id="signup-page">
-        <div id="signup-holder">
-          <h1 id="h1">Create an Account</h1>
-          <div id="signup-form">
-            <form onSubmit={this.handleSubmit}>
-              <div className="form-group">
-                {/* <label htmlFor="email">Email Address:</label> */}
-                <input
+        <Container className="signupContainer w-25">
+          <Form onSubmit={this.handleSubmit}>
+            <h1 id="signuptitle">Create an Account</h1>
+
+            <Row className = "m-3 mx-auto w-75">
+              <Col>
+                <Form.Group controlId="formEmail">
+                  <input
                   type="text"
                   name="email"
                   value={this.state.input.email}
@@ -119,12 +121,15 @@ class SignupForm extends React.Component {
                   id="email"
                 />
 
-                <div className="text-danger">{this.state.errors.email}</div>
-              </div>
+                  <div className="text-danger">{this.state.errors.email}</div>
+                </Form.Group>
+              </Col>
+            </Row>
 
-              <div className="form-group">
-                {/* <label htmlFor="password">Password:</label> */}
-                <input
+            <Row className = "m-3 mx-auto w-75">
+              <Col>
+                <Form.Group>
+                  <input
                   type="password"
                   name="password"
                   value={this.state.input.password}
@@ -134,12 +139,15 @@ class SignupForm extends React.Component {
                   id="password"
                 />
 
-                <div className="text-danger">{this.state.errors.password}</div>
-              </div>
+                  <div className="text-danger">{this.state.errors.password}</div>
+                </Form.Group>
+              </Col>
+            </Row>
 
-              <div className="form-group">
-                {/* <label htmlFor="password">Confirm Password:</label> */}
-                <input
+            <Row className = "m-3 mx-auto w-75">
+              <Col>
+                <Form.Group>
+                  <input
                   type="password"
                   name="confirm_password"
                   value={this.state.input.confirm_password}
@@ -149,15 +157,28 @@ class SignupForm extends React.Component {
                   id="confirm_password"
                 />
 
-                <div className="text-danger">
-                  {this.state.errors.confirm_password}
-                </div>
-              </div>
+                  <div className="text-danger">{this.state.errors.confirm_password}</div>
+                </Form.Group>
+              </Col>
+            </Row>
 
-              <input type="submit" value="Register" id="signup-submit" />
-            </form>
-          </div>
-        </div>
+            <Col className = "mx-auto w-25">
+              <Row>
+                <Button 
+                  type="submit" 
+                  value="Register"
+                  className="customBtn" 
+                  variant="primary btn-block"
+                  size="md"  
+                  style={{background: "orange", border: "none"}}
+                  >
+                    Sign Up
+                </Button>
+              </Row>
+            </Col>
+
+          </Form>
+        </Container>
       </div>
     );
   }

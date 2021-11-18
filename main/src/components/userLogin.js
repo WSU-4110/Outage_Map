@@ -6,6 +6,7 @@ import { useHistory, withRouter } from "react-router-dom";
 import Modal from "react-modal";
 import "../css/login.css";
 import axios from "axios";
+import { Container, Form, Row, Col, Button, ToggleButtonGroup} from 'react-bootstrap'
 import hash from "object-hash";
 
 class UserLogin extends React.Component {
@@ -43,8 +44,59 @@ class UserLogin extends React.Component {
 
   render() {
     return (
-      <div id="login-page">
-        <div id="main-holder">
+      <div id ="login-page">
+        <Container className="loginContainer w-25 mw-25" >
+          <Form onSubmit={this.handleSubmits}>
+            <h1 id="title">Login</h1>
+
+            <Row className = "m-3 mx-auto w-75">
+              <Col /*lg={4} md={6} sm={12}*/>
+                <Form.Group controlId="formEmail">
+                  <input
+                    type="email"
+                    name="email"
+                    id="username-field"
+                    className="login-form-field"
+                    placeholder="Email"
+                    onChange={this.handleChange}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+ 
+            <Row className = "m-3 mx-auto w-75">
+              <Col /*lg={4} md={6} sm={12}*/>
+                <Form.Group controlId="formPassword">
+                  <input
+                  type="password"
+                  name="pwd"
+                  id="password-field"
+                  className="login-form-field"
+                  placeholder="Password"
+                  onChange={this.handleChange}
+                />
+                </Form.Group>
+              </Col>
+            </Row>
+            
+            <Col className = "mx-auto w-25">
+              <Row>
+                <Button 
+                  className="customBtn" 
+                  variant="primary btn-block" 
+                  type="submit" 
+                  size="md"  
+                  style={{background: "orange", border: "none"}}
+                  onSubmit={this.handleSubmits}
+                  >
+                    Login
+                </Button>
+              </Row>
+            </Col>
+          </Form>
+        </Container>
+
+        {/* <div id="main-holder">
           <form className="login-form" onSubmit={this.handleSubmits}>
             <h1 id="login-header">Log in</h1>
             <div>
@@ -76,50 +128,9 @@ class UserLogin extends React.Component {
               </div>
             </div>
           </form>
-        </div>
+        </div> */}
       </div>
     );
   }
 }
 export default withRouter(UserLogin);
-
-//first draft of react form
-/*export default function Login() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("")
-
-    function validateForm(){
-        return email.length > 0 && password.length > 0;
-    }
-
-    function handleSubmits(event) {
-        event.preventDefault();
-    }
-    
-    return (
-        <div className="Login">
-            <Form onSubmit={handleSubmits}>
-                <Form.Group size="lg" controlID="email">
-                    <Form.Label>User Email</Form.Label>
-                    <Form.Control
-                    autoFocus //focus on the field
-                    type="email"
-                    value={email}
-                    onChange={(e) => setPassword (e.target.value)}
-                    />
-                </Form.Group>
-                <Form.Group size="lg" controlID="password">
-                    <Form.Label>User Password</Form.Label>
-                    <Form.Control
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                </Form.Group>
-                <Button block size="lg" type="submit" disabled={!validateForm()}>
-                  Login  
-                </Button>
-            </Form>
-        </div>
-    );
-}*/
