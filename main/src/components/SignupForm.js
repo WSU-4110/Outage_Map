@@ -119,6 +119,7 @@ class SignupForm extends React.Component {
                   className="form-control"
                   placeholder="Email"
                   id="email"
+                  required
                 />
 
                   <div className="text-danger">{this.state.errors.email}</div>
@@ -137,6 +138,7 @@ class SignupForm extends React.Component {
                   className="form-control"
                   placeholder="Password"
                   id="password"
+                  required
                 />
 
                   <div className="text-danger">{this.state.errors.password}</div>
@@ -155,6 +157,7 @@ class SignupForm extends React.Component {
                   className="form-control"
                   placeholder="Confirm Password"
                   id="confirm_password"
+                  required
                 />
 
                   <div className="text-danger">{this.state.errors.confirm_password}</div>
