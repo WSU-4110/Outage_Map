@@ -13,22 +13,55 @@ import cable from "./icons/ethernet-solid.svg"
 import website from "./icons/laptop-code-solid.svg"
 import exclamation from "./icons/exclamation-solid.svg"
 
-function OutageIndicator({ outage }) {
+//Using the Observer Design pattern
+//Javascript doe not have interfaces, so classes were used.
+//Observer class
+class observer {
+  update(){}
+}
+//Subject class
+class subject {
+  constructor(){
+    this.observers=[];
+  }
+  getOutages();
+}
+
+//class outageData extends the subject class
+class outageData extends subject{
+  super();
+  this.state = {
+    outages: {
+    }
+  };
+  //this method comes from the subject class.
+  getOutages(){
+    useEffect(() => {
+      async function fetchOutages() {
+        const resp = await axios.get("/outages");
+        this.state.outages = resp.data.outages;
+      }
+      fetchOutages();
+  }
+}
+
+//class outageIndicator extends the observer class.
+class OutageIndicator extends React.Component, observer{
   //this component renders the markers with corresponding lat and long values calculated by the geocodify api.
-  const [coords, setCoords] = useState();
-  //localStorage.clear();
-  //console.log(JSON.parse(localStorage.getItem("user")));
+  super();
+  this.state = {
+    outages: {}
+  };
+
   const localUser = localStorage.getItem("user");
   const userEmail = '"' + outage.user_email + '"';
-  console.log(localUser);
-  // localUser user has "" around it so "" is added around outage.user_email so that it would satisfy the condition on line 40-66
-  // if (localUser === userEmail) {
-  //   console.log("user exist");
-  // } else {
-  //   console.log("User does not exist");
-  // }
 
   const [isLoggedIn, setIsLoggedIn] = useState(localUser === userEmail); //localStorage.getItem("user") === outage.user_email
+
+  //from observer class, using updates method
+  function update(data){
+    this.state.outages = data;
+  }
 
   const closeReport = async (event) => {
     event.preventDefault();
@@ -37,10 +70,6 @@ function OutageIndicator({ outage }) {
     });
     console.log(res.status);
   };
-
-  function extendReport() {
-    console.log("Extending Report");
-  }
 
   const LeafIcon = L.Icon.extend({
     options: {
@@ -105,30 +134,36 @@ function OutageIndicator({ outage }) {
 
 
   if (!coords) {
-    return "Loading";
+    render(){
+      return "Loading";
+    }
   } else if (isLoggedIn) {
-    return (
-      <Marker position={[coords.lat, coords.lng]} icon={icon}>
-        <Popup className={outage.service_type}>
-          {outage.service_type}: {outage.service_name}
-          <button onClick={closeReport}>
-            {" "}
-            {/* onClick event handlers for closing and extending reports*/}
-            Close Report
-          </button>
-          <button onClick={extendReport}>Extend Report</button>
-          {}
-        </Popup>
-      </Marker>
-    );
+    render(){
+      return (
+        <Marker position={[coords.lat, coords.lng]} icon={icon}>
+          <Popup className={outage.service_type}>
+            {outage.service_type}: {outage.service_name}
+            <button onClick={closeReport}>
+              {" "}
+              {/* onClick event handlers for closing and extending reports*/}
+              Close Report
+            </button>
+            <button onClick={extendReport}>Extend Report</button>
+            {}
+          </Popup>
+        </Marker>
+      );
+    }
   } else {
-    return (
-      <Marker position={[coords.lat, coords.lng]}>
-        <Popup className={outage.service_type}>
-          {outage.service_type}: {outage.service_name}
-        </Popup>
-      </Marker>
-    );
+    render(){
+      return (
+        <Marker position={[coords.lat, coords.lng]}>
+          <Popup className={outage.service_type}>
+            {outage.service_type}: {outage.service_name}
+          </Popup>
+        </Marker>
+      );
+    }
   }
 
 }
