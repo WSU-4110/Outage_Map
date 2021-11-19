@@ -26,24 +26,42 @@ class Navbar extends React.Component {
 
         {/* className changes based on user-click on menu icon, this is for mobile view css */}
         <ul className={this.state.clicked ? "navmenu active" : "navmenu"}>
-          <li>
-            <Link className="navlinks" to="/login">
-              Log In
-            </Link>
-          </li>
-          <li>
-            <Link className="navlinks" to="/outages">
-              View Outages
-            </Link>
-          </li>
-          <li>
-            <Link className="navlinks" to="/signup">
-              Sign Up
-            </Link>
-          </li>
+          <NavbarButtons></NavbarButtons>
         </ul>
       </nav>
     );
+  }
+}
+
+class NavbarButtons extends Navbar{
+  constructor(){
+    super();
+    this.state = {foo: true};
+  }
+
+  render(){
+    if(this.state.foo){
+      return super.render();
+    }
+    return(
+      <div>
+            <li>
+              <Link className="navlinks" to="/login">
+                Log In
+              </Link>
+            </li>
+            <li>
+              <Link className="navlinks" to="/outages">
+                View Outages
+              </Link>
+            </li>
+            <li>
+              <Link className="navlinks" to="/signup">
+                Sign Up
+              </Link>
+            </li>
+      </div>
+    )
   }
 }
 
