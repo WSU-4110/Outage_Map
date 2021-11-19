@@ -38,9 +38,10 @@ function ReportOutage(){
         <Container id="report-container" className="w-75">
             <Form onSubmit={handleSubmitReport}>
                 <h1 id="report-title" class>Report Outage</h1>
-                {/* {JSON.parse(localStorage.getItem("user")) == null
-                ? <h1>please log in</h1>
-                : */}
+                {JSON.parse(localStorage.getItem("user")) == null
+                ? <h3>Please log in</h3>
+                :
+                <>
                     <Row >
                         <Col className = "m-3 mx-auto">
                             <select className="form-control" placeholder="Select Service Type" selected="Streaming" id="serviceType" name="serviceType" onChange={handleChange} required>
@@ -80,6 +81,8 @@ function ReportOutage(){
                             Report Outage
                         </Button>
                     </Row>
+                </>
+                }
             </Form>
         </Container>
 
