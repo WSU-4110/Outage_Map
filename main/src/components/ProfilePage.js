@@ -4,8 +4,41 @@ import { useHistory, withRouter } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import "../css/profile.css";
+import axios from "axios";
 
 function Profile() {
+    //classes used instead of interfaces
+    //observer class for reported outages
+    class observerReports{
+        update(){}
+    }
+    //observer class for closed outages
+    class observerClosedReports{
+        update(){}
+    }
+    class subject{
+        constructor(){
+            this.observed=[]
+        }
+        getReportData();
+    }
+    //reports data extend from subject class
+    class reportData extends subject{
+        super();
+        this.state = {
+            reports:{}
+        }
+    };
+    getReportData(){
+        useEffect(()=>{
+            async function fetchOutages(){
+                const resp = await axios.get("/outages");
+                this.state.reports=resp.data.reports;
+            }
+            fetchOutages();
+        })
+    }
+    //profile view
     return (
         <div className="pv-col-border">
             <h2 className="ptab-row">Profile for:</h2>
