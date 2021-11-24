@@ -3,28 +3,29 @@ import React from "react";
 import { useHistory, withRouter } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
+import TabContent from 'react-bootstrap/TabContent'
 import "../css/profile.css";
 
 function Profile() {
     return (
-        <div className="pv-col-border">
-            <h2 className="ptab-row">Profile for:</h2>
-            <p className="ptab-row" style={{ color: 'orange' }}>test@test.com</p>
-        <Tabs className="profile-tabbed-view">
-        <TabList className="nth child">
-          <Tab className="profileview-tab ptab-ms-c tab-button li">Reported Outages</Tab>
-          <Tab className="profileview-tab ptab-ms-c tab-button li">Closed Outages</Tab>          
+        <div className="mt-3 mx-2 w-3">
+            <h2 className="mt-3 mb-0 mx-4">Profile for:</h2>
+            <p className="m-1 mx-4 w-auto" style={{ color: 'orange' }}>test@test.com</p>
+        <Tabs
+            defaultActiveKey="report"
+            variant="fullWidth"
+            transition={false} 
+            className="profile-tabbed-view mx-1 w-100">
+        <TabList className="mt-3 mx-4">
+          <Tab className="profileview-tab ptab-ms-c tab-button">Reported Outages</Tab>
+          <Tab className="profileview-tab ptab-ms-c tab-button">Closed Outages</Tab>          
         </TabList>
 
-        <TabPanel className="profileview-tab-list">
-          <div className="content">
-            <p>Reported outages are saved here as a list</p>
-               </div>
+        <TabPanel>
+            <TabContent style={{color:'white'}}>Reported outages are saved here as a list</TabContent>            
         </TabPanel>
-        <TabPanel className="profileview-tab-list">
-          <div className="content">
-            <p>Closed reports associated with user account are saved here as a list</p>
-          </div>
+        <TabPanel>     
+          <TabContent style={{color:'white'}}>Closed outages will save here</TabContent>        
         </TabPanel>
       </Tabs>
         </div>
