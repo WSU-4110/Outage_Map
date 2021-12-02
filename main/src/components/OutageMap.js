@@ -178,8 +178,8 @@ function OutageMap() {
         </Row>
       </Col>
 
-      <MapContainer center={JSON.parse(localStorage.getItem("user")) == null ? [44, -85]:[localStorage.getItem("latitude"), localStorage.getItem("longitude")]} 
-      zoom={JSON.parse(localStorage.getItem("user")) == null ? 7 : 12} 
+      <MapContainer center={JSON.parse(localStorage.getItem("latitude")) == null ? [44, -85]:[localStorage.getItem("latitude"), localStorage.getItem("longitude")]} 
+      zoom={JSON.parse(localStorage.getItem("latitude")) == null ? 7 : 12} 
       scrollWheelZoom={true}>
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
