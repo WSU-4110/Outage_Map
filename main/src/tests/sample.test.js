@@ -24,6 +24,16 @@ beforeAll((done) => {
   done();
 });
 
+//HOME PAGE
+describe("GET /", () => {
+  test("HOME PAGE: Should respond with a 200 status code", async () => {
+    const response = await request(app).get("/");
+    expect(response.status).toBe(200);
+  });
+
+});
+
+//DELETE USER
 describe("DELETE /delete", () => {
   test("Should respond with a 201 status code", async () => {
     let req = mockRequest();
@@ -35,6 +45,7 @@ describe("DELETE /delete", () => {
   });
 });
 
+//USER SIGN UP
 describe("POST /signup", () => {
   //Save username and password to users table
   //Respond with 201 status code
@@ -59,6 +70,7 @@ describe("POST /signup", () => {
   });
 });
 
+// USER LOGIN
 describe("POST /login", () => {
   //Respond with 201 status code
   //Return JSON user object
@@ -83,6 +95,7 @@ describe("POST /login", () => {
   });
 });
 
+// OUTAGE MAP PAGE
 describe("GET /outages", () => {
   test("Should respond with a 200 status code", async () => {
     const response = await request(app).get("/outages");
@@ -97,6 +110,7 @@ describe("GET /outages", () => {
   });
 });
 
+// USER PROFILE PAGE
 describe("POST /profile", () => {
   test("Should respond with a 200 status code regardless whether or not the user has reported any outages", async () => {
     let req = mockRequest();
