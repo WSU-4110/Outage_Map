@@ -33,8 +33,8 @@ function ReportOutage() {
       longitude: localStorage.getItem("longitude"),
       outage_description: `${formData.serviceDescription}`,
     });
-    // window.location.reload();
-    history.push("/outages");
+     window.location.reload();
+    //history.push("/outages");
   };
 
   return (
