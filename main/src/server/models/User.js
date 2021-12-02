@@ -18,6 +18,11 @@ class User {
     return db.execute(sql);
   }
 
+  deleteUser() {
+    let sql = `delete from users where user_email = '${this.user_email}';`;
+    return db.execute(sql);
+  }
+
   //Validation upon User login
   //Compare the password the user entered to the hashed
   //password in the database. Return true if passwords match.

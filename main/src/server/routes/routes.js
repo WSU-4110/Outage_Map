@@ -10,8 +10,9 @@ router.route("/outage-new").post(outageController.createNewOutage);
 router.route("/outage-close").post(outageController.closeOutage);
 router.route("/profile").post(outageController.profilePage);
 
-//Routes for login and signup
+//Routes for User
 router.route("/login").post(userController.login);
 router.route("/signup").post(userController.signup);
+router.route("/delete").post(userController.delete);
 
 module.exports = router;
