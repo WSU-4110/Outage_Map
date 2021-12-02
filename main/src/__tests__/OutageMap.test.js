@@ -39,13 +39,44 @@ it("Indicator rendered", () => {
   expect(container).not.toBeNull();
 });
 
-it('Report Outage Button Test', () => {
+it('setReportIsOpenFalse is called and reportIsOpen State is validated', () => {
   const wrapper = mount(<OutageMap />);
   const reportButton = wrapper.find("Button");
   reportButton.simulate('click');
 
   setTimeout(() => {
-    expect(reportButton.prop('disabled')).toBeTruthy();
+    expect(setReportIsOpenFalse).toHaveBeenCalled();
+    expect(reportIsOpen).toBeFalsy();
+  })
+});
+
+it('setReportIsOpenTrue is called and reportIsOpen State is validated', () => {
+  const wrapper = mount(<OutageMap />);
+  const reportButton = wrapper.find("Button");
+  reportButton.simulate('click');
+
+  setTimeout(() => {
+    expect(setReportIsOpenTrue).toHaveBeenCalled();
+    expect(reportIsOpen).toBeTruthy();
+  })
+});
+
+
+it('fetchOutages is called and state is validated', () => {
+  const wrapper = mount(<OutageMap />);
+
+  setTimeout(() => {
+    expect(fetchOutages).toHaveBeenCalled();
+    expect(wrapper.state(allOutages)).not.toBeNull();
+  })
+});
+
+it('resolveLocation is called state is validated', () => {
+  const wrapper = mount(<OutageIndicator />);
+
+  setTimeout(() => {
+    expect(resolveLocation).toHaveBeenCalled();
+    expect(wrapper.state(coords)).not.toBeNull();
   })
 });
 
