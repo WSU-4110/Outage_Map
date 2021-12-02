@@ -6,14 +6,7 @@ import { useHistory, withRouter } from "react-router-dom";
 import Modal from "react-modal";
 import "../css/login.css";
 import axios from "axios";
-import {
-  Container,
-  Form,
-  Row,
-  Col,
-  Button,
-  ToggleButtonGroup,
-} from "react-bootstrap";
+import { Container, Form, Row, Col, Button, ToggleButtonGroup} from 'react-bootstrap'
 import hash from "object-hash";
 
 class UserLogin extends React.Component {
@@ -37,7 +30,7 @@ class UserLogin extends React.Component {
   async handleSubmits(e) {
     e.preventDefault();
     const hashedPassword = hash(this.state.pwd);
-    const res = await axios.post("/api/login", {
+    const res = await axios.post("/login", {
       user_email: `${this.state.email}`,
       user_password: `${hashedPassword}`,
     });
@@ -51,12 +44,12 @@ class UserLogin extends React.Component {
 
   render() {
     return (
-      <div id="login-page">
-        <Container className="loginContainer w-25 mw-25">
+      <div id ="login-page">
+        <Container className="loginContainer w-25 mw-25" >
           <Form onSubmit={this.handleSubmits}>
             <h1 id="title">Login</h1>
 
-            <Row className="m-3 mx-auto w-75">
+            <Row className = "m-3 mx-auto w-75">
               <Col /*lg={4} md={6} sm={12}*/>
                 <Form.Group controlId="formEmail">
                   <input
@@ -71,34 +64,34 @@ class UserLogin extends React.Component {
                 </Form.Group>
               </Col>
             </Row>
-
-            <Row className="m-3 mx-auto w-75">
+ 
+            <Row className = "m-3 mx-auto w-75">
               <Col /*lg={4} md={6} sm={12}*/>
                 <Form.Group controlId="formPassword">
                   <input
-                    type="password"
-                    name="pwd"
-                    id="password-field"
-                    className="form-control"
-                    placeholder="Password"
-                    onChange={this.handleChange}
-                    required
-                  />
+                  type="password"
+                  name="pwd"
+                  id="password-field"
+                  className="form-control"
+                  placeholder="Password"
+                  onChange={this.handleChange}
+                  required
+                />
                 </Form.Group>
               </Col>
             </Row>
-
-            <Col className="mx-auto w-25">
+            
+            <Col className = "mx-auto w-25">
               <Row>
-                <Button
-                  className="customBtn"
-                  variant="primary btn-block"
-                  type="submit"
-                  size="md"
-                  style={{ background: "orange", border: "none" }}
+                <Button 
+                  className="customBtn" 
+                  variant="primary btn-block" 
+                  type="submit" 
+                  size="md"  
+                  style={{background: "orange", border: "none"}}
                   onSubmit={this.handleSubmits}
-                >
-                  Login
+                  >
+                    Login
                 </Button>
               </Row>
             </Col>

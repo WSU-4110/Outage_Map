@@ -4,14 +4,14 @@ import L from "leaflet";
 import Modal from "react-modal";
 import axios from "axios";
 import ReportOutage from "./ReportOutage";
-import { Button, Container, Row, Col } from "react-bootstrap";
-import gaming from "./icons/gamepad-solid.svg";
-import streaming from "./icons/video-slash-solid.svg";
-import power from "./icons/plug-solid.svg";
-import internet from "./icons/wifi-solid.svg";
-import cable from "./icons/ethernet-solid.svg";
-import website from "./icons/laptop-code-solid.svg";
-import exclamation from "./icons/exclamation-solid.svg";
+import { Button, Container, Row, Col } from 'react-bootstrap';
+import gaming from "./icons/gamepad-solid.svg"
+import streaming from "./icons/video-slash-solid.svg"
+import power from "./icons/plug-solid.svg"
+import internet from "./icons/wifi-solid.svg"
+import cable from "./icons/ethernet-solid.svg"
+import website from "./icons/laptop-code-solid.svg"
+import exclamation from "./icons/exclamation-solid.svg"
 
 function OutageIndicator({ outage }, serviceSort) {
   //this component renders the markers with corresponding lat and long values calculated by the geocodify api.
@@ -30,8 +30,8 @@ function OutageIndicator({ outage }, serviceSort) {
 
   const closeReport = async (event) => {
     event.preventDefault();
-    const res = await axios.post("/api/outage-close", {
-      outage_id: `${outage.outage_id}`,
+    const res = await axios.post("/outage-close", {
+      outage_id: `${outage.outage_id}`
     });
     console.log(res.status);
   };
@@ -42,30 +42,30 @@ function OutageIndicator({ outage }, serviceSort) {
 
   const LeafIcon = L.Icon.extend({
     options: {
-      iconSize: [38, 35],
-    },
+        iconSize:     [38, 35],
+    }
   });
 
   const streamingIcon = new LeafIcon({
-    iconUrl: streaming,
+    iconUrl: streaming
   });
   const powerIcon = new LeafIcon({
-    iconUrl: power,
+    iconUrl: power
   });
   const internetIcon = new LeafIcon({
-    iconUrl: internet,
+    iconUrl: internet
   });
   const gamingIcon = new LeafIcon({
-    iconUrl: gaming,
+    iconUrl: gaming
   });
   const exclamationIcon = new LeafIcon({
-    iconUrl: exclamation,
+    iconUrl: exclamation
   });
   const cableIcon = new LeafIcon({
-    iconUrl: cable,
+    iconUrl: cable
   });
   const websiteIcon = new LeafIcon({
-    iconUrl: website,
+    iconUrl: website
   });
 
   const [icon, setIcon] = useState(powerIcon);
@@ -74,32 +74,33 @@ function OutageIndicator({ outage }, serviceSort) {
     function resolveLocation() {
       let lng = Number(outage.longitude);
       let lat = Number(outage.latitude);
-      switch (outage.service_type) {
+      switch(outage.service_type) {
         case "Streaming":
-          setIcon(streamingIcon);
+          setIcon(streamingIcon)
           break;
         case "Power":
-          setIcon(powerIcon);
+          setIcon(powerIcon)
           break;
         case "Internet":
-          setIcon(internetIcon);
+          setIcon(internetIcon)
           break;
         case "Gaming Platform":
-          setIcon(gamingIcon);
+          setIcon(gamingIcon)
           break;
         case "Cable":
-          setIcon(cableIcon);
+          setIcon(cableIcon)
           break;
         case "Website":
-          setIcon(websiteIcon);
+          setIcon(websiteIcon)
           break;
         default:
-          setIcon(exclamationIcon);
+          setIcon(exclamationIcon)
       }
       setCoords({ lng, lat });
     }
     resolveLocation();
   }, [outage]);
+
 
   if (!coords) {
     return "Loading";
@@ -127,6 +128,7 @@ function OutageIndicator({ outage }, serviceSort) {
       </Marker>
     );
   }
+
 }
 
 function OutageMap() {
@@ -156,7 +158,7 @@ function OutageMap() {
 
   useEffect(() => {
     async function fetchOutages() {
-      const resp = await axios.get("/api/outages");
+      const resp = await axios.get("/outages");
       setAllOutages(resp.data.outages);
     }
     fetchOutages();
@@ -164,18 +166,18 @@ function OutageMap() {
   
   return (
     <>
-      <Col className="m-3 mx-auto w-25">
+      <Col className = "m-3 mx-auto w-25">
         <Row>
-          <Button
-            onClick={setReportIsOpenTrue}
-            variant="primary btn-block"
-            size="md"
-            style={{ background: "orange", border: "none" }}
+        <Button onClick={setReportIsOpenTrue}
+          variant="primary btn-block"
+          size="md"  
+          style={{background: "orange", border: "none"}}
           >
             Report Outage
           </Button>
         </Row>
       </Col>
+
       <MapContainer center={JSON.parse(localStorage.getItem("user")) == null ? [44, -85]:[localStorage.getItem("latitude"), localStorage.getItem("longitude")]} 
       zoom={JSON.parse(localStorage.getItem("user")) == null ? 7 : 12} 
       scrollWheelZoom={true}>
@@ -239,10 +241,9 @@ function OutageMap() {
       </MapContainer>
 
       <Modal id="modal-container" isOpen={reportIsOpen}>
-        <Button
-          onClick={setReportIsOpenFalse}
-          style={{ background: "black", border: "none" }}
-        >
+        <Button 
+        onClick={setReportIsOpenFalse}
+        style={{background: "black", border: "none"}}>
           X
         </Button>
 
