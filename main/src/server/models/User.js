@@ -1,4 +1,5 @@
 const db = require("../db/sql");
+const bcrypt = require("bcrypt");
 
 /*
  * User Class for User table in databse

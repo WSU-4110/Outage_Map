@@ -21,6 +21,12 @@ app.use((error, req, res, next) => {
   next();
 });
 
+app.use(express.static(path.join(__dirname, "main/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/main/build/index.html"));
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
 });

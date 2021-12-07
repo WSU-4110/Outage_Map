@@ -4,13 +4,8 @@ exports.signup = async (req, res, next) => {
   try {
     let { user_email, user_password } = req.body;
     let user = new User(user_email, user_password);
-    const validUser = await user.validateUser();
-    console.log(`User Exists: ${validUser}`);
-    if (validUser) res.status(401).json({ message: "User already exists" });
-    else {
-      user = await user.register();
-      res.status(201).json({ message: "User Registered" });
-    }
+    user = await user.register();
+    res.status(201).json({ message: "User Registered" });
   } catch (error) {
     console.log(error);
     next(error);

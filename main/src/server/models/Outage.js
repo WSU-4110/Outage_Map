@@ -27,7 +27,7 @@ class Outage {
     let year = outageDate.getFullYear();
     let month = outageDate.getMonth() + 1;
     let day = outageDate.getDate();
-    let dateCreated = `${year}-${day}-${month}`;
+    let dateCreated = `${year}-${month}-${day}`;
 
     let sql = `INSERT INTO outages (user_email, service_type, service_name, latitude, longitude, outage_description, date_created) VALUES ('${this.user_email}', '${this.service_type}', '${this.service_name}', '${this.latitude}', '${this.longitude}', '${this.outage_description}', '${dateCreated}');`;
     return db.execute(sql);
@@ -48,15 +48,6 @@ class Outage {
   static close(id) {
     let sql = `UPDATE OUTAGES SET outage_status = 'Closed' WHERE outage_id = ${id};`;
     return db.execute(sql);
-  }
-
-  static autoCheckOutages(){
-  let year = outageDate.getFullYear();
-    let month = outageDate.getMonth() + 1;
-    let day = outageDate.getDate();
-  let currentDate = `${year}-${day}-${month}`;
-  let sql = `Update outages set outage_status = 'Closed' where ('${currentDate}' - dateCreated) > 3;`;
-  return db.execute(sql)
   }
 }
 module.exports = Outage;
