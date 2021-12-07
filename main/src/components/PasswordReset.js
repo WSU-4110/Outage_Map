@@ -1,11 +1,11 @@
 import React from "react";
 import axios from "axios";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import hash from "object-hash";
 import "../css/SignupForm.css";
 import { Container, Form, Row, Col, Button } from "react-bootstrap";
 
-class SignupForm extends React.Component {
+class PasswordReset extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -106,7 +106,7 @@ class SignupForm extends React.Component {
       <div id="signup-page">
         <Container className="signupContainer w-25">
           <Form onSubmit={this.handleSubmit}>
-            <h1 id="signuptitle">Create an Account</h1>
+            <h1 id="signuptitle">Reset Your Password</h1>
 
             <Row className="m-3 mx-auto w-75">
               <Col>
@@ -179,7 +179,7 @@ class SignupForm extends React.Component {
                   size="md"
                   style={{ background: "orange", border: "none" }}
                 >
-                  Sign Up
+                  Reset
                 </Button>
               </Row>
             </Col>
@@ -190,4 +190,4 @@ class SignupForm extends React.Component {
   }
 }
 
-export default withRouter(SignupForm);
+export default withRouter(PasswordReset);
