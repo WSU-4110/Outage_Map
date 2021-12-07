@@ -50,7 +50,7 @@ class SignupForm extends React.Component {
 
       if (res.status === 201) {
         this.props.history.push("/login");
-      }
+      } else console.log(JSON.parse(res.status.message));
     }
   }
 
@@ -108,78 +108,81 @@ class SignupForm extends React.Component {
           <Form onSubmit={this.handleSubmit}>
             <h1 id="signuptitle">Create an Account</h1>
 
-            <Row className = "m-3 mx-auto w-75">
+            <Row className="m-3 mx-auto w-75">
               <Col>
                 <Form.Group controlId="formEmail">
                   <input
-                  type="text"
-                  name="email"
-                  value={this.state.input.email}
-                  onChange={this.handleChange}
-                  className="form-control"
-                  placeholder="Email"
-                  id="email"
-                  required
-                />
+                    type="text"
+                    name="email"
+                    value={this.state.input.email}
+                    onChange={this.handleChange}
+                    className="form-control"
+                    placeholder="Email"
+                    id="email"
+                    required
+                  />
 
                   <div className="text-danger">{this.state.errors.email}</div>
                 </Form.Group>
               </Col>
             </Row>
 
-            <Row className = "m-3 mx-auto w-75">
+            <Row className="m-3 mx-auto w-75">
               <Col>
                 <Form.Group>
                   <input
-                  type="password"
-                  name="password"
-                  value={this.state.input.password}
-                  onChange={this.handleChange}
-                  className="form-control"
-                  placeholder="Password"
-                  id="password"
-                  required
-                />
+                    type="password"
+                    name="password"
+                    value={this.state.input.password}
+                    onChange={this.handleChange}
+                    className="form-control"
+                    placeholder="Password"
+                    id="password"
+                    required
+                  />
 
-                  <div className="text-danger">{this.state.errors.password}</div>
+                  <div className="text-danger">
+                    {this.state.errors.password}
+                  </div>
                 </Form.Group>
               </Col>
             </Row>
 
-            <Row className = "m-3 mx-auto w-75">
+            <Row className="m-3 mx-auto w-75">
               <Col>
                 <Form.Group>
                   <input
-                  type="password"
-                  name="confirm_password"
-                  value={this.state.input.confirm_password}
-                  onChange={this.handleChange}
-                  className="form-control"
-                  placeholder="Confirm Password"
-                  id="confirm_password"
-                  required
-                />
+                    type="password"
+                    name="confirm_password"
+                    value={this.state.input.confirm_password}
+                    onChange={this.handleChange}
+                    className="form-control"
+                    placeholder="Confirm Password"
+                    id="confirm_password"
+                    required
+                  />
 
-                  <div className="text-danger">{this.state.errors.confirm_password}</div>
+                  <div className="text-danger">
+                    {this.state.errors.confirm_password}
+                  </div>
                 </Form.Group>
               </Col>
             </Row>
 
-            <Col className = "mx-auto w-25">
+            <Col className="mx-auto w-25">
               <Row>
-                <Button 
-                  type="submit" 
+                <Button
+                  type="submit"
                   value="Register"
-                  className="customBtn" 
+                  className="customBtn"
                   variant="primary btn-block"
-                  size="md"  
-                  style={{background: "orange", border: "none"}}
-                  >
-                    Sign Up
+                  size="md"
+                  style={{ background: "orange", border: "none" }}
+                >
+                  Sign Up
                 </Button>
               </Row>
             </Col>
-
           </Form>
         </Container>
       </div>
