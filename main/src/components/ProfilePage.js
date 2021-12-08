@@ -7,31 +7,37 @@ import { TabContent } from 'react-bootstrap'
 import axios from "axios";
 import "../css/profile.css";
 
-function Profile() {
-   const [selectTab, setSelectTab] = useState('reported');
-   const [loggedInUser, setLoggedInUser] = useState(JSON.parse(localStorage.getItem("user")));
+function Profile({outage}) {
+  //set tabs states
+  const [selectTab, setSelectTab] = useState("reported");   
+  
+  const [loggedInUser, setLoggedInUser] = useState(JSON.parse(localStorage.getItem("user")));
+   
+  //set table outages
+  const [tableOutage, setTableOutage] = useState([]);
 
-   console.log(loggedInUser);
-
-   const handleChange = (event, newSelect) => {
-     setSelectTab(newSelect);
-   }
-   let history = useHistory();
-   useEffect(()=>{
-     const foundUser = loggedInUser?.foundUser;
-     
-      setLoggedInUser(JSON.parse(localStorage.getItem("user")));       
-    }, []);
-
+  function handleChange(event, newSelect) {
+    setSelectTab(newSelect);
+  }
+   //let history = useHistory();
+   
+   useEffect(() => {
+    async function fetchOutages() {
+      const resp = await axios.get("/outages");
+      setTableOutage(resp.data.outages);
+    }
+    fetchOutages();
+  }, []);
+   
     //shows the profile for user email
     return (
       <div className="mt-3 mx-2 w-3">
-            <h2 className="mt-3 mb-0 mx-4">Profile for:</h2>            
-            <p className="m-1 mx-4 w-auto" style={{ color: 'orange' }}>{JSON.parse(localStorage.getItem("user"))}</p>
+            <h2 className="mt-3 mb-0 mx-4">Profile</h2>            
+            <p className="m-1 mx-4 w-auto" style={{ color: 'orange' }}>Username: {loggedInUser}</p>
 
         <Tabs //tabbed data
           value = {selectTab} 
-          onSelect={handleChange}
+          onChange={handleChange}
           className="mx-1 w-100"
           centered="true">
         
@@ -41,10 +47,14 @@ function Profile() {
         </TabList>
 
         <TabPanel className="tabscontent">
-            <TabContent style={{color:'white'}}>Reported outages</TabContent>            
+            <TabContent style={{color:'white'}}>Reported: {tableOutage.map((val)=>{
+              return <p>Service Name: {val.outage.service_name} | Outage Description: {val.outage.outage_description}</p>
+             })}</TabContent>            
         </TabPanel>
-        <TabPanel className="tabscontent" >     
-          <TabContent style={{color:'white'}}>Closed outages will save here</TabContent>        
+        <TabPanel className="tabscontent">
+            <TabContent style={{color:'white'}}>Closed: {tableOutage.map((val)=>{
+              return <p>Service Name: {val.outage.service_name} | Outage Description: {val.outage.outage_description}</p>
+             })}</TabContent>            
         </TabPanel>
       </Tabs>
         </div>

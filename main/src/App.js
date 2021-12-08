@@ -38,7 +38,8 @@ function App() {
             <UserLogin />
           </Route>
           <Route path="/profile">
-            <Profile />            
+            <Profile />
+          </Route>            
           <Route path="/reset">
             <PasswordReset />
           </Route>
