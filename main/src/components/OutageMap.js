@@ -1,6 +1,8 @@
 import { MapContainer, TileLayer, Marker, Popup, Circle, LayersControl, FeatureGroup } from "react-leaflet";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,createRef } from "react";
 import L from "leaflet";
+import { geosearch, arcgisOnlineProvider} from 'esri-leaflet-geocoder';
+import 'esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css';
 import Modal from "react-modal";
 import axios from "axios";
 import ReportOutage from "./ReportOutage";
@@ -136,7 +138,6 @@ function OutageMap() {
   const [allOutages, setAllOutages] = useState([]);
   console.log(allOutages);
   const [reportIsOpen, setReportIsOpen] = useState(false);
-  const [sortType, setSortType] = useState('default');
 
   navigator.geolocation.getCurrentPosition(function (position) {
     var realLat = position.coords.latitude;
@@ -156,13 +157,31 @@ function OutageMap() {
     setReportIsOpen(false);
   };
 
+  const [mapRef, setMapRef] = useState();
+
   useEffect(() => {
     async function fetchOutages() {
       const resp = await axios.get("/outages");
       setAllOutages(resp.data.outages);
     }
     fetchOutages();
-  }, []);
+
+    const map = mapRef; //reference to map container
+
+    if ( !map ) return; //if reference not found, do not render
+
+    const control = geosearch({
+      useMapBounds: false,
+      providers: [
+        arcgisOnlineProvider({
+          // API Key to be passed to the ArcGIS Online Geocoding Service
+          apikey: 'AAPK79891099930141d58d6591638ebcec16Hx8LOh64nCnFYAdXqPkxslM7cc9ZG1NcLO2ULi0hX2v2r9Dob-GhcGSgDbj9PYYX' //need to hide key
+        })
+      ]
+    });
+
+    control.addTo(map);
+  }, [mapRef]);
   
   return (
     <>
@@ -178,17 +197,13 @@ function OutageMap() {
         </Row>
       </Col>
 
-      <MapContainer center={JSON.parse(localStorage.getItem("latitude")) == null ? [44, -85]:[localStorage.getItem("latitude"), localStorage.getItem("longitude")]} 
+      <MapContainer whenCreated={setMapRef} center={JSON.parse(localStorage.getItem("latitude")) == null ? [44, -85]:[localStorage.getItem("latitude"), localStorage.getItem("longitude")]} 
       zoom={JSON.parse(localStorage.getItem("latitude")) == null ? 7 : 12} 
       scrollWheelZoom={true}>
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-
-        {/* {allOutages.map((mock) => (
-          mock.service_type === "Power" ? <OutageIndicator outage={mock} sortType/> : null
-        ))} */}
         <LayersControl>
           <LayersControl.Overlay checked  name="Power">
             <FeatureGroup>
