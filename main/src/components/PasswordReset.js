@@ -43,7 +43,7 @@ class PasswordReset extends React.Component {
 
       // alert("You have successfully registered");
 
-      const res = await axios.post("/signup", {
+      const res = await axios.post("/reset", {
         user_email: `${this.state.input.email}`,
         user_password: `${hashedPassword}`,
       });
