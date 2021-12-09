@@ -1,5 +1,4 @@
 const db = require("../db/sql");
-const bcrypt = require("bcrypt");
 
 /*
  * User Class for User table in databse
@@ -13,9 +12,12 @@ class User {
 
   //Signup functionality. Inserts a new user into the User table.
   register() {
-    let sql = `
-        INSERT INTO users (user_email, user_password)
-         VALUES ('${this.user_email}', '${this.user_password}');`;
+    let sql = `INSERT INTO users (user_email, user_password) VALUES ('${this.user_email}', '${this.user_password}');`;
+    return db.execute(sql);
+  }
+
+  resetPassword() {
+    let sql = `update users set user_password = '${this.user_password}' where user_email = '${this.user_email}';`;
     return db.execute(sql);
   }
 
