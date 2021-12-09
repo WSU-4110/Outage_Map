@@ -7,7 +7,7 @@ import { TabContent } from 'react-bootstrap'
 import axios from "axios";
 import "../css/profile.css";
 
-function Profile({outage}) {
+function Profile() {
   //set loggedInUser from localstorage
   const [loggedInUser, setLoggedInUser] = useState(JSON.parse(localStorage.getItem("user")));
   //set table outages
@@ -73,11 +73,19 @@ function Profile({outage}) {
   //toggle between tabs
   
   const history = useHistory();
+  //checking if the user is logged in first
+  useEffect(()=>{
+    const user=localStorage.getItem('user');
+    if(!user){
+      history.push('/login');
+    }
+  })
    useEffect(() => {
     if(!selectTab){
         history.push(`reported`);
     }
   }, [history, selectTab]);
+
   function handleTab(newSelect) {
     if (selectTab !== newSelect)
       history.push(`/${newSelect}`);
