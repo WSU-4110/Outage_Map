@@ -13,6 +13,12 @@ h2 {
   font-size: 40px;
   padding-bottom: 10px;
 }
+.table{
+  background-color:#E8F0F2
+}
+.thead{
+  background: grey;
+}
 .profiletab {
     size: auto;
     text-align: center;
@@ -36,9 +42,9 @@ h2 {
     position: relative;
   }
 .tabscontent{
-  display: flexbox;
+  display: block;
   align-content: center;
   padding: 10px;
   margin: 5px;
-  border: .5px solid white; 
+  border: none;
 }
