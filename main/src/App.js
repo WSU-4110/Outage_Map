@@ -39,7 +39,7 @@ function App() {
           </Route>
           <Route path="/profile">
             <Profile />    
-            </Route>        
+            </Route>                    
           <Route path="/reset">
             <PasswordReset />
           </Route>
