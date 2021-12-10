@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, BrowserRouter as Router } from "react-router-dom";
 import "../css/NavBar.css";
 
 class Navbar extends React.Component {
@@ -12,10 +12,11 @@ class Navbar extends React.Component {
 
   render() {
     return (
+      <Router>
       <nav className="NavbarItems">
-        <Link className="navbartitle" to="/">
-          <img src={"small-logo.png"} width="70" height="70" />
-        </Link>
+          <Link className="navbartitle" to="/">
+            <img src={"small-logo.png"} width="70" height="70" />
+          </Link>
 
         {/* function that will recognize user click and change menu img from 3 layer icon to 'x'. Also the naming has to 'fas fa-' according to fontawesome */}
         <div className="menuicon" onClick={this.handleClick}>
@@ -43,6 +44,7 @@ class Navbar extends React.Component {
           </li>
         </ul>
       </nav>
+      </Router>
     );
   }
 }
