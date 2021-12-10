@@ -1,11 +1,12 @@
 import { MapContainer, TileLayer, Marker, Popup, Circle, LayersControl, FeatureGroup } from "react-leaflet";
-import React, { useState, useEffect,createRef } from "react";
+import React, { useState, useEffect } from "react";
 import L from "leaflet";
 import { geosearch, arcgisOnlineProvider} from 'esri-leaflet-geocoder';
 import 'esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css';
 import Modal from "react-modal";
 import axios from "axios";
 import ReportOutage from "./ReportOutage";
+import Leaderboard from "./Leaderboard";
 import { Button, Container, Row, Col } from 'react-bootstrap';
 import gaming from "./icons/gamepad-solid.svg"
 import streaming from "./icons/video-slash-solid.svg"
@@ -15,7 +16,7 @@ import cable from "./icons/ethernet-solid.svg"
 import website from "./icons/laptop-code-solid.svg"
 import exclamation from "./icons/exclamation-solid.svg"
 
-function OutageIndicator({ outage }, serviceSort) {
+function OutageIndicator({ outage }) {
   //this component renders the markers with corresponding lat and long values calculated by the geocodify api.
   const [coords, setCoords] = useState();
   //localStorage.clear();
@@ -136,7 +137,7 @@ function OutageIndicator({ outage }, serviceSort) {
 function OutageMap() {
   //This is where the map page will be rendered.
   const [allOutages, setAllOutages] = useState([]);
-  console.log(allOutages);
+  //console.log(allOutages);
   const [reportIsOpen, setReportIsOpen] = useState(false);
 
   navigator.geolocation.getCurrentPosition(function (position) {
@@ -264,6 +265,8 @@ function OutageMap() {
 
         <ReportOutage />
       </Modal>
+
+      <Leaderboard tableData={allOutages}/>
     </>
   );
 }
