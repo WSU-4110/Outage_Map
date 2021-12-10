@@ -13,5 +13,6 @@ router.route("/profile").post(outageController.profilePage);
 //Routes for login and signup
 router.route("/login").post(userController.login);
 router.route("/signup").post(userController.signup);
+router.route("/reset").post(userController.reset);
 
 module.exports = router;
