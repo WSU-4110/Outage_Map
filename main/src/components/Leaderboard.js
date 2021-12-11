@@ -4,31 +4,42 @@ import { Button, Container, Row, Col } from 'react-bootstrap';
 
 
 function Leaderboard(props){
-    console.log(props.tableData);
+    const olddata = props.tableData;
+    //console.log(data);
 
-    const data = React.useMemo(
-        () => [
-          {
-            col1: "hello",
-            col2: 'World',
-          },
-        ],
-        []
-    )
+    let data = React.useMemo(() => {
+      const counts = {
+        Streaming: 0,
+        Power: 0,
+        Internet: 0,
+        GamingPlatform: 0,
+        Cable: 0,
+        Website: 0
+      };
+    
+      olddata.forEach(({ service_type }) => {
+        if (Object.hasOwnProperty.call(counts, service_type)) {
+          counts[service_type] += 1;
+        }
+      });
+    
+      return Object.entries(counts).map(([type, count]) => ({ type, count }));
+    }, [olddata]);
+    console.log(data);
     
     const columns = React.useMemo(
         () => [
           {
             Header: 'Service Type',
-            accessor: 'col1',
+            accessor: 'type',
           },
           {
-            Header: 'Date',
-            accessor: 'col2',
+            Header: 'Outage Count',
+            accessor: 'count',
           },
         ],
         []
-    )
+    );
     
     const {
         getTableProps,
@@ -36,7 +47,7 @@ function Leaderboard(props){
         headerGroups,
         rows,
         prepareRow,
-    } = useTable({ columns, data })
+    } = useTable({ columns, data})
     
     return (
         <table {...getTableProps()} style={{ border: 'solid 1px blue' }}>
@@ -83,7 +94,6 @@ function Leaderboard(props){
             })}
           </tbody>
         </table>
-    )
-}
-
+    );
+  }
 export default Leaderboard;
