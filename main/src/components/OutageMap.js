@@ -9,9 +9,12 @@ import {
 } from "react-leaflet";
 import React, { useState, useEffect } from "react";
 import L from "leaflet";
+import { geosearch, arcgisOnlineProvider } from "esri-leaflet-geocoder";
+import "esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css";
 import Modal from "react-modal";
 import axios from "axios";
 import ReportOutage from "./ReportOutage";
+import Leaderboard from "./Leaderboard";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import gaming from "./icons/gamepad-solid.svg";
 import streaming from "./icons/video-slash-solid.svg";
@@ -21,11 +24,12 @@ import cable from "./icons/ethernet-solid.svg";
 import website from "./icons/laptop-code-solid.svg";
 import exclamation from "./icons/exclamation-solid.svg";
 
-function OutageIndicator({ outage }, serviceSort) {
+function OutageIndicator({ outage }) {
   //this component renders the markers with corresponding lat and long values calculated by the geocodify api.
   const [coords, setCoords] = useState();
   //localStorage.clear();
   const localUser = localStorage.getItem("user");
+  const userEmail = '"' + outage.user_email + '"';
   // localUser user has "" around it so "" is added around outage.user_email so that it would satisfy the condition on line 40-66
   // if (localUser === userEmail) {
   //   console.log("user exist");
@@ -33,9 +37,7 @@ function OutageIndicator({ outage }, serviceSort) {
   //   console.log("User does not exist");
   // }
 
-  function isLoggedIn() {
-    return localUser !== null;
-  }
+  const [isLoggedIn, setIsLoggedIn] = useState(localUser === userEmail); //localStorage.getItem("user") === outage.user_email
 
   const closeReport = async (event) => {
     event.preventDefault();
@@ -112,7 +114,7 @@ function OutageIndicator({ outage }, serviceSort) {
 
   if (!coords) {
     return "Loading";
-  } else if (isLoggedIn(localUser)) {
+  } else if (isLoggedIn) {
     return (
       <Marker position={[coords.lat, coords.lng]} icon={icon}>
         <Popup className={outage.service_type}>
@@ -141,9 +143,8 @@ function OutageIndicator({ outage }, serviceSort) {
 function OutageMap() {
   //This is where the map page will be rendered.
   const [allOutages, setAllOutages] = useState([]);
-  console.log(allOutages);
+  //console.log(allOutages);
   const [reportIsOpen, setReportIsOpen] = useState(false);
-  const [sortType, setSortType] = useState("default");
 
   navigator.geolocation.getCurrentPosition(function (position) {
     var realLat = position.coords.latitude;
@@ -163,13 +164,32 @@ function OutageMap() {
     setReportIsOpen(false);
   };
 
+  const [mapRef, setMapRef] = useState();
+
   useEffect(() => {
     async function fetchOutages() {
       const resp = await axios.get("/outages");
       setAllOutages(resp.data.outages);
     }
     fetchOutages();
-  }, []);
+
+    const map = mapRef; //reference to map container
+
+    if (!map) return; //if reference not found, do not render
+
+    const control = geosearch({
+      useMapBounds: false,
+      providers: [
+        arcgisOnlineProvider({
+          // API Key to be passed to the ArcGIS Online Geocoding Service
+          apikey:
+            "AAPK79891099930141d58d6591638ebcec16Hx8LOh64nCnFYAdXqPkxslM7cc9ZG1NcLO2ULi0hX2v2r9Dob-GhcGSgDbj9PYYX", //need to hide key
+        }),
+      ],
+    });
+
+    control.addTo(map);
+  }, [mapRef]);
 
   return (
     <>
@@ -187,6 +207,7 @@ function OutageMap() {
       </Col>
 
       <MapContainer
+        whenCreated={setMapRef}
         center={
           JSON.parse(localStorage.getItem("latitude")) == null
             ? [44, -85]
@@ -202,10 +223,6 @@ function OutageMap() {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-
-        {/* {allOutages.map((mock) => (
-          mock.service_type === "Power" ? <OutageIndicator outage={mock} sortType/> : null
-        ))} */}
         <LayersControl>
           <LayersControl.Overlay checked name="Power">
             <FeatureGroup>
@@ -279,6 +296,8 @@ function OutageMap() {
 
         <ReportOutage />
       </Modal>
+
+      <Leaderboard tableData={allOutages} />
     </>
   );
 }

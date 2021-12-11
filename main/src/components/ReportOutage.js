@@ -31,7 +31,6 @@ function ReportOutage(){
             outage_description: `${formData.serviceDescription}`,
         })
         window.location.reload();
-        history.push('/outages');
     };
 
     return (
