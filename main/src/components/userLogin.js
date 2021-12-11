@@ -9,6 +9,7 @@ import axios from "axios";
 import { Container, Form, Row, Col, Button, ToggleButtonGroup} from 'react-bootstrap'
 import hash from "object-hash";
 
+
 class UserLogin extends React.Component {
   constructor() {
     super();
@@ -18,6 +19,12 @@ class UserLogin extends React.Component {
       pwd: "", //object entry from user
       loggedIn: false,
     };
+
+    // Clear out user from localStorage when on log-in page, since only logged-out users will end up here.
+    if (localStorage.getItem("user")) {
+      localStorage.removeItem("user");
+      window.location.reload();
+    }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmits = this.handleSubmits.bind(this);
   }
@@ -39,6 +46,7 @@ class UserLogin extends React.Component {
       this.state.loggedIn = true;
       localStorage.setItem("user", JSON.stringify(this.state.email));
       this.props.history.push("/outages");
+      window.location.reload();
     }
   }
 
