@@ -47,9 +47,13 @@ function OutageIndicator({ outage }) {
     console.log(res.status);
   };
 
-  function extendReport() {
-    console.log("Extending Report");
-  }
+  const extendReport = async (event) => {
+    event.preventDefault();
+    const res = await axios.post("/outage-extend", {
+      outage_id: `${outage.outage_id}`,
+    });
+    console.log(res.status);
+  };
 
   const LeafIcon = L.Icon.extend({
     options: {
