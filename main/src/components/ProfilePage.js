@@ -1,9 +1,10 @@
-//profile page, with user reported outages and closed outages
+//profile page, with user reported outages and closedrepo outages
 import React from "react";
 import { useHistory, useParams, withRouter } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import { TabContent } from 'react-bootstrap'
+import moment from "moment";
 import axios from "axios";
 import "../css/profile.css";
 
@@ -12,7 +13,8 @@ function Profile() {
   const [loggedInUser, setLoggedInUser] = useState(JSON.parse(localStorage.getItem("user")));
   //set table outages
   const [tableOutage, setTableOutage] = useState([]);
-  const tabData = {
+  //table data content from server
+  const tabData =  {
     "reported": {
       title: "Open Reported Outages",
       content: (         
@@ -33,14 +35,14 @@ function Profile() {
                      <td>{item.service_name}</td>
                      <td>{item.outage_description}</td>
                      <td>{item.outage_status}</td>
-                     <td>{item.date_created}</td>
+                     <td>{moment(item.date_created).format("DD/MM/YYYY")}</td>
                    </tr>;
                  })}
                </tbody>
              </table>         
         )    
     },
-  "closed": {
+  "closedrepo": {
     title: "Closed Reported Outages",
     content: (      
           <table class="table">
@@ -54,14 +56,14 @@ function Profile() {
               </tr>
             </thead>
             <tbody>
-              {tableOutage.map(item => {
+              {tableOutage.map((item) => {
                 return <tr key={item.Id}>
                   <td>{item.service_type}</td>
                   <td>{item.service_name}</td>
                   <td>{item.outage_description}</td>
                   <td>{item.outage_status}</td>
-                  <td>{item.date_created}</td>
-                </tr>;
+                  <td>{moment(item.date_created).format("DD/MM/YYYY")}</td>
+                </tr>
               })}
             </tbody>
           </table>        
@@ -107,21 +109,36 @@ function Profile() {
             <p className="m-1 mx-4 w-auto" style={{ color: 'orange' }}>Username: {loggedInUser}</p>
 
         <Tabs //tabbed data
-          tabData 
+          tabData
           onChange={handleTab}
           className="mx-1 w-100"
           centered="true">
-          
+          {/* tab list open and closed tabbuttons */}
           <TabList>
-            <Tab className="profiletab" {...selectTab === tabData["reported"]? "active" : ""} onChange={()=>{handleTab(tabData["reported"]);}}>{tabData["reported"].title}</Tab> 
-            <Tab className="profiletab" {...selectTab === tabData["closed"]? "active" : ""} onChange={()=>{handleTab(tabData["closed"]);}}>{tabData["closed"].title}</Tab>          
+
+            <Tab className="profiletab" 
+            {...selectTab === tabData["reported"]? "active" : ""} 
+            onChange={()=>{handleTab(tabData["reported"]);}}>
+              {tabData["reported"].title}
+            </Tab>
+
+            <Tab className="profiletab" 
+            {...selectTab === tabData["closedrepo"]? "active" : ""} 
+            onChange={()=>{handleTab(tabData["closedrepo"]);}}>
+              {tabData["closedrepo"].title}
+            </Tab> 
+
           </TabList>
+
           <TabPanel className="tabscontent" >
-            <TabContent style={{color:'white'}}>Reported: {tabData["reported"].content}</TabContent>            
+            {/* data content only that is open */}
+            <TabContent style={{color:'white'}}>Reported: {tabData["reported"].content})</TabContent>            
           </TabPanel>
           <TabPanel className="tabscontent">
-            <TabContent style={{color:'white'}}>Closed: {tabData["closed"].content}</TabContent>            
+            {/* data content only that is closed */}
+            <TabContent style={{color:'white'}}>Closed: {tabData["closedrepo"].content}</TabContent>            
           </TabPanel> 
+
         </Tabs>         
       
         </div>

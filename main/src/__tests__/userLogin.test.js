@@ -23,9 +23,6 @@ describe("rendering userLogin component", ()=>{
         expect(wrapper.find('password')).toEqual({});
     });
     it('should have a login button', ()=>{
-        //one button
-        expect(wrapper.find('Button')).toHaveLength(1);
-
         //Button should be of type button
         expect(wrapper.find('Button')
         .type().defaultProps.type)
