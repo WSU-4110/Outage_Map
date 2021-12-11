@@ -53,7 +53,7 @@ exports.profilePage = async (req, res, next) => {
 
 exports.closeOutage = async (req, res, next) => {
   try {
-    let { outage_id } = req.body
+    let { outage_id } = req.body;
     await Outage.close(outage_id);
     res.status(204).json({ message: "Outage Closed" });
   } catch (error) {

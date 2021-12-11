@@ -39,7 +39,7 @@ function ReportOutage(){
             <Form onSubmit={handleSubmitReport}>
                 <h1 id="report-title" class>Report Outage</h1>
                 {JSON.parse(localStorage.getItem("user")) == null
-                ? <h3>Please log in</h3>
+                ? <h3 className="w-50 mx-auto">Please log in</h3>
                 :
                 <>
                     <Row >
