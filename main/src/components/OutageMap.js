@@ -1,17 +1,25 @@
-import { MapContainer, TileLayer, Marker, Popup, Circle, LayersControl, FeatureGroup } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  Circle,
+  LayersControl,
+  FeatureGroup,
+} from "react-leaflet";
 import React, { useState, useEffect } from "react";
 import L from "leaflet";
 import Modal from "react-modal";
 import axios from "axios";
 import ReportOutage from "./ReportOutage";
-import { Button, Container, Row, Col } from 'react-bootstrap';
-import gaming from "./icons/gamepad-solid.svg"
-import streaming from "./icons/video-slash-solid.svg"
-import power from "./icons/plug-solid.svg"
-import internet from "./icons/wifi-solid.svg"
-import cable from "./icons/ethernet-solid.svg"
-import website from "./icons/laptop-code-solid.svg"
-import exclamation from "./icons/exclamation-solid.svg"
+import { Button, Container, Row, Col } from "react-bootstrap";
+import gaming from "./icons/gamepad-solid.svg";
+import streaming from "./icons/video-slash-solid.svg";
+import power from "./icons/plug-solid.svg";
+import internet from "./icons/wifi-solid.svg";
+import cable from "./icons/ethernet-solid.svg";
+import website from "./icons/laptop-code-solid.svg";
+import exclamation from "./icons/exclamation-solid.svg";
 
 function OutageIndicator({ outage }, serviceSort) {
   //this component renders the markers with corresponding lat and long values calculated by the geocodify api.
@@ -32,41 +40,45 @@ function OutageIndicator({ outage }, serviceSort) {
   const closeReport = async (event) => {
     event.preventDefault();
     const res = await axios.post("/outage-close", {
-      outage_id: `${outage.outage_id}`
+      outage_id: `${outage.outage_id}`,
     });
     console.log(res.status);
   };
 
-  function extendReport() {
-    console.log("Extending Report");
-  }
+  const extendReport = async (event) => {
+    event.preventDefault();
+    const res = await axios.post("/outage-extend", {
+      outage_id: `${outage.outage_id}`,
+    });
+    console.log(res.status);
+  };
 
   const LeafIcon = L.Icon.extend({
     options: {
-        iconSize:     [38, 35],
-    }
+      iconSize: [38, 35],
+    },
   });
 
   const streamingIcon = new LeafIcon({
-    iconUrl: streaming
+    iconUrl: streaming,
   });
   const powerIcon = new LeafIcon({
-    iconUrl: power
+    iconUrl: power,
   });
   const internetIcon = new LeafIcon({
-    iconUrl: internet
+    iconUrl: internet,
   });
   const gamingIcon = new LeafIcon({
-    iconUrl: gaming
+    iconUrl: gaming,
   });
   const exclamationIcon = new LeafIcon({
-    iconUrl: exclamation
+    iconUrl: exclamation,
   });
   const cableIcon = new LeafIcon({
-    iconUrl: cable
+    iconUrl: cable,
   });
   const websiteIcon = new LeafIcon({
-    iconUrl: website
+    iconUrl: website,
   });
 
   const [icon, setIcon] = useState(powerIcon);
@@ -75,33 +87,32 @@ function OutageIndicator({ outage }, serviceSort) {
     function resolveLocation() {
       let lng = Number(outage.longitude);
       let lat = Number(outage.latitude);
-      switch(outage.service_type) {
+      switch (outage.service_type) {
         case "Streaming":
-          setIcon(streamingIcon)
+          setIcon(streamingIcon);
           break;
         case "Power":
-          setIcon(powerIcon)
+          setIcon(powerIcon);
           break;
         case "Internet":
-          setIcon(internetIcon)
+          setIcon(internetIcon);
           break;
         case "Gaming Platform":
-          setIcon(gamingIcon)
+          setIcon(gamingIcon);
           break;
         case "Cable":
-          setIcon(cableIcon)
+          setIcon(cableIcon);
           break;
         case "Website":
-          setIcon(websiteIcon)
+          setIcon(websiteIcon);
           break;
         default:
-          setIcon(exclamationIcon)
+          setIcon(exclamationIcon);
       }
       setCoords({ lng, lat });
     }
     resolveLocation();
   }, [outage]);
-
 
   if (!coords) {
     return "Loading";
@@ -129,7 +140,6 @@ function OutageIndicator({ outage }, serviceSort) {
       </Marker>
     );
   }
-
 }
 
 function OutageMap() {
@@ -137,7 +147,7 @@ function OutageMap() {
   const [allOutages, setAllOutages] = useState([]);
   console.log(allOutages);
   const [reportIsOpen, setReportIsOpen] = useState(false);
-  const [sortType, setSortType] = useState('default');
+  const [sortType, setSortType] = useState("default");
 
   navigator.geolocation.getCurrentPosition(function (position) {
     var realLat = position.coords.latitude;
@@ -164,24 +174,34 @@ function OutageMap() {
     }
     fetchOutages();
   }, []);
-  
+
   return (
     <>
-      <Col className = "m-3 mx-auto w-25">
+      <Col className="m-3 mx-auto w-25">
         <Row>
-        <Button onClick={setReportIsOpenTrue}
-          variant="primary btn-block"
-          size="md"  
-          style={{background: "orange", border: "none"}}
+          <Button
+            onClick={setReportIsOpenTrue}
+            variant="primary btn-block"
+            size="md"
+            style={{ background: "orange", border: "none" }}
           >
             Report Outage
           </Button>
         </Row>
       </Col>
 
-      <MapContainer center={JSON.parse(localStorage.getItem("latitude")) == null ? [44, -85]:[localStorage.getItem("latitude"), localStorage.getItem("longitude")]} 
-      zoom={JSON.parse(localStorage.getItem("latitude")) == null ? 7 : 12} 
-      scrollWheelZoom={true}>
+      <MapContainer
+        center={
+          JSON.parse(localStorage.getItem("latitude")) == null
+            ? [44, -85]
+            : [
+                localStorage.getItem("latitude"),
+                localStorage.getItem("longitude"),
+              ]
+        }
+        zoom={JSON.parse(localStorage.getItem("latitude")) == null ? 7 : 12}
+        scrollWheelZoom={true}
+      >
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -191,60 +211,73 @@ function OutageMap() {
           mock.service_type === "Power" ? <OutageIndicator outage={mock} sortType/> : null
         ))} */}
         <LayersControl>
-          <LayersControl.Overlay checked  name="Power">
+          <LayersControl.Overlay checked name="Power">
             <FeatureGroup>
-              {allOutages.map((mock) => (
-              mock.service_type === "Power" ? <OutageIndicator outage={mock} sortType/> : null
-              ))}
+              {allOutages.map((mock) =>
+                mock.service_type === "Power" ? (
+                  <OutageIndicator outage={mock} sortType />
+                ) : null
+              )}
             </FeatureGroup>
           </LayersControl.Overlay>
 
-          <LayersControl.Overlay checked  name="Streaming">
+          <LayersControl.Overlay checked name="Streaming">
             <FeatureGroup>
-              {allOutages.map((mock) => (
-              mock.service_type === "Streaming" ? <OutageIndicator outage={mock} sortType/> : null
-              ))}
+              {allOutages.map((mock) =>
+                mock.service_type === "Streaming" ? (
+                  <OutageIndicator outage={mock} sortType />
+                ) : null
+              )}
             </FeatureGroup>
           </LayersControl.Overlay>
 
-          <LayersControl.Overlay checked  name="Internet">
+          <LayersControl.Overlay checked name="Internet">
             <FeatureGroup>
-              {allOutages.map((mock) => (
-              mock.service_type === "Internet" ? <OutageIndicator outage={mock} sortType/> : null
-              ))}
+              {allOutages.map((mock) =>
+                mock.service_type === "Internet" ? (
+                  <OutageIndicator outage={mock} sortType />
+                ) : null
+              )}
             </FeatureGroup>
           </LayersControl.Overlay>
 
-          <LayersControl.Overlay checked  name="Cable">
+          <LayersControl.Overlay checked name="Cable">
             <FeatureGroup>
-              {allOutages.map((mock) => (
-              mock.service_type === "Cable" ? <OutageIndicator outage={mock} sortType/> : null
-              ))}
+              {allOutages.map((mock) =>
+                mock.service_type === "Cable" ? (
+                  <OutageIndicator outage={mock} sortType />
+                ) : null
+              )}
             </FeatureGroup>
           </LayersControl.Overlay>
 
-          <LayersControl.Overlay checked  name="Gaming Platform">
+          <LayersControl.Overlay checked name="Gaming Platform">
             <FeatureGroup>
-              {allOutages.map((mock) => (
-              mock.service_type === "Gaming Platform" ? <OutageIndicator outage={mock} sortType/> : null
-              ))}
+              {allOutages.map((mock) =>
+                mock.service_type === "Gaming Platform" ? (
+                  <OutageIndicator outage={mock} sortType />
+                ) : null
+              )}
             </FeatureGroup>
           </LayersControl.Overlay>
 
-          <LayersControl.Overlay checked  name="Website">
+          <LayersControl.Overlay checked name="Website">
             <FeatureGroup>
-              {allOutages.map((mock) => (
-              mock.service_type === "Website" ? <OutageIndicator outage={mock} sortType/> : null
-              ))}
+              {allOutages.map((mock) =>
+                mock.service_type === "Website" ? (
+                  <OutageIndicator outage={mock} sortType />
+                ) : null
+              )}
             </FeatureGroup>
           </LayersControl.Overlay>
         </LayersControl>
       </MapContainer>
 
       <Modal id="modal-container" isOpen={reportIsOpen}>
-        <Button 
-        onClick={setReportIsOpenFalse}
-        style={{background: "black", border: "none"}}>
+        <Button
+          onClick={setReportIsOpenFalse}
+          style={{ background: "black", border: "none" }}
+        >
           X
         </Button>
 

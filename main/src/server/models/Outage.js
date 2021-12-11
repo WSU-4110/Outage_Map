@@ -27,7 +27,7 @@ class Outage {
     let year = outageDate.getFullYear();
     let month = outageDate.getMonth() + 1;
     let day = outageDate.getDate();
-    let dateCreated = `${year}-${day}-${month}`;
+    let dateCreated = `${year}-${month}-${day}`;
 
     let sql = `INSERT INTO outages (user_email, service_type, service_name, latitude, longitude, outage_description, date_created) VALUES ('${this.user_email}', '${this.service_type}', '${this.service_name}', '${this.latitude}', '${this.longitude}', '${this.outage_description}', '${dateCreated}');`;
     return db.execute(sql);
@@ -40,7 +40,7 @@ class Outage {
     return db.execute(sql);
   }
 
-  static userProfile(email) {   
+  static userProfile(email) {
     let sql = `SELECT * FROM outages where user_email = '${email}'`;
     return db.execute(sql);
   }
@@ -50,13 +50,24 @@ class Outage {
     return db.execute(sql);
   }
 
-  static autoCheckOutages(){
-  let year = outageDate.getFullYear();
+  static autoCheckOutages() {
+    let outageDate = new Date();
+    let year = outageDate.getFullYear();
     let month = outageDate.getMonth() + 1;
     let day = outageDate.getDate();
-  let currentDate = `${year}-${day}-${month}`;
-  let sql = `Update outages set outage_status = 'Closed' where ('${currentDate}' - dateCreated) > 3;`;
-  return db.execute(sql)
+    let currentDate = `${year}-${month}-${day}`;
+    let sql = `Update outages set outage_status = 'Closed' where (datediff('${currentDate}', date_created) > 3);`;
+    return db.execute(sql);
+  }
+
+  static extendOutage(id) {
+    let outageDate = new Date();
+    let year = outageDate.getFullYear();
+    let month = outageDate.getMonth() + 1;
+    let day = outageDate.getDate();
+    let currentDate = `${year}-${month}-${day}`;
+    let sql = `Update outages set date_created = '${currentDate}' where outage_id = ${id};`;
+    return db.execute(sql);
   }
 }
 module.exports = Outage;

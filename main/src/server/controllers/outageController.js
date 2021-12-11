@@ -62,3 +62,15 @@ exports.closeOutage = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.extendOutage = async (req, res, next) => {
+  try {
+    let { outage_id } = req.body;
+    await Outage.extendOutage(outage_id);
+    res.status(204).json({ message: "Outage Extended" });
+  } catch (error) {
+    console.log(error);
+    res.status(404);
+    next(error);
+  }
+};
