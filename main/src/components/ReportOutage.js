@@ -39,7 +39,7 @@ function ReportOutage(){
             <Form onSubmit={handleSubmitReport}>
                 <h1 id="report-title" class>Report Outage</h1>
                 {JSON.parse(localStorage.getItem("user")) == null
-                ? <h3>Please log in</h3>
+                ? <h3 className="w-50 mx-auto">Please log in</h3>
                 :
                 <>
                     <Row >
@@ -85,30 +85,6 @@ function ReportOutage(){
                 }
             </Form>
         </Container>
-
-        // <h1 id="Report-Title" class>Test Dialog box</h1>
-        // <form onSubmit={handleSubmitReport}>
-
-        //     <select selected="Streaming" id="serviceType" name="serviceType" onChange={handleChange} required>
-        //         <option value="Streaming">Streaming</option>
-        //         <option value="Internet">Internet</option>
-        //         <option value="Power">Power</option>
-        //         <option value="Cable">Cable</option>
-        //         <option value="Gaming Platform">Gaming Platform</option>
-        //     </select>
-
-        //     <input type="text" placeholder="Service Name"
-        //     onChange={handleChange} 
-        //     value={formData.serviceName}
-        //     name="serviceName" required/>
-
-        //     <input type="text" placeholder="Description"
-        //     onChange={handleChange} 
-        //     value={formData.serviceDescription}
-        //     name="serviceDescription" required/>
-
-        //     <Button type="submit">Report Outage</Button>
-        // </form>
     );
 }
 
