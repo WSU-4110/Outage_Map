@@ -42,6 +42,11 @@
   background: #565757;
 }
 
+.loginContainer{
+  width: 35vw;
+  max-width: 50vw;
+}
+
 /* #login-page {
   display: grid;
   justify-items: center;
