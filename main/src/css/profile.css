@@ -1,0 +1,51 @@
+p{
+  width: auto;
+  height: auto;
+  text-align: left;  
+  font-size: 1.2rem; 
+  padding-left: .5em;
+  color: white;
+  
+}
+h2 {
+  color: #fff;
+  display: block;
+  font-size: 40px;
+  padding-bottom: 10px;
+}
+.table{
+  background-color:#E8F0F2
+}
+.thead{
+  background: grey;
+}
+.profiletab {
+    size: auto;
+    text-align: center;
+    min-height: 5px;
+    background: orange;
+    margin: .5rem;    
+    color: #E8F0F2;
+    display: inline-block;
+    border: 1px solid black;
+    border-bottom: none;
+    list-style: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: 0.3s;   
+}
+.profiletab:hover {
+    background: rgba(134, 136, 136, 0.15);
+  }
+.profiletab:active {
+    background: white;
+    border-bottom: .5em solid white;
+    position: relative;
+  }
+.tabscontent{
+  display: block;
+  align-content: center;
+  padding: 10px;
+  margin: 5px;
+  border: none;
+}

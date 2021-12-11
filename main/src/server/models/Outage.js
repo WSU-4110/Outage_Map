@@ -40,7 +40,7 @@ class Outage {
     return db.execute(sql);
   }
 
-  static userProfile(email) {
+  static userProfile(email) {   
     let sql = `SELECT * FROM outages where user_email = '${email}'`;
     return db.execute(sql);
   }
