@@ -21,7 +21,6 @@ function OutageIndicator({ outage }) {
   const [coords, setCoords] = useState();
   //localStorage.clear();
   const localUser = localStorage.getItem("user");
-  const userEmail = '"' + outage.user_email + '"';
   // localUser user has "" around it so "" is added around outage.user_email so that it would satisfy the condition on line 40-66
   // if (localUser === userEmail) {
   //   console.log("user exist");
@@ -29,7 +28,9 @@ function OutageIndicator({ outage }) {
   //   console.log("User does not exist");
   // }
 
-  const [isLoggedIn, setIsLoggedIn] = useState(localUser === userEmail); //localStorage.getItem("user") === outage.user_email
+  function isLoggedIn() {
+    return localUser !== null;
+  }
 
   const closeReport = async (event) => {
     event.preventDefault();
@@ -107,7 +108,7 @@ function OutageIndicator({ outage }) {
 
   if (!coords) {
     return "Loading";
-  } else if (isLoggedIn) {
+  } else if (isLoggedIn(localUser)) {
     return (
       <Marker position={[coords.lat, coords.lng]} icon={icon}>
         <Popup className={outage.service_type}>
