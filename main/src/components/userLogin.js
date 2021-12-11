@@ -52,7 +52,7 @@ class UserLogin extends React.Component {
   render() {
     return (
       <div id="login-page">
-        <Container className="loginContainer w-25 mw-25">
+        <Container className="loginContainer w-50 mw-25">
           <Form onSubmit={this.handleSubmits}>
             <h1 id="title">Login</h1>
 

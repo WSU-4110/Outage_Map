@@ -1,5 +1,4 @@
 .content {
-  /* display: inline-block; this was not allowing the content to be centered correctly */
   margin: auto;
 }
 
@@ -8,6 +7,7 @@ h2 {
   display: block;
   font-size: 40px;
   padding-bottom: 10px;
+  padding-top: 10px;
 }
 
 .orange {
@@ -17,7 +17,6 @@ h2 {
 .text {
   color: #fff;
   font-size: 25px;
-  /* display: flex; */
   padding-left: 10px;
   padding-right: 10px;
   padding-bottom: 10px;

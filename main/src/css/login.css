@@ -1,3 +1,7 @@
+.resetLink:hover{
+  color: orange;
+}
+
 .loginContainer {
   margin-top: 10%;
   padding: 30px;
