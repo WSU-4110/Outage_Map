@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useTable } from 'react-table';
+import { useTable, useSortBy } from 'react-table';
+import "../css/App.css"
 import { Button, Container, Row, Col } from 'react-bootstrap';
 
 
@@ -46,25 +47,34 @@ function Leaderboard(props){
         getTableBodyProps,
         headerGroups,
         rows,
-        prepareRow,
-    } = useTable({ columns, data})
+        prepareRow
+    } = useTable({ columns, data}, useSortBy)
     
     return (
-        <table {...getTableProps()} style={{ border: 'solid 1px blue' }}>
+        <table {...getTableProps()} style={{marginRight: 'auto', marginLeft: 'auto',marginTop: 10, border: 'solid 1px blue' }}>
           <thead>
             {headerGroups.map(headerGroup => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map(column => (
                   <th
-                    {...column.getHeaderProps()}
+                    {...column.getHeaderProps(column.getSortByToggleProps())}
                     style={{
                       borderBottom: 'solid 3px red',
                       background: 'aliceblue',
                       color: 'black',
                       fontWeight: 'bold',
+                      paddingLeft: 10,
+                      paddingRight: 10
                     }}
                   >
                     {column.render('Header')}
+                    <span>
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? ' 🔽'
+                        : ' 🔼'
+                      : ''}
+                  </span>
                   </th>
                 ))}
               </tr>

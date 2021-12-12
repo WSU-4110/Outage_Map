@@ -25,17 +25,9 @@ import website from "./icons/laptop-code-solid.svg";
 import exclamation from "./icons/exclamation-solid.svg";
 
 function OutageIndicator({ outage }) {
-  //this component renders the markers with corresponding lat and long values calculated by the geocodify api.
   const [coords, setCoords] = useState();
-  //localStorage.clear();
   const localUser = localStorage.getItem("user");
   const userEmail = '"' + outage.user_email + '"';
-  // localUser user has "" around it so "" is added around outage.user_email so that it would satisfy the condition on line 40-66
-  // if (localUser === userEmail) {
-  //   console.log("user exist");
-  // } else {
-  //   console.log("User does not exist");
-  // }
 
   const [isLoggedIn, setIsLoggedIn] = useState(localUser === userEmail); //localStorage.getItem("user") === outage.user_email
 
@@ -123,11 +115,15 @@ function OutageIndicator({ outage }) {
       <Marker position={[coords.lat, coords.lng]} icon={icon}>
         <Popup className={outage.service_type}>
           {outage.service_type}: {outage.service_name}
+          <br />
+          Description: {outage.outage_description}
+          <br />
+          <br />
           <button onClick={closeReport}>
-            {" "}
             {/* onClick event handlers for closing and extending reports*/}
             Close Report
           </button>
+          {" "}
           <button onClick={extendReport}>Extend Report</button>
           {}
         </Popup>
@@ -138,6 +134,9 @@ function OutageIndicator({ outage }) {
       <Marker position={[coords.lat, coords.lng]} icon={icon}>
         <Popup className={outage.service_type}>
           {outage.service_type}: {outage.service_name}
+          <br />
+          Description: {outage.outage_description}
+          <br />
         </Popup>
       </Marker>
     );
