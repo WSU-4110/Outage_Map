@@ -36,6 +36,7 @@ Outages reported by users are displayed on a map using various icons that are cl
 - Run `npm run dev` to run the NodeJS backend app.
 - Run `npm start` to run the React app.
 - Go to http://localhost:3000 to view the app.
+- Detailed installation instructions can be found here: https://github.com/WSU-4110/Outage_Map/blob/main/install.md
 
 ## Contributors
 
