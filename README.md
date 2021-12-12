@@ -31,7 +31,7 @@ Outages reported by users are displayed on a map using various icons that are cl
 
 - Visit the NodeJS website to install both NodeJS and NPM onto your machine: https://nodejs.org/en/download/.
 - Clone this repository to a location on your machine.
-- Run `npm install` the `main` file directory of the project to install the required dependancies.
+- Run `npm install` from the `main` file directory of the project to install the required dependancies.
 - Run `npm start` to run the React app.
 - Run `npm run dev` to run the NodeJS backend app.
 - Go to http://localhost:3000 to view the app.
