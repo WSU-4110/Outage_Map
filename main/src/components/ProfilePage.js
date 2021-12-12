@@ -39,8 +39,12 @@ function Profile() {
    
   useEffect(() => {
     async function fetchOutages() {
-      const resp = await axios.get("/outages");
-      setTableOutage(resp.data.outages);
+      const resp = await axios.post("/profile", {
+        user_email: `${loggedInUser}`,
+      });
+      setTableOutage(resp.data.profile);
+
+      console.log(tableOutage);
   }
     fetchOutages();
   }, []);
@@ -65,7 +69,7 @@ function Profile() {
                <tbody>
                  {tableOutage.map((cell) =>  {
                    
-                   return (cell.outage_status=="Open" && cell.user_email==loggedInUser)?<tr key={cell.Id}>
+                   return (cell.outage_status=="Open")?<tr key={cell.Id}>
                      <td>{cell.user_email}</td>                     
                      <td>{cell.service_type}</td>
                      <td>{cell.service_name}</td>
