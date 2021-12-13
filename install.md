@@ -3,9 +3,8 @@
 ## Table of Contents
 
 - [Database](#Database)
-- [Features](#features)
-- [Installation](#installation)
-- [Contributors](#contributors)
+- [NodeJS](#nodejs)
+
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -20,3 +19,10 @@
 - Run the script
 - Congrats! You have successfully set up your MySQL Database.
 
+## NodeJS 
+- Visit the NodeJS website to install both NodeJS and NPM onto your machine: https://nodejs.org/en/download/.
+- Clone this repository to a location on your machine.
+- Run `npm install` from the `main` file directory of the project to install the required dependancies.
+- Run `npm run dev` to run the NodeJS backend app.
+- Run `npm start` to run the React app.
+- Go to http://localhost:3000 to view the app.
