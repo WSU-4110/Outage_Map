@@ -18,7 +18,7 @@ class Navbar extends React.Component {
     return (
       <nav className="NavbarItems">
         <Link className="navbartitle" to="/">
-          <img src={"small-logo.png"} width="70" height="70" />
+          <img src={"small-logo.png"} width="70" height="70" alt="logo"/>
         </Link>
 
         {/* function that will recognize user click and change menu img from 3 layer icon to 'x'. Also the naming has to 'fas fa-' according to fontawesome */}
@@ -59,7 +59,7 @@ class Navbar extends React.Component {
       return (
         <nav className="NavbarItems">
           <Link className="navbartitle" to="/">
-            <img src={"small-logo.png"} width="70" height="70" />
+            <img src={"small-logo.png"} width="70" height="70" alt="logo"/>
           </Link>
   
           {/* function that will recognize user click and change menu img from 3 layer icon to 'x'. Also the naming has to 'fas fa-' according to fontawesome */}

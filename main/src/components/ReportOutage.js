@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from 'react-router-dom'
+import React, { useState} from "react";
 import axios from "axios";
 import { Button, Container, Row, Col, Form } from 'react-bootstrap';
 
@@ -12,14 +11,14 @@ function ReportOutage(){
         serviceDescription: ""
     }) 
 
+    //handles the changes of values that occur on a form.
     const handleChange = (event) => {
         event.preventDefault();
         const { name, value } = event.target;
         setFormData((data) => ({...data, [event.target.name]: event.target.value,}));
     };
 
-    const history = useHistory();
-
+    //request to submit a report
     const handleSubmitReport = async (event) =>{
         event.preventDefault();
         const res = await axios.post("/outage-new", {
