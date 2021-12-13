@@ -6,6 +6,7 @@
 - [Features](#features)
 - [Installation](#installation)
 - [Contributors](#contributors)
+- [Wiki](#wiki)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -45,3 +46,6 @@ Outages reported by users are displayed on a map using various icons that are cl
 - Aaron Imam
 - Ian Wixson
 - John Liu
+
+## Wiki
+-For detailed project overview and planning, please visit our wiki: https://github.com/WSU-4110/Outage_Map/wiki
