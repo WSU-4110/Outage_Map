@@ -48,4 +48,4 @@ Outages reported by users are displayed on a map using various icons that are cl
 - John Liu
 
 ## Wiki
--For detailed project overview and planning, please visit our wiki: https://github.com/WSU-4110/Outage_Map/wiki
+- For detailed project overview and planning, please visit our wiki: https://github.com/WSU-4110/Outage_Map/wiki
