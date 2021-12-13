@@ -30,13 +30,6 @@ Outages reported by users are displayed on a map using various icons that are cl
 
 ## Installation
 
-- Visit the NodeJS website to install both NodeJS and NPM onto your machine: https://nodejs.org/en/download/.
-- Clone this repository to a location on your machine.
-- Run `npm install` from the `main` file directory of the project to install the required dependancies.
-- Set up the MySQL Database: https://github.com/WSU-4110/Outage_Map/blob/main/install.md#Database.
-- Run `npm run dev` to run the NodeJS backend app.
-- Run `npm start` to run the React app.
-- Go to http://localhost:3000 to view the app.
 - Detailed installation instructions can be found here: https://github.com/WSU-4110/Outage_Map/blob/main/install.md
 
 ## Contributors
