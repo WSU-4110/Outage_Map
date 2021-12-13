@@ -9,6 +9,7 @@ router.route("/outages").get(outageController.getAllOutages);
 router.route("/outage-new").post(outageController.createNewOutage);
 router.route("/outage-close").post(outageController.closeOutage);
 router.route("/profile").post(outageController.profilePage);
+router.route("/outage-extend").post(outageController.extendOutage);
 
 //Routes for login and signup
 router.route("/login").post(userController.login);

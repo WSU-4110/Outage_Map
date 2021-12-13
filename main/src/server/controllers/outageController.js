@@ -51,19 +51,23 @@ exports.profilePage = async (req, res, next) => {
   }
 };
 
-exports.profilepage = async (req, res, next) => {
-  try {
-    let { user_email } = req.body;
-    const [profile,_ ] = await Outage.userProfile(user_email);
-    res.status(200).json({ profile });
-  } catch (error) {
-    console.log(error);
-    next(error);}}
 exports.closeOutage = async (req, res, next) => {
   try {
-    let { outage_id } = req.body
+    let { outage_id } = req.body;
     await Outage.close(outage_id);
     res.status(204).json({ message: "Outage Closed" });
+  } catch (error) {
+    console.log(error);
+    res.status(404);
+    next(error);
+  }
+};
+
+exports.extendOutage = async (req, res, next) => {
+  try {
+    let { outage_id } = req.body;
+    await Outage.extendOutage(outage_id);
+    res.status(204).json({ message: "Outage Extended" });
   } catch (error) {
     console.log(error);
     res.status(404);

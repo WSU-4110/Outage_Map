@@ -16,6 +16,7 @@ import {
 } from "react-bootstrap";
 import hash from "object-hash";
 
+
 class UserLogin extends React.Component {
   constructor() {
     super();
@@ -25,6 +26,12 @@ class UserLogin extends React.Component {
       pwd: "", //object entry from user
       loggedIn: false,
     };
+
+    // Clear out user from localStorage when on log-in page, since only logged-out users will end up here.
+    if (localStorage.getItem("user")) {
+      localStorage.removeItem("user");
+      window.location.reload();
+    }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmits = this.handleSubmits.bind(this);
   }
@@ -46,6 +53,7 @@ class UserLogin extends React.Component {
       this.state.loggedIn = true;
       localStorage.setItem("user", JSON.stringify(this.state.email));
       this.props.history.push("/outages");
+      window.location.reload();
     }
   }
 
@@ -57,7 +65,7 @@ class UserLogin extends React.Component {
             <h1 id="title">Login</h1>
 
             <Row className="m-3 mx-auto w-75">
-              <Col /*lg={4} md={6} sm={12}*/>
+              <Col>
                 <Form.Group controlId="formEmail">
                   <input
                     type="email"
@@ -73,7 +81,7 @@ class UserLogin extends React.Component {
             </Row>
 
             <Row className="m-3 mx-auto w-75">
-              <Col /*lg={4} md={6} sm={12}*/>
+              <Col>
                 <Form.Group controlId="formPassword">
                   <input
                     type="password"
@@ -103,46 +111,14 @@ class UserLogin extends React.Component {
               </Row>
             </Col>
           </Form>
+
           <div className="passwordReset">
             <Link className="resetLink" to="/reset">
               Forgot My Password
             </Link>
           </div>
+          
         </Container>
-
-        {/* <div id="main-holder">
-          <form className="login-form" onSubmit={this.handleSubmits}>
-            <h1 id="login-header">Log in</h1>
-            <div>
-              <div id="login-form">
-                <input
-                  type="email"
-                  name="email"
-                  id="username-field"
-                  className="login-form-field"
-                  placeholder="Email"
-                  onChange={this.handleChange}
-                />
-                <input
-                  type="password"
-                  name="pwd"
-                  id="password-field"
-                  className="login-form-field"
-                  placeholder="Password"
-                  onChange={this.handleChange}
-                />
-                <div className="login-form-submit">
-                  <input
-                    type="submit"
-                    value="Log in"
-                    id="login-submit"
-                    onSubmit={this.handleSubmits}
-                  />
-                </div>
-              </div>
-            </div>
-          </form>
-        </div> */}
       </div>
     );
   }

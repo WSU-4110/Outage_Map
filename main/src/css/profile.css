@@ -39,6 +39,7 @@ h2 {
   }
 .profiletab:active {
     background: white;
+    border-bottom: .5em solid white;
     position: relative;
   }
 .tabscontent{
