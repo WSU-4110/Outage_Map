@@ -1,9 +1,8 @@
 // login page for users
 // author: IW
 //second draft of react form
-import React, { useEffect } from "react";
-import { useHistory, withRouter, Link } from "react-router-dom";
-import Modal from "react-modal";
+import React, { } from "react";
+import { withRouter, Link } from "react-router-dom";
 import "../css/login.css";
 import axios from "axios";
 import {
@@ -12,7 +11,6 @@ import {
   Row,
   Col,
   Button,
-  ToggleButtonGroup,
 } from "react-bootstrap";
 import hash from "object-hash";
 

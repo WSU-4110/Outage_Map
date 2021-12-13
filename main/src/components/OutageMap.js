@@ -3,7 +3,6 @@ import {
   TileLayer,
   Marker,
   Popup,
-  Circle,
   LayersControl,
   FeatureGroup,
 } from "react-leaflet";
@@ -11,11 +10,12 @@ import React, { useState, useEffect } from "react";
 import L from "leaflet";
 import { geosearch, arcgisOnlineProvider } from "esri-leaflet-geocoder";
 import "esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css";
+import "../css/App.css"
 import Modal from "react-modal";
 import axios from "axios";
 import ReportOutage from "./ReportOutage";
 import Leaderboard from "./Leaderboard";
-import { Button, Container, Row, Col } from "react-bootstrap";
+import { Button, Row, Col, Container } from "react-bootstrap";
 import gaming from "./icons/gamepad-solid.svg";
 import streaming from "./icons/video-slash-solid.svg";
 import power from "./icons/plug-solid.svg";
@@ -25,34 +25,30 @@ import website from "./icons/laptop-code-solid.svg";
 import exclamation from "./icons/exclamation-solid.svg";
 
 function OutageIndicator({ outage }) {
-  //this component renders the markers with corresponding lat and long values calculated by the geocodify api.
   const [coords, setCoords] = useState();
-  //localStorage.clear();
   const localUser = localStorage.getItem("user");
   const userEmail = '"' + outage.user_email + '"';
-  // localUser user has "" around it so "" is added around outage.user_email so that it would satisfy the condition on line 40-66
-  // if (localUser === userEmail) {
-  //   console.log("user exist");
-  // } else {
-  //   console.log("User does not exist");
-  // }
 
   const [isLoggedIn, setIsLoggedIn] = useState(localUser === userEmail); //localStorage.getItem("user") === outage.user_email
 
+  //request to close outage
   const closeReport = async (event) => {
     event.preventDefault();
     const res = await axios.post("/outage-close", {
       outage_id: `${outage.outage_id}`,
     });
     console.log(res.status);
+    window.location.reload();
   };
 
+  //request to extend outage
   const extendReport = async (event) => {
     event.preventDefault();
     const res = await axios.post("/outage-extend", {
       outage_id: `${outage.outage_id}`,
     });
     console.log(res.status);
+    window.location.reload();
   };
 
   const LeafIcon = L.Icon.extend({
@@ -61,6 +57,7 @@ function OutageIndicator({ outage }) {
     },
   });
 
+  //Assigned the corresponing images to each outage indicator
   const streamingIcon = new LeafIcon({
     iconUrl: streaming,
   });
@@ -85,6 +82,7 @@ function OutageIndicator({ outage }) {
 
   const [icon, setIcon] = useState(powerIcon);
 
+  //assigning icons based on service type
   useEffect(() => {
     function resolveLocation() {
       let lng = Number(outage.longitude);
@@ -123,11 +121,15 @@ function OutageIndicator({ outage }) {
       <Marker position={[coords.lat, coords.lng]} icon={icon}>
         <Popup className={outage.service_type}>
           {outage.service_type}: {outage.service_name}
+          <br />
+          Description: {outage.outage_description}
+          <br />
+          <br />
           <button onClick={closeReport}>
-            {" "}
             {/* onClick event handlers for closing and extending reports*/}
             Close Report
           </button>
+          {" "}
           <button onClick={extendReport}>Extend Report</button>
           {}
         </Popup>
@@ -138,6 +140,9 @@ function OutageIndicator({ outage }) {
       <Marker position={[coords.lat, coords.lng]} icon={icon}>
         <Popup className={outage.service_type}>
           {outage.service_type}: {outage.service_name}
+          <br />
+          Description: {outage.outage_description}
+          <br />
         </Popup>
       </Marker>
     );
@@ -170,6 +175,7 @@ function OutageMap() {
 
   const [mapRef, setMapRef] = useState();
 
+  //function to retrieve outages
   useEffect(() => {
     async function fetchOutages() {
       const resp = await axios.get("/outages");
@@ -197,6 +203,7 @@ function OutageMap() {
 
   return (
     <>
+    <Container>
       <Col className="m-3 mx-auto w-25">
         <Row>
           <Button
@@ -209,88 +216,94 @@ function OutageMap() {
           </Button>
         </Row>
       </Col>
+      <Col>
+        <Row className="m-auto">
+          <MapContainer
+          whenCreated={setMapRef}
+          center={
+            JSON.parse(localStorage.getItem("latitude")) == null
+              ? [44, -85]
+              : [
+                  localStorage.getItem("latitude"),
+                  localStorage.getItem("longitude"),
+                ]
+          }
+          zoom={JSON.parse(localStorage.getItem("latitude")) == null ? 7 : 12}
+          scrollWheelZoom={true}
+        >
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <LayersControl>
+            <LayersControl.Overlay checked name="Power">
+              <FeatureGroup>
+                {allOutages.map((mock) =>
+                  mock.service_type === "Power" ? (
+                    <OutageIndicator outage={mock} sortType />
+                  ) : null
+                )}
+              </FeatureGroup>
+            </LayersControl.Overlay>
 
-      <MapContainer
-        whenCreated={setMapRef}
-        center={
-          JSON.parse(localStorage.getItem("latitude")) == null
-            ? [44, -85]
-            : [
-                localStorage.getItem("latitude"),
-                localStorage.getItem("longitude"),
-              ]
-        }
-        zoom={JSON.parse(localStorage.getItem("latitude")) == null ? 7 : 12}
-        scrollWheelZoom={true}
-      >
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <LayersControl>
-          <LayersControl.Overlay checked name="Power">
-            <FeatureGroup>
-              {allOutages.map((mock) =>
-                mock.service_type === "Power" ? (
-                  <OutageIndicator outage={mock} sortType />
-                ) : null
-              )}
-            </FeatureGroup>
-          </LayersControl.Overlay>
+            <LayersControl.Overlay checked name="Streaming">
+              <FeatureGroup>
+                {allOutages.map((mock) =>
+                  mock.service_type === "Streaming" ? (
+                    <OutageIndicator outage={mock} sortType />
+                  ) : null
+                )}
+              </FeatureGroup>
+            </LayersControl.Overlay>
 
-          <LayersControl.Overlay checked name="Streaming">
-            <FeatureGroup>
-              {allOutages.map((mock) =>
-                mock.service_type === "Streaming" ? (
-                  <OutageIndicator outage={mock} sortType />
-                ) : null
-              )}
-            </FeatureGroup>
-          </LayersControl.Overlay>
+            <LayersControl.Overlay checked name="Internet">
+              <FeatureGroup>
+                {allOutages.map((mock) =>
+                  mock.service_type === "Internet" ? (
+                    <OutageIndicator outage={mock} sortType />
+                  ) : null
+                )}
+              </FeatureGroup>
+            </LayersControl.Overlay>
 
-          <LayersControl.Overlay checked name="Internet">
-            <FeatureGroup>
-              {allOutages.map((mock) =>
-                mock.service_type === "Internet" ? (
-                  <OutageIndicator outage={mock} sortType />
-                ) : null
-              )}
-            </FeatureGroup>
-          </LayersControl.Overlay>
+            <LayersControl.Overlay checked name="Cable">
+              <FeatureGroup>
+                {allOutages.map((mock) =>
+                  mock.service_type === "Cable" ? (
+                    <OutageIndicator outage={mock} sortType />
+                  ) : null
+                )}
+              </FeatureGroup>
+            </LayersControl.Overlay>
 
-          <LayersControl.Overlay checked name="Cable">
-            <FeatureGroup>
-              {allOutages.map((mock) =>
-                mock.service_type === "Cable" ? (
-                  <OutageIndicator outage={mock} sortType />
-                ) : null
-              )}
-            </FeatureGroup>
-          </LayersControl.Overlay>
+            <LayersControl.Overlay checked name="Gaming Platform">
+              <FeatureGroup>
+                {allOutages.map((mock) =>
+                  mock.service_type === "Gaming Platform" ? (
+                    <OutageIndicator outage={mock} sortType />
+                  ) : null
+                )}
+              </FeatureGroup>
+            </LayersControl.Overlay>
 
-          <LayersControl.Overlay checked name="Gaming Platform">
-            <FeatureGroup>
-              {allOutages.map((mock) =>
-                mock.service_type === "Gaming Platform" ? (
-                  <OutageIndicator outage={mock} sortType />
-                ) : null
-              )}
-            </FeatureGroup>
-          </LayersControl.Overlay>
+            <LayersControl.Overlay checked name="Website">
+              <FeatureGroup>
+                {allOutages.map((mock) =>
+                  mock.service_type === "Website" ? (
+                    <OutageIndicator outage={mock} sortType />
+                  ) : null
+                )}
+              </FeatureGroup>
+            </LayersControl.Overlay>
+          </LayersControl>
+        </MapContainer>
+        </Row>
+        <Row className="m-3 mx-auto">
+          <Leaderboard tableData={allOutages} />
+        </Row>
+      </Col>
 
-          <LayersControl.Overlay checked name="Website">
-            <FeatureGroup>
-              {allOutages.map((mock) =>
-                mock.service_type === "Website" ? (
-                  <OutageIndicator outage={mock} sortType />
-                ) : null
-              )}
-            </FeatureGroup>
-          </LayersControl.Overlay>
-        </LayersControl>
-      </MapContainer>
-
-      <Modal id="modal-container" isOpen={reportIsOpen}>
+      <Modal centered id="modal-container" isOpen={reportIsOpen} style={{marginLeft: "50%", marginRight: "50%"}}>
         <Button
           onClick={setReportIsOpenFalse}
           style={{ background: "black", border: "none" }}
@@ -300,8 +313,7 @@ function OutageMap() {
 
         <ReportOutage />
       </Modal>
-
-      <Leaderboard tableData={allOutages} />
+      </Container>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter} from "react-router-dom";
 import hash from "object-hash";
 import "../css/SignupForm.css";
 import { Container, Form, Row, Col, Button } from "react-bootstrap";

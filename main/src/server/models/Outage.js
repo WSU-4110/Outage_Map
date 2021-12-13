@@ -36,10 +36,10 @@ class Outage {
   //SQL query function to get outages from database for
   //outage map page
   static findAll() {
-    let sql = "SELECT * FROM outages";
+    let sql = `SELECT * FROM outages WHERE outage_status='Open'`;
     return db.execute(sql);
   }
-
+  
   static userProfile(email) {
     let sql = `SELECT * FROM outages where user_email = '${email}'`;
     return db.execute(sql);

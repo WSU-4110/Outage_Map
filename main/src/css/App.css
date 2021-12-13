@@ -8,9 +8,7 @@ body {
 }
 
 .leaflet-container{
-    width: 65%;
     height: 80vh;
-    margin: auto;
     margin-top: 2%;
     z-index: 0;
 }

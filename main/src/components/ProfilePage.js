@@ -1,6 +1,6 @@
 //profile page, with user reported outages and closedrepo outages
 import React from "react";
-import { useHistory, useParams, withRouter } from "react-router-dom";
+import { useHistory} from "react-router-dom";
 import { useState, useEffect } from "react";
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import { TabContent } from 'react-bootstrap'
@@ -39,8 +39,12 @@ function Profile() {
    
   useEffect(() => {
     async function fetchOutages() {
-      const resp = await axios.get("/outages");
-      setTableOutage(resp.data.outages);
+      const resp = await axios.post("/profile", {
+        user_email: `${loggedInUser}`,
+      });
+      setTableOutage(resp.data.profile);
+
+      console.log(tableOutage);
   }
     fetchOutages();
   }, []);
@@ -54,7 +58,6 @@ function Profile() {
              <table class="table">
                <thead class="thead">
                  <tr>
-                 <th scope="col">Username</th>
                  <th scope="col">Service Type</th>
                 <th scope="col">Service Name</th>
                 <th scope="col">Description</th>
@@ -65,8 +68,7 @@ function Profile() {
                <tbody>
                  {tableOutage.map((cell) =>  {
                    
-                   return (cell.outage_status=="Open" && cell.user_email==loggedInUser)?<tr key={cell.Id}>
-                     <td>{cell.user_email}</td>                     
+                   return (cell.outage_status==="Open")?<tr key={cell.Id}>                  
                      <td>{cell.service_type}</td>
                      <td>{cell.service_name}</td>
                      <td>{cell.outage_description}</td>
@@ -85,7 +87,6 @@ function Profile() {
           <table class="table">
             <thead class="thead">
               <tr>
-                <th scope="col">Username</th>
                 <th scope="col">Service Type</th>
                 <th scope="col">Service Name</th>
                 <th scope="col">Description</th>
@@ -95,8 +96,7 @@ function Profile() {
             </thead>
             <tbody>
               {tableOutage.map((cell) => {
-                return (cell.outage_status=="Closed" && cell.user_email==loggedInUser)?<tr key={cell.Id}>
-                <td>{cell.user_email}</td>
+                return (cell.outage_status==="Closed" && cell.user_email===loggedInUser)?<tr key={cell.Id}>
                 <td>{cell.service_type}</td>
                 <td>{cell.service_name}</td>
                 <td>{cell.outage_description}</td>
@@ -115,8 +115,6 @@ function Profile() {
     return (
       
       <div className="mt-3 mx-2 w-3">
-            <h2 className="mt-3 mb-0 mx-4">Profile</h2>            
-            <p className="m-1 mx-4 w-auto" style={{ color: 'orange' }}>Username: {loggedInUser}</p>
       
             
          
