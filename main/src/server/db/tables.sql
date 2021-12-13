@@ -39,8 +39,8 @@ INSERT INTO service_types values ('Gaming Platform');
 INSERT INTO service_types values ('Website');
 
 
-insert into outages (user_email, service_type, service_name, latitude,
-longitude, outage_description, date_created) values ("test")
+/* Run each of this select statements to ensure the tables were created successfully. They should all be
+   empty except for the service_types table. */
 
 select * from service_types;
 select * from outages;
