@@ -69,16 +69,3 @@ it('Tests select element to see onChange',() =>{
   wrapper.find('select').simulate('change', {target: {value: 'Streaming'}});
   expect(wrapper.find('select').props().value).toBe('Streaming');
 })
-
-
-
-// it('setReportIsOpenTrue is called and reportIsOpen State is validated', () => {
-//   const wrapper = mount(<OutageMap />);
-//   const reportButton = wrapper.find("Button");
-//   reportButton.simulate('click');
-
-//   setTimeout(() => {
-//     expect(setReportIsOpenTrue).toHaveBeenCalled();
-//     expect(reportIsOpen).toBeTruthy();
-//   })
-// });
